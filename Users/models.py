@@ -17,3 +17,7 @@ class User(models.Model):
 
     class Meta:
         verbose_name_plural = "Users"
+
+
+
+#dklhkjhasd
