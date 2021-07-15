@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #################################
     'Users',
-    'MainPage',
+
 ]
 
 MIDDLEWARE = [
@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'ResearchStory.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ResearchStoryDB',
+        'NAME': 'ResearchStoryDatabase',
         'USER': 'postgres',
         'PASSWORD': '93239323',
         'HOST': 'comp9323-postgres.c4ewkd5opwpk.us-east-2.rds.amazonaws.com',
