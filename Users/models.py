@@ -1,26 +1,27 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser, User as  User_view
 
 
-class User(models.Model):
-    SEX_ITEMS = [
+class User(AbstractUser):
+    SEX_ITEMS = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+        ("S", 'Secret'),
+    )
 
-        (1, 'Male'),
-        (2, 'Female'),
-        (0, 'Secret'),
-    ]
-
-    ROLES = [
-        (0, 'Researcher'),
-        (1, 'Common User'),
-    ]
+    ROLES = (
+        ('R', 'Researcher'),
+        ('C', 'Common User'),
+    )
 
     username = models.CharField(max_length=128, unique=True, verbose_name='username')
-    age = models.IntegerField(verbose_name="age", null=True)
-    gender = models.IntegerField(verbose_name="gender", choices=SEX_ITEMS)
+    age = models.IntegerField(null=True, verbose_name="age")
+    gender = models.CharField(choices=SEX_ITEMS, max_length=100, verbose_name="gender")
 
-    last_name = models.CharField(max_length=128, verbose_name="last Name", )
+    last_name = models.CharField(max_length=128, verbose_name="last Name")
     first_name = models.CharField(max_length=128, verbose_name="first Name")
-    usertype = models.IntegerField(choices=ROLES, verbose_name='user type')
+
+    usertype = models.CharField(choices=ROLES, max_length=100, verbose_name='user type')
     email = models.EmailField(unique=True, verbose_name="email", )
 
     password = models.CharField(max_length=256, verbose_name='password')

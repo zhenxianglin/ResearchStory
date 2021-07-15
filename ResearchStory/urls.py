@@ -20,8 +20,9 @@ from django.conf.urls import url
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path('Users/', include(('Users.urls', 'Users'), namespace='Users')),
+    path(r'Users/', include(('Users.urls', 'Users'), namespace='Users')),
 
+    path(r'', include(('MainPage.urls', 'MainPage'), namespace='MainPage')),
 
 
 ]
