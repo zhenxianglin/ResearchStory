@@ -28,8 +28,9 @@ class User(models.Model):
     created_time = models.DateTimeField(auto_now_add=True, editable=False, verbose_name='created time')
 
     def __str__(self):
+        # Help humanized display object information
         return self.username
 
     class Meta:
-        verbose_name = 'users'
+        verbose_name = 'user'
         verbose_name_plural = "users"
