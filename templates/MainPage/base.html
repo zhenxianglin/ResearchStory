@@ -1,0 +1,18 @@
+<p>
+
+    <a href="#">Research Story</a> -
+
+    {% if user.is_authenticated %}
+
+        Hello, {{ user.username }}
+
+    {% else %}
+
+        <a href="#">Login</a>
+
+    {% endif %}
+
+
+</p>
+
+{% block content %}{% endblock content %}
