@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from django.conf.urls import url
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,6 +23,5 @@ urlpatterns = [
     path(r'Users/', include(('Users.urls', 'Users'), namespace='Users')),
 
     path(r'', include(('MainPage.urls', 'MainPage'), namespace='MainPage')),
-
 
 ]
