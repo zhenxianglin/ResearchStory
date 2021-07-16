@@ -1,27 +1,32 @@
 from django.db import models
-from django.utils import timezone
+from django.utils.timezone import now
+from django.urls import reverse
+
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Story(models.Model):
-    title_name = models.CharField("title_name", max_length=100)
-    publish_time = models.DateTimeField('publish_time', auto_now=True)
-    category = models.CharField("category", max_length=100,
-                                choices=(('Computer Science', 'CS'),
+    title_name = models.CharField(verbose_name="title", max_length=100)
+    created_time = models.DateTimeField(verbose_name='publish time', auto_now_add=True)
+    category = models.CharField(verbose_name="category", max_length=100,
+                                choices=(('ComputerScience', 'ComputerScience'),
                                          ('Physics', 'Physics'),
-                                         ("Electrical Engineering", "EE")),
-                                blank=True, null=True)
+                                         ("ElectricalEngineering", "ElectricalEngineering")),
+                                blank=False, null=False)
 
-    # user_id = models.ForeignKey
+    views = models.PositiveIntegerField(verbose_name='views number', default=0)
+
+    text = models.TextField(verbose_name="text", blank=True, null=True)
+    # video = models.CharField("video", max_length=9000)
+    paper_link = models.CharField(verbose_name="paper_link", max_length=9000, null=True)
+
+    def __str__(self):
+        return self.title_name
+
+    def viewed(self):
+        self.views += 1
+        self.save(update_fields=['views'])
 
     class Meta:
         verbose_name_plural = 'Stories'
-
-
-class StoryContent(models.Model):
-    story_id = models.ForeignKey(Story, on_delete=models.CASCADE, related_name="story_id")
-    text = models.CharField("text", max_length=9000)
-    video = models.CharField("video", max_length=9000)
-    paper_link = models.CharField("paper_link", max_length=9000)
-
-    class Meta:
-        verbose_name_plural = 'StoryContents'

@@ -41,6 +41,8 @@ INSTALLED_APPS = [
 
     # 第三方应用程序
     'bootstrap3',
+    # 'ckeditor',  # 富文本编辑器
+    # 'ckeditor_uploader', # 富文本编辑器上传图片模块
 ]
 
 MIDDLEWARE = [
@@ -80,7 +82,7 @@ WSGI_APPLICATION = 'ResearchStory.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ResearchStoryDatabase',
+        'NAME': 'rschDB',
         'USER': 'postgres',
         'PASSWORD': '93239323',
         'HOST': 'comp9323-postgres.c4ewkd5opwpk.us-east-2.rds.amazonaws.com',
