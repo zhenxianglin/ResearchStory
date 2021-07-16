@@ -15,7 +15,7 @@ class LoginFom(forms.Form):
 class RegisterForm(UserCreationForm):
     username = forms.CharField(label='Username', max_length=128,
                                error_messages={
-                                   'required': '用户名不能为空',
+                                   'required': 'Username can not be empty.',
                                },
                                widget=forms.TextInput(attrs={'placeholder': 'Please enter a username'}))
 
