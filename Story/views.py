@@ -13,13 +13,8 @@ def storyListCategory(request, category):
 
 
 def getStory(request, story_id):
-    story = Story.objects.filter(id=story_id)
+    story = Story.objects.get(id=story_id)
     return render(request, 'story.html', locals())
 
 
-"""
-
-127.0.0.1/story/id
-
-"""
 
