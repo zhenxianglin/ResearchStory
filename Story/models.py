@@ -17,9 +17,9 @@ class Story(models.Model):
 
     views = models.PositiveIntegerField(verbose_name='views number', default=0)
 
-    text = models.TextField(verbose_name="text", blank=True, null=True)
-    # video = models.CharField("video", max_length=9000)
-    paper_link = models.CharField(verbose_name="paper_link", max_length=9000, null=True)
+    text = models.TextField(verbose_name="text", blank=False, null=True)
+    video = models.URLField(verbose_name="video", blank=True, null=True)
+    paper_link = models.URLField(verbose_name="paper_link", null=True, blank=True)
 
     def __str__(self):
         return self.title_name
@@ -30,3 +30,4 @@ class Story(models.Model):
 
     class Meta:
         verbose_name_plural = 'Stories'
+
