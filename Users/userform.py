@@ -26,21 +26,26 @@ class RegisterForm(UserCreationForm):
     usertype = forms.ChoiceField(label='User Type', choices=User.ROLES)
 
     email = forms.EmailField(label="Email Address",
-                             widget=forms.TextInput(attrs={'placeholder': 'Required. Inform a valid email address.'}))
+                             widget=forms.TextInput(attrs={'placeholder': 'Required. Inform a valid email address.'})
+                             )
 
     password1 = forms.CharField(label='Password', min_length=8, max_length=256,
                                 error_messages={
                                     'min_length': 'The password should be no less than 8 characters. ',
                                     'required': 'The password cannot be empty. ',
                                 },
-                                widget=forms.PasswordInput(attrs={'placeholder': 'Please enter the password.'}))
+                                widget=forms.PasswordInput(attrs={'placeholder': 'Please enter the password.'}),
+                                help_text=(" - The password should be no less than 8 characters. <br/> - Your password can’t be too similar to your other personal information.<br/>  - Your password can’t be entirely numeric."),
+                                )
 
     password2 = forms.CharField(label='Password confirmation', min_length=8, max_length=256,
                                 error_messages={
                                     'min_length': 'The password should be no less than 8 characters. ',
                                     'required': 'The password cannot be empty. ',
                                 },
-                                widget=forms.PasswordInput(attrs={'placeholder': 'Please confirm password.'}))
+                                widget=forms.PasswordInput(attrs={'placeholder': 'Please confirm password.'}),
+                                help_text=(" - Enter the same password as above, for verification.\n"),
+                                )
 
     class Meta:
         model = User
