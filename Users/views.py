@@ -1,67 +1,44 @@
 from django.shortcuts import render
 from django.contrib.auth.hashers import make_password, check_password
 from django.http import HttpResponse, HttpResponseRedirect
-
+from django.urls import reverse
+from django.contrib.auth import logout, login, authenticate
 import random
 import time
+from Users.userform import RegisterForm, LoginFom
+from Users.models import User
+from django.contrib.auth.forms import UserCreationForm
+import hashlib
 
-from .models import User
+
+def hash_code(s, salt='Mysite_project'):
+    h = hashlib.sha256()
+    s += salt
+    # update方法只接受bytes类型
+    h.update(s.encode())
+    return h.hexdigest()
+
+
+def logout_view(request):
+    """log out the account"""
+    logout(request)
+    return HttpResponseRedirect(reverse("MainPage:index"))
 
 
 def register(request):
-    if request.method == "GET":
-        return render(request, "register.html")
-    if request.method == "POST":
-        username = request.POST.get('username')
-        age = request.POST.get('age')
-        last_name = request.POST.get('last_name')
-        first_name = request.POST.get('first_name')
-        gender = request.POST.get('gender')
-        e_mail = request.POST.get('e_mail')
-        password = make_password(request.POST.get('password'))
-
-        User.objects.create(username=username,
-                            age=age,
-                            last_name=last_name,
-                            first_name=first_name,
-                            gender=gender,
-                            e_mail=e_mail,
-                            password=password)
-        return HttpResponseRedirect("/Users/login/")
-
-
-def login(request):
-    if request.method == "GET":
-        return render(request, "login.html")
-
-    if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        if User.objects.filter(username=username).exist():
-            user = User.objects.get(username=username)
-            if check_password(password, user.password):
-                ticket = ''
-                for i in range(15):
-                    s = "zxcvbnmlkjhgfdsaqwertyuiop"
-                    ticket += random.choice(s)
-                current_time = str(int(time.time()))
-                ticket = 'TICKET' + ticket + current_time
-
-                response = HttpResponseRedirect("/MainPage/index")
-                response.set_cookie("ticket", ticket, max_age=10000)
-                user.ticket = ticket
-                user.save()
-                return response
-            else:
-                return render(request, "login.html", {'password': "Wrong password."})
-        else:
-            return render(request, 'login.html', {'username': 'Username does not exist.'})
-
-
-def logout(request):
-    if request.method == "GET":
-        response = HttpResponseRedirect("/MainPage/login")
-        response.delete_cookie("ticket")
-        return response
-
-
+    """register a new account"""
+    if request.method != "POST":
+        form = RegisterForm()
+    else:
+        form = RegisterForm(data=request.POST)
+        message = 'Please check your information'
+        # 获取数据
+        if form.is_valid():
+            new_user = form.save()
+            authenticate_user = authenticate( username=new_user.username,
+                                             password=request.POST['password1']
+                                             )
+            login(request, authenticate_user)
+            return HttpResponseRedirect(reverse("MainPage:index"))
+    context = {"form": form}
+    return render(request, 'Users/register.html', context)

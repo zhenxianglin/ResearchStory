@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <p>Stories</p >
+
+    <ul>
+        {% for st in story %}
+            <li><a href="#">{{ st }}</a></li>
+        {% empty %}
+            <li>No topics have been added yet.</li>
+        {% endfor %}
+    </ul>
+
+{% endblock content %}

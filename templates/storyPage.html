@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <p>Stories</p >
+
+    <ul>
+    <p>title_name: </p >
+        <li><a>{{ title_name }}</a></li>
+    <p>created_time: </p >
+        <li><a>{{ created_time }}</a></li>
+    <p>category: </p >
+        <li><a>{{ category }}</a></li>
+    <p>views: </p >
+        <li><a>{{ views }}</a></li>
+    <p>text: </p >
+            <li><a>{{ text }}</a></li>
+    <p>paper_link: </p >
+        {% if paper_link %}
+            <li><a href="#">{{ paper_link }}</a></li>
+        {% else %}
+            <li>No Papaer Link.</li>
+        {% endif %}
+    <p>Video: </p >
+        {% if video %}
+            <iframe width="560" height="315" src="{{video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        {% else %}
+            <li>No video.</li>
+        {% endif %}
+    </ul>
+
+{% endblock content %}
