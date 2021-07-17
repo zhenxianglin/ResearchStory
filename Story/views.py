@@ -1,5 +1,28 @@
 from django.shortcuts import render
 from .models import Story
+from .storyform import StoryForm
+from django.urls import reverse
+from django.http import HttpResponse, HttpResponseRedirect
+
+def upload(request):
+    if request.method=="GET":
+        form=StoryForm()
+    elif request.method=="POST":
+        form=StoryForm(data=request.POST)
+        if form.is_valid():
+            story=Story()
+            story.title_name=request.POST.get('title')
+            story.category=request.POST.get('category')
+            story.text=request.POST.get('text')
+            story.video=request.POST.get('videoUrl')
+            story.paper_link=request.POST.get('paperLink')
+            story.save()
+            #form.save()
+            return HttpResponseRedirect(reverse("Story:storyList"))
+
+    return render(request,'upload.html',locals())
+
+
 
 
 def storyList(request):
