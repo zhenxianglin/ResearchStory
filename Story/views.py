@@ -21,9 +21,10 @@ def getStory(request, story_id):
     text = story.text
     video = story.video
     paper_link = story.paper_link
-    print(video)
-    video = f"https://www.youtube.com/embed/{video.split('/')[-1]}"
-    print("video: ", video)
+    try:
+        video = f"https://www.youtube.com/embed/{video.split('/')[-1]}"
+    except AttributeError:
+        pass
     kwarg = {
         "title_name": title_name,
         "created_time": created_time,
