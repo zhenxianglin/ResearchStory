@@ -17,7 +17,9 @@ class Story(models.Model):
 
     views = models.PositiveIntegerField(verbose_name='views number', default=0)
 
-    text = models.TextField(verbose_name="text", blank=False, null=True)
+    #text = models.TextField(verbose_name="text", blank=False, null=True)
+    #text=RichTextUploadingField()
+    text=RichTextField()
     video = models.URLField(verbose_name="video", blank=True, null=True)
     paper_link = models.URLField(verbose_name="paper_link", null=True, blank=True)
 
