@@ -18,5 +18,13 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('', include(("MainPage.urls", "MainPage"), namespace="MainPage")),
+
+    path(r'Users/', include(('Users.urls', 'Users'), namespace='Users')),
+
+    path(r'', include(('MainPage.urls', 'MainPage'), namespace='MainPage')),
+
+    path(r'story/', include(('Story.urls', 'Story'), namespace='story')),
+
+    # path(r'', include(('forum.urls', 'forum'), namespace='forum')),
+
 ]
