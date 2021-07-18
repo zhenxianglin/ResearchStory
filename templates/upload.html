@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load bootstrap3 %}
+{#{% load bootstrap3 %}#}
 
 {% block header %}
     <h2>Upload you story</h2>
@@ -12,11 +12,12 @@
 
 <form method="post" action="{% url 'Story:upload' %}" class="form">
     {% csrf_token %}
-    {% bootstrap_form form %}
 
-    {% buttons %}
+    {{ form.as_p }}
+
+{#    {% buttons %}#}
     <button name="submit" class="btn btn-primary">Upload</button>
-    {% endbuttons %}
+{#    {% endbuttons %}#}
 
     <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
 

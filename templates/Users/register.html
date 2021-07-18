@@ -22,7 +22,7 @@
 
 {% extends 'base.html' %}
 
-{% load bootstrap3 %}
+{#{% load bootstrap3 %}#}
 
 {% block header %}
     <h2>Register Your Account.</h2>
@@ -34,11 +34,11 @@
 
 <form method="post" action="{% url 'Users:register' %}" class="form">
     {% csrf_token %}
-    {% bootstrap_form form %}
+    {{ form.as_p }}
 
-    {% buttons %}
+{#    {% buttons %}#}
     <button name="submit" class="btn btn-primary">Register</button>
-    {% endbuttons %}
+{#    {% endbuttons %}#}
 
     <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
 
