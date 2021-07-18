@@ -4,6 +4,7 @@ from .storyform import StoryForm
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 
+
 def upload(request):
     if request.method=="GET":
         form=StoryForm()
@@ -26,7 +27,7 @@ def upload(request):
 
 
 def storyList(request):
-    story = Story.objects.filter()
+    story = Story.objects.filter().order_by('created_time')
     return render(request, 'story.html', locals())
 
 
