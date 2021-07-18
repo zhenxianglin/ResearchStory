@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.timezone import now
 from django.urls import reverse
 
-#from ckeditor.fields import RichTextField
+from ckeditor.fields import RichTextField
 #from ckeditor_uploader.fields import RichTextUploadingField
 
 
