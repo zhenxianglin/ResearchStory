@@ -24,4 +24,7 @@ urlpatterns = [
     path(r'', include(('MainPage.urls', 'MainPage'), namespace='MainPage')),
 
     path(r'story/', include(('Story.urls', 'Story'), namespace='story')),
+
+    # path(r'', include(('forum.urls', 'forum'), namespace='forum')),
+
 ]

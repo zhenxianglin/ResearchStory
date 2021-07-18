@@ -27,6 +27,11 @@
                             class="sr-only">(current)</span></a>
                 </li>
 
+                <li class="nav-item active">
+                    <a class="nav-link" href="#"> Story <span
+                            class="sr-only">(current)</span></a>
+                </li>
+
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -34,11 +39,15 @@
                         Research area
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">ai</a>
-                        <a class="dropdown-item" href="#">ds</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">bio</a>
+                        <a class="dropdown-item" href="{% url 'Story:storyListCategory' 'ComputerScience' %}">ComputerScience</a>
+                        <a class="dropdown-item" href="{% url 'Story:storyListCategory' 'Physics' %}">Physics</a>
+                        <a class="dropdown-item" href="{% url 'Story:storyListCategory' 'ElectricalEngineering' %}">ElectricalEngineering</a>
                     </div>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'Story:upload' %}">Upload<span
+                            class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item">

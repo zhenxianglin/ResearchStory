@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     #################################
     'Users',
     'Story',
+    'forum',
 
     # 第三方应用程序
     'bootstrap3',

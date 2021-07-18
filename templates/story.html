@@ -6,7 +6,7 @@
 
     <ul>
         {% for st in story %}
-            <li><a href="#">{{ st }}</a></li>
+            <li><a href="story_id={{ st.id }}">{{ st }}</a></li>
         {% empty %}
             <li>No topics have been added yet.</li>
         {% endfor %}

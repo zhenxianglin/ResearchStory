@@ -1,20 +1,47 @@
+{#{% extends 'MainPage/base1.html' %}#}
+{##}
+{##}
+{#{% block content %}#}
+{##}
+{##}
+{#    <form method="post" action="{% url "Users:register" %}">#}
+{#    {% csrf_token %}#}
+{##}
+{##}
+{##}
+{#    {{ form.as_p }}#}
+{##}
+{#    <button name="submit">Register</button>#}
+{##}
+{##}
+{#    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>#}
+{##}
+{#    </form>#}
+{#{% endblock content %}#}
+
+
 {% extends 'base.html' %}
+
+{% load bootstrap3 %}
+
+{% block header %}
+    <h2>Register Your Account.</h2>
+
+{% endblock header %}
 
 
 {% block content %}
 
-
-    <form method="post" action="{% url "Users:register" %}">
+<form method="post" action="{% url 'Users:register' %}" class="form">
     {% csrf_token %}
+    {% bootstrap_form form %}
 
-
-
-    {{ form.as_p }}
-
-    <button name="submit">Register</button>
-
+    {% buttons %}
+    <button name="submit" class="btn btn-primary">Register</button>
+    {% endbuttons %}
 
     <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
 
-    </form>
+
+</form>
 {% endblock content %}
