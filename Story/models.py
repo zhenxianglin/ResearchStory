@@ -38,4 +38,4 @@ class Story(models.Model):
     # 通过reverse()方法返回文章详情页面的url，实现了路由重定向。
     def get_absolute_url(self):
         return reverse('Story:getStory', args=[self.id])
-        # return HttpResponseRedirect(reverse('Story:getStory', args=[self.id]))
+

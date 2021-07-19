@@ -27,5 +27,4 @@ urlpatterns = [
 
     path(r'comment/', include(('comment.urls', 'comment'), namespace='comment')),
 
-
 ]

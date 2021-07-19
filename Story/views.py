@@ -3,8 +3,10 @@ from .models import Story
 from .storyform import StoryForm
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
+
 from comment.models import Comment
 from comment.forms import CommentForm
+
 
 def upload(request):
     if request.method == "GET":
