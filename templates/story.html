@@ -1,15 +1,161 @@
 {% extends "base.html" %}
 
 {% block content %}
+<style type="text/css">
 
-    <p>Stories</p >
+div.content {
+background:  #ffffff;
+padding-left: 10px;
+padding-right: 10px;
+}
 
-    <ul>
+p1 {color:black;
+font-size:16px;
+position:relative;
+bottom:0px;
+}
+
+h1 {color:black;
+font-size:24px;
+}
+
+h2 {color:black;
+font-size:20px;
+}
+
+div.column {
+  float: left;
+  width: 510px;
+  height: 200px;
+  margin-left:30px;
+  margin-top:10px;
+}
+
+/* 列后清除浮动 */
+div.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+div.pic {
+    background-color:#FFD700;
+    height:200px;
+    width:240px;
+    float:left;
+
+}
+
+div.title {
+    background-color:#f1f1f1;
+    height:115px;
+    width:270px;
+    float:left;
+    padding:15px;
+}
+
+div.info {
+    background-color:#f1f1f1;
+    height:85px;
+    width:270px;
+    float:left;
+    padding:15px;
+}
+
+@media screen and (max-width: 700px) {
+    div.column {
+        width: 600px;
+        margin:15px auto;
+    }
+}
+
+div.top{
+width: 100%;
+height: 50px;
+margin: 10px;
+}
+
+div.top_item{
+width: 20%;
+height: 50px;
+float:left;
+background: white;
+text-align: center;
+}
+
+.button3 {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width:100%;
+    height:100%;
+}
+.button2 {
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width:100%;
+    height:100%;
+}
+.button1 {
+    background-color: #ff8800;
+    border: none;
+    color: white;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width:100%;
+    height:100%;
+}
+
+</style>
+<div class="top">
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'ComputerScience' %}"><button class="button1">ComputerScience</button></a>
+        </div>
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'Physics' %}"><button class="button2">Physics</button></a>
+        </div>
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'ElectricalEngineering' %}"><button class="button3">ElectricalEngineering</button></a>
+        </div>
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'ComputerScience' %}"><button class="button1">ComputerScience</button></a>
+        </div>
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'ComputerScience' %}"><button class="button2">ComputerScience</button></a>
+        </div>
+    </div>
+
+<div class="content">
+    <div class="row">
         {% for st in story %}
-            <li><a href="story_id={{ st.id }}">{{ st }}</a></li>
+        <div class="column">
+        <a href="story_id={{ st.id }}"><div class="pic">
+            <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fef8f4e259600dc03b34dafa0b48affdf633c620f19b15-BzqyIl_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1629285821&t=70e7df799515c6e871156fa0ad68369a" width="300" height="200" />
+        </div></a>
+            <div class="title">
+                <a href="story_id={{ st.id }}"><h1>{{ st }}</h1></a>
+            </div>
+            <div class="info">
+            <h2>Researcher:</h2>
+            <p1>Heat:</p1>
+            </div>
+        </div>
         {% empty %}
-            <li>No topics have been added yet.</li>
+        <li>No topics have been added yet.</li>
         {% endfor %}
-    </ul>
-
+    </div>
+</div>
 {% endblock content %}
