@@ -1,4 +1,4 @@
-{#{% extends 'MainPage/base1.html' %}#}
+{#{% extends 'base.html' %}#}
 {##}
 {##}
 {#{% block content %}#}
@@ -6,7 +6,6 @@
 {##}
 {#    <form method="post" action="{% url "Users:register" %}">#}
 {#    {% csrf_token %}#}
-{##}
 {##}
 {##}
 {#    {{ form.as_p }}#}
@@ -104,15 +103,15 @@
                         <button name="submit" class="form-control btn btn-primary submit px-3">Register</button>
                         <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
                     </div>
-{#                    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>#}
+                    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
 
                 </form>
             </div>
 
-            {#            <div class="form-group">#}
-            {#                <button type="submit" class="form-control btn btn-primary submit px-3">Register</button>#}
-            {##}
-            {#            </div>#}
+                        <div class="form-group">
+                            <button type="submit" class="form-control btn btn-primary submit px-3">Register</button>
+
+                        </div>
 
         </div>
     </div>

@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'comment',
 
     # 第三方应用程序
-    # 'bootstrap3',
+    'bootstrap3',
     'ckeditor',  # 富文本编辑器
     'ckeditor_uploader',  # 富文本编辑器上传图片模块
     'mptt',

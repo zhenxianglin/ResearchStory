@@ -108,8 +108,7 @@
                         {% if user.is_authenticated %}
                             <button type="button"
                                     class="btn btn-light btn-sm text-muted"
-                                    onclick="load_modal({{ story.id }}, {{ comment.id }})">
-                                Reply
+                                    onclick="load_modal({{ story.id }}, {{ comment.id }})">Reply
                             </button>
                         {% else %}
                             <a class="btn btn-light btn-sm text-muted"
@@ -129,7 +128,8 @@
                         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                             <div class="modal-content" style="height: 480px">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalCenterTitle">Replying to {{ comment.user }}：</h5>
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Replying
+                                        to {{ comment.user }}：</h5>
                                 </div>
                                 <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
                             </div>
@@ -155,26 +155,12 @@
 
             // 加载编辑器
             if ($(modal_body).children().length === 0) {
-                let content = '<iframe src="/comment/post_comment/' +
-                    story_id +
-                    '/' +
-                    comment_id +
-                    '" frameborder="0" style="width: 100%; height: 100%;"></iframe>';
+                let content = '<iframe src="/comment/post_comment/' + story_id + '/' + comment_id + '" frameborder="0" style="width: 100%; height: 100%;"></iframe>';
                 $(modal_body).append(content);
             }
             ;
             $(modal_id).modal('show');
         }
-
-        // 处理二级回复
-        function post_reply_and_show_it(new_comment_id) {
-            let next_url = "{% url 'Story:getStory' story.id %}";
-            // 去除 url 尾部 '/' 符号
-            next_url = next_url.charAt(next_url.length - 1) == '/' ? next_url.slice(0, -1) : next_url;
-            // 刷新并定位到锚点
-            window.location.replace(next_url + "#comment_elem_" + new_comment_id);
-        };
-
 
     </script>
 
