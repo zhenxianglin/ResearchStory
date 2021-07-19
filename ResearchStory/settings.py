@@ -39,27 +39,29 @@ INSTALLED_APPS = [
     'Users',
     'Story',
     'forum',
+    'comment',
 
     # 第三方应用程序
-    'bootstrap3',
-     'ckeditor',  # 富文本编辑器
-     'ckeditor_uploader', # 富文本编辑器上传图片模块
+    # 'bootstrap3',
+    'ckeditor',  # 富文本编辑器
+    'ckeditor_uploader',  # 富文本编辑器上传图片模块
+    'mptt',
 ]
-#媒体文件配置
+# 媒体文件配置
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 CKEDITOR_UPLOAD_PATH = "img"  # 上传图片保存路径，如果没有图片存储或者使用自定义存储位置，那么则直接写  ' ' ,如果是使用django本身的存储方式，那么你就指名一个目录用来存储即可。
-#CKEDITOR_IMAGE_BACKEND = 'pillow'
+# CKEDITOR_IMAGE_BACKEND = 'pillow'
 # 富文本编辑器ckeditor配置
 CKEDITOR_CONFIGS = {
-    #（1）默认配置
+    # （1）默认配置
     # 'default': {
     #     'toolbar': 'full',  # 工具条功能
     #     'height': 300,  # 编辑器高度
     #     'width': 800,  # 编辑器宽
     # },
 
-    #（3）自定义配置带代码块显示
+    # （3）自定义配置带代码块显示
     'default': {
         'toolbar': (
             ['div', 'Source', '-', 'Save', 'NewPage', 'Preview', '-', 'Templates'],
@@ -181,3 +183,5 @@ STATICFILES_DIRS = (
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # abc
+# user login required
+LOGIN_URL = 'Users/login/'

@@ -5,6 +5,7 @@ from .views import *
 from django.conf.urls.static import static
 from django.conf import settings
 
+app_name = 'Story'
 urlpatterns = [
     path(r'', storyList, name='storyList'),
     path(r'story_id=<int:story_id>', getStory, name='getStory'),

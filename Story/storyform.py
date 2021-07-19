@@ -32,5 +32,5 @@ class StoryForm(forms.Form):
             'paperLink',
             'text',
             'videoUrl',
-
         )
+

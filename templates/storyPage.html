@@ -1,32 +1,90 @@
 {% extends "base.html" %}
 
+{% load static %}
 {% block content %}
+    <script src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'prism/prism.css' %}">
 
-    <p>Stories</p >
+    <div>
 
-    <ul>
-    <p>title_name: </p >
-        <li><a>{{ title_name }}</a></li>
-    <p>created_time: </p >
-        <li><a>{{ created_time }}</a></li>
-    <p>category: </p >
-        <li><a>{{ category }}</a></li>
-    <p>views: </p >
-        <li><a>{{ views }}</a></li>
-    <p>text: </p >
+        <p>Stories</p>
+
+        <ul>
+            <p>title_name: </p>
+            <li><a>{{ title_name }}</a></li>
+            <p>created_time: </p>
+            <li><a>{{ created_time }}</a></li>
+            <p>category: </p>
+            <li><a>{{ category }}</a></li>
+            <p>views: </p>
+            <li><a>{{ views }}</a></li>
+            <p>text: </p>
             <li><a>{{ text }}</a></li>
-    <p>paper_link: </p >
-        {% if paper_link %}
-            <li><a href="#">{{ paper_link }}</a></li>
-        {% else %}
-            <li>No Papaer Link.</li>
-        {% endif %}
-    <p>Video: </p >
-        {% if video %}
-            <iframe width="560" height="315" src="{{video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        {% else %}
-            <li>No video.</li>
-        {% endif %}
-    </ul>
+            <p>paper_link: </p>
+            {% if paper_link %}
+                <li><a href="#">{{ paper_link }}</a></li>
+            {% else %}
+                <li>No Papaer Link.</li>
+            {% endif %}
+            <p>Video: </p>
+            {% if video %}
+                <iframe width="560" height="315" src="{{ video }}" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            {% else %}
+                <li>No video.</li>
+            {% endif %}
+        </ul>
+
+    </div>
+    <!-- 发表评论 -->
+    <hr/>
+    {% if user.is_authenticated %}
+        <div>
+            <form action="{% url "comment:post_comment" story.id %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="body">
+                        <strong>
+                            I WANT TO REPLY：
+                        </strong>
+                    </label>
+                    <textarea type="text" class="form-control" id="body" name="body" rows="2",
+                              placeholder="Please enter a comment"></textarea>
+                </div>
+                <!-- 提交按钮 -->
+                <button type="submit" class="btn btn-primary ">Send</button>
+            </form>
+        </div>
+
+        <br>
+    {% else %}
+        <br>
+        <h5 class="row justify-content-center">
+            Please <a href="{% url 'Users:login' %}"> login </a> to reply.
+        </h5>
+        <br>
+    {% endif %}
+
+    <!-- 显示评论 -->
+    <h4>Total comments: {{ comments.count }}</h4>
+    <div>
+        {% for comment in comments %}
+            <hr>
+            <p>
+                <span style="color: green">
+                    {{ comment.created|date:"Y-m-d H:i:s" }}
+                </span>
+                <strong style="color: pink">
+                    {{ comment.user }}
+                </strong> Said：
+            </p>
+            <pre style="font-family: inherit; font-size: 1em;">
+            {{ comment.body }}
+            </pre>
+        {% endfor %}
+    </div>
+
 
 {% endblock content %}
+
