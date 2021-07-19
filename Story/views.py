@@ -18,8 +18,8 @@ def upload(request):
             story.text = request.POST.get('text')
             story.video = request.POST.get('videoUrl')
             story.paper_link = request.POST.get('paperLink')
+            story.img=request.POST.get('img')
             story.save()
-            # form.save()
             return HttpResponseRedirect(reverse("Story:storyList"))
 
     return render(request, 'upload.html', locals())

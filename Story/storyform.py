@@ -1,6 +1,7 @@
 from .models import Story
 from django import forms
 from ckeditor.fields import RichTextField
+from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 
 class StoryForm(forms.Form):
@@ -15,6 +16,7 @@ class StoryForm(forms.Form):
     #text=forms.CharField(widget=forms.Textarea)
     #text=RichTextUploadingField(default='xxx', verbose_name='text')
     text=RichTextField(default='xxx')
+    img=models.ImageField(upload_to='img',null=False)
     videoUrl=forms.URLField(label='videoUrl',max_length=512,
                          widget=forms.URLInput(attrs={'placeholder':'Please enter your content'})
                          )
@@ -31,6 +33,7 @@ class StoryForm(forms.Form):
             'viewsNum',
             'paperLink',
             'text',
+            'img'
             'videoUrl',
         )
 

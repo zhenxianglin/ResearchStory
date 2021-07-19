@@ -21,6 +21,7 @@ class Story(models.Model):
 
     # text = models.TextField(verbose_name="text", blank=False, null=True)
     # text=RichTextUploadingField()
+    img= models.ImageField(verbose_name="front page",upload_to='img',null=False)
     text = RichTextField()
     video = models.URLField(verbose_name="video", blank=True, null=True)
     paper_link = models.URLField(verbose_name="paper_link", null=True, blank=True)
