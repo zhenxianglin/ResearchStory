@@ -19,6 +19,7 @@ class LoginFom(forms.Form):
         )
 
 
+
 class RegisterForm(UserCreationForm):
     username = forms.CharField(label='Username', max_length=128,
                                error_messages={
