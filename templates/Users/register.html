@@ -22,13 +22,11 @@
 
 {% extends 'base.html' %}
 
-{#{% load bootstrap3 %}#}
 
 {% block header %}
-     <div class="text-center">
-      <h2> Welcome To Register</h2>
-     </div>
-
+    <div class="text-center">
+            <h3> Welcome To Register</h3>
+    </div>
 
 {% endblock header %}
 
@@ -36,72 +34,85 @@
     <div class="container">
         <div class="text-center">
 
-         <div class="row justify-content-center form-group">
+            <div class="row justify-content-center form-group">
                 <form method="post" action="{% url 'Users:register' %}" class="form">
+                    {% csrf_token %}
+
                     <div class="row form-group">
                         <div class="p" style="width:150px;height:40px;float:left;">Username:</div>
-		      			<input type="text" class="form-control" style="width:300px;height:30px;float:right;" name="username" placeholder="Username" required>
-		      		</div>
+                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
+                               name="username" placeholder="Username" required>
+                    </div>
                     <div class="row form-group">
                         <div class="p" style="width:150px;height:40px;float:left;">Age:</div>
-		      			<input type="text" class="form-control" style="width:300px;height:30px;float:right;" name="age" placeholder="Age" required>
-		      		</div>
+                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;" name="age"
+                               placeholder="Age" required>
+                    </div>
 
                     <div class="row form-group">
                         <div class="p" style="width:150px;height:40px;float:left;">Gender:</div>
-		      			<select type="text" class="form-control" style="width:300px;height:30px;float:right;" name="gender" placeholder="gender" required>
+                        <select type="text" class="form-control" style="width:300px;height:30px;float:right;"
+                                name="gender" placeholder="gender" required>
+                            <option value="">---</option>
                             <option value="">Male</option>
                             <option value="">Female</option>
                             <option value="">Secret</option>
                         </select>
-		      		</div>
+                    </div>
 
                     <div class="row form-group">
                         <div class="p" style="width:150px;height:40px;float:left;">First Name:</div>
-		      			<input type="text" class="form-control" style="width:300px;height:30px;float:right;" name="first_name" placeholder="First name" required>
-		      		</div>
+                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
+                               name="first_name" placeholder="First name" required>
+                    </div>
 
                     <div class="row form-group">
                         <div class="p" style="width:150px;height:40px;float:left;">Last Name:</div>
-		      			<input type="text" class="form-control"  style="width:300px;height:30px;float:right;" name="last_name" placeholder="Last name" required>
-		      		</div>
+                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
+                               name="last_name" placeholder="Last name" required>
+                    </div>
 
                     <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">Usertype:</div>
-		      			<select type="text" class="form-control" style="width:300px;height:30px;float:right;" name="usertype" placeholder="usertype" required>
+                        <div class="p" style="width:150px;height:40px;float:left;">User Type:</div>
+                        <select type="text" class="form-control" style="width:300px;height:30px;float:right;"
+                                name="usertype" placeholder="usertype" required>
+                            <option value=""> ---</option>
                             <option value="">Researcher</option>
                             <option value="">Common User</option>
                         </select>
-		      		</div>
+                    </div>
 
                     <div class="row form-group">
                         <div class="p" style="width:150px;height:40px;float:left;">Email Address:</div>
-		      			<input type="text" class="form-control" style="width:300px;height:30px;float:right;" name="email" placeholder="@gmail.com" required>
-		      		</div>
+                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
+                               name="email" placeholder="@gmail.com" required>
+                    </div>
 
                     <div class="row form-group">
                         <div class="p" style="width:150px;height:40px;float:left;">Password:</div>
-		      			<input type="password" class="form-control" style="width:300px;height:30px;float:right;" name="password1" placeholder="password" required>
-		      		</div>
+                        <input type="password" class="form-control" style="width:300px;height:30px;float:right;"
+                               name="password1" placeholder="password" required>
+                    </div>
 
                     <div class="row form-group">
                         <div class="p" style="width:150px;height:40px;float:left;">Password Again:</div>
-		      			<input type="password" class="form-control" style="width:300px;height:30px;float:right;" name="password2" placeholder="password" required>
-		      		</div>
+                        <input type="password" class="form-control" style="width:300px;height:30px;float:right;"
+                               name="password2" placeholder="password" required>
+                    </div>
 
-
-
+                    <div class="form-group">
+                        <button name="submit" class="form-control btn btn-primary submit px-3">Register</button>
+                        <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
+                    </div>
+{#                    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>#}
 
                 </form>
-         </div>
+            </div>
 
-            {#    {% buttons %}#}
-                <button name="submit" class="btn btn-primary">Register</button>
-            {#    {% endbuttons %}#}
-
-                <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
-
-
+            {#            <div class="form-group">#}
+            {#                <button type="submit" class="form-control btn btn-primary submit px-3">Register</button>#}
+            {##}
+            {#            </div>#}
 
         </div>
     </div>

@@ -29,7 +29,7 @@
 
 {% block header %}
        <div class="text-center">
-      <h2>Log in to your account</h2>
+      <h2></h2>
      </div>
 
 
@@ -54,8 +54,10 @@
 		      	<h3 class="mb-4 text-center">Have an account?</h3>
 		      	<form method="post" class="signin-form" action="{% url 'Users:login' %}">
 		      		<div class="form-group">
+                        {% csrf_token %}
 		      			<input type="text" class="form-control" name="username" placeholder="Username" required>
 {#                        {{ form.username|as_crispy_field }}#}
+                        <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
 		      		</div>
 	            <div class="form-group">
 	              <input id="password-field" type="password" class="form-control"  name="password" placeholder="Password" required>

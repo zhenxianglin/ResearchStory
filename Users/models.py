@@ -15,7 +15,7 @@ class User(AbstractUser):
     )
 
     username = models.CharField(max_length=128, unique=True, verbose_name='username')
-    age = models.IntegerField(null=True, verbose_name="age")
+    age = models.PositiveIntegerField(null=True, verbose_name="age")
     gender = models.CharField(choices=SEX_ITEMS, max_length=100, verbose_name="gender")
 
     last_name = models.CharField(max_length=128, verbose_name="last Name")
