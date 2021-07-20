@@ -46,6 +46,17 @@ INSTALLED_APPS = [
     'ckeditor',  # 富文本编辑器
     'ckeditor_uploader',  # 富文本编辑器上传图片模块
     'mptt',
+    'password_reset',
+
+    # allauth 启动必须项
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # 可添加需要的第三方登录
+    'allauth.socialaccount.providers.github',
+
 ]
 # 媒体文件配置
 MEDIA_URL = "/media/"
@@ -113,6 +124,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'django.template.context_processors.request',
             ],
         },
     },
@@ -139,7 +151,10 @@ DATABASES = {
 AUTH_USER_MODEL = 'Users.User'
 
 AUTHENTICATION_BACKENDS = [
+    # Django 后台可独立于 allauth 登录
     'django.contrib.auth.backends.ModelBackend',
+    # 配置 allauth 独有的认证方法，如 email 登录
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -186,3 +201,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # abc
 # user login required
 LOGIN_URL = 'Users/login/'
+
+# abc
+# user login required
+LOGIN_URL = 'Users/login/'
+
+# SMTP服务器
+EMAIL_HOST = 'smtp.gmail.com'
+# 邮箱名
+EMAIL_HOST_USER = 'your email'
+# 邮箱密码
+EMAIL_HOST_PASSWORD = 'your password'
+# 发送邮件的端口
+EMAIL_PORT = 587
+# 是否使用 TLS
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = True
+# 默认的发件人
+DEFAULT_FROM_EMAIL = 'tracyguoji@gmail.com'
+
+# 设置站点
+SITE_ID = 1
+
+# 登录成功后重定向地址
+LOGIN_REDIRECT_URL = '/'

@@ -1,118 +1,133 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block content %}
+
+
+    <form method="post" action="{% url "Users:register" %}">
+        {% csrf_token %}
+
+
+        {{ form.as_p }}
+
+        <button name="submit">Register</button>
+
+
+        <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
+
+    </form>
+    {% get_providers as socialaccount_providers %}
+    {% if socialaccount_providers %}
+        <p>
+            {% blocktrans with site.name as site_name %}{% endblocktrans %}
+        </p>
+        <div class="socialaccount_ballot">
+            <h6 class="mb-2 mt-4"> sign in through a third party.：</h6>
+            <ul class="socialaccount_providers">
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+            </ul>
+
+        </div>
+        {% include "socialaccount/snippets/login_extra.html" %}
+    {% endif %}
+{% endblock content %}
+
+{##}
 {#{% extends 'base.html' %}#}
 {##}
 {##}
+{#{% block header %}#}
+{#    <div class="text-center">#}
+{#            <h3> Welcome To Register</h3>#}
+{#    </div>#}
+{##}
+{#{% endblock header %}#}
+{##}
 {#{% block content %}#}
+{#    <div class="container">#}
+{#        <div class="text-center">#}
 {##}
+{#            <div class="row justify-content-center form-group">#}
+{#                <form method="post" action="{% url 'Users:register' %}" class="form">#}
+{#                    {% csrf_token %}#}
 {##}
-{#    <form method="post" action="{% url "Users:register" %}">#}
-{#    {% csrf_token %}#}
+{#                    <div class="row form-group">#}
+{#                        <div class="p" style="width:150px;height:40px;float:left;">Username:</div>#}
+{#                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"#}
+{#                               name="username" placeholder="Username" required>#}
+{#                    </div>#}
+{#                    <div class="row form-group">#}
+{#                        <div class="p" style="width:150px;height:40px;float:left;">Age:</div>#}
+{#                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;" name="age"#}
+{#                               placeholder="Age" required>#}
+{#                    </div>#}
 {##}
+{#                    <div class="row form-group">#}
+{#                        <div class="p" style="width:150px;height:40px;float:left;">Gender:</div>#}
+{#                        <select type="text" class="form-control" style="width:300px;height:30px;float:right;"#}
+{#                                name="gender" placeholder="gender" required>#}
+{#                            <option value="">---</option>#}
+{#                            <option value="">Male</option>#}
+{#                            <option value="">Female</option>#}
+{#                            <option value="">Secret</option>#}
+{#                        </select>#}
+{#                    </div>#}
 {##}
-{#    {{ form.as_p }}#}
+{#                    <div class="row form-group">#}
+{#                        <div class="p" style="width:150px;height:40px;float:left;">First Name:</div>#}
+{#                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"#}
+{#                               name="first_name" placeholder="First name" required>#}
+{#                    </div>#}
 {##}
-{#    <button name="submit">Register</button>#}
+{#                    <div class="row form-group">#}
+{#                        <div class="p" style="width:150px;height:40px;float:left;">Last Name:</div>#}
+{#                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"#}
+{#                               name="last_name" placeholder="Last name" required>#}
+{#                    </div>#}
 {##}
+{#                    <div class="row form-group">#}
+{#                        <div class="p" style="width:150px;height:40px;float:left;">User Type:</div>#}
+{#                        <select type="text" class="form-control" style="width:300px;height:30px;float:right;"#}
+{#                                name="usertype" placeholder="usertype" required>#}
+{#                            <option value=""> ---</option>#}
+{#                            <option value="">Researcher</option>#}
+{#                            <option value="">Common User</option>#}
+{#                        </select>#}
+{#                    </div>#}
 {##}
-{#    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>#}
+{#                    <div class="row form-group">#}
+{#                        <div class="p" style="width:150px;height:40px;float:left;">Email Address:</div>#}
+{#                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"#}
+{#                               name="email" placeholder="@gmail.com" required>#}
+{#                    </div>#}
 {##}
-{#    </form>#}
+{#                    <div class="row form-group">#}
+{#                        <div class="p" style="width:150px;height:40px;float:left;">Password:</div>#}
+{#                        <input type="password" class="form-control" style="width:300px;height:30px;float:right;"#}
+{#                               name="password1" placeholder="password" required>#}
+{#                    </div>#}
+{##}
+{#                    <div class="row form-group">#}
+{#                        <div class="p" style="width:150px;height:40px;float:left;">Password Again:</div>#}
+{#                        <input type="password" class="form-control" style="width:300px;height:30px;float:right;"#}
+{#                               name="password2" placeholder="password" required>#}
+{#                    </div>#}
+{##}
+{#                    <div class="form-group">#}
+{#                        <button name="submit" class="form-control btn btn-primary submit px-3">Register</button>#}
+{#                        <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>#}
+{#                    </div>#}
+{#                    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>#}
+{##}
+{#                </form>#}
+{#            </div>#}
+{##}
+{#                        <div class="form-group">#}
+{#                            <button type="submit" class="form-control btn btn-primary submit px-3">Register</button>#}
+{##}
+{#                        </div>#}
+{##}
+{#        </div>#}
+{#    </div>#}
 {#{% endblock content %}#}
-
-
-{% extends 'base.html' %}
-
-
-{% block header %}
-    <div class="text-center">
-            <h3> Welcome To Register</h3>
-    </div>
-
-{% endblock header %}
-
-{% block content %}
-    <div class="container">
-        <div class="text-center">
-
-            <div class="row justify-content-center form-group">
-                <form method="post" action="{% url 'Users:register' %}" class="form">
-                    {% csrf_token %}
-
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">Username:</div>
-                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
-                               name="username" placeholder="Username" required>
-                    </div>
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">Age:</div>
-                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;" name="age"
-                               placeholder="Age" required>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">Gender:</div>
-                        <select type="text" class="form-control" style="width:300px;height:30px;float:right;"
-                                name="gender" placeholder="gender" required>
-                            <option value="">---</option>
-                            <option value="">Male</option>
-                            <option value="">Female</option>
-                            <option value="">Secret</option>
-                        </select>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">First Name:</div>
-                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
-                               name="first_name" placeholder="First name" required>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">Last Name:</div>
-                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
-                               name="last_name" placeholder="Last name" required>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">User Type:</div>
-                        <select type="text" class="form-control" style="width:300px;height:30px;float:right;"
-                                name="usertype" placeholder="usertype" required>
-                            <option value=""> ---</option>
-                            <option value="">Researcher</option>
-                            <option value="">Common User</option>
-                        </select>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">Email Address:</div>
-                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
-                               name="email" placeholder="@gmail.com" required>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">Password:</div>
-                        <input type="password" class="form-control" style="width:300px;height:30px;float:right;"
-                               name="password1" placeholder="password" required>
-                    </div>
-
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">Password Again:</div>
-                        <input type="password" class="form-control" style="width:300px;height:30px;float:right;"
-                               name="password2" placeholder="password" required>
-                    </div>
-
-                    <div class="form-group">
-                        <button name="submit" class="form-control btn btn-primary submit px-3">Register</button>
-                        <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
-                    </div>
-                    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
-
-                </form>
-            </div>
-
-                        <div class="form-group">
-                            <button type="submit" class="form-control btn btn-primary submit px-3">Register</button>
-
-                        </div>
-
-        </div>
-    </div>
-{% endblock content %}
