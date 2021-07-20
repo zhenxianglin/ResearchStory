@@ -23,8 +23,6 @@ class StoryForm(forms.Form):
     paperLink=forms.URLField(label='paperLink',max_length=512,
                              widget=forms.URLInput(attrs={'Placeholder':'Please enter your paper link'}))
 
-
-
     class Meta:
         model = Story
         fields=(

@@ -21,7 +21,7 @@ class Story(models.Model):
 
     # text = models.TextField(verbose_name="text", blank=False, null=True)
     # text=RichTextUploadingField()
-    img= models.ImageField(verbose_name="front page",upload_to='img',null=False)
+    img = models.ImageField(verbose_name="front page", upload_to='img', null=False)
     text = RichTextField()
     video = models.URLField(verbose_name="video", blank=True, null=True)
     paper_link = models.URLField(verbose_name="paper_link", null=True, blank=True)
@@ -39,4 +39,3 @@ class Story(models.Model):
     # 通过reverse()方法返回文章详情页面的url，实现了路由重定向。
     def get_absolute_url(self):
         return reverse('Story:getStory', args=[self.id])
-
