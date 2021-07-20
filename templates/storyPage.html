@@ -117,6 +117,7 @@
         </div>
 
         <div class="column right">
+            
 {% if user.is_authenticated %}
         <div>
             <form action="{% url "comment:post_comment" story.id %}" method="post">
