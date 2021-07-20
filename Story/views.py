@@ -20,21 +20,79 @@ def upload(request):
             story.text = request.POST.get('text')
             story.video = request.POST.get('videoUrl')
             story.paper_link = request.POST.get('paperLink')
-            story.img=request.POST.get('img')
+            story.img = request.POST.get('img')
             story.save()
             return HttpResponseRedirect(reverse("Story:storyList"))
-
     return render(request, 'upload.html', locals())
 
 
 def storyList(request):
-    story = Story.objects.filter().order_by('-created_time')
-    return render(request, 'story.html', locals())
+    print("method =", request.method)
+    if request.method == "GET":
+        story = Story.objects.filter().order_by('-created_time')
+        kwarg = {
+            "story": story,
+        }
+        return render(request, 'story.html', kwarg)
+    elif request.method == "POST":
+        method = request.POST.get("sort_by")
+        story = request.POST.get("story")
+        if method == "time":
+            story.order_by("-created_time")
+        elif method == "hot":
+            story.order_by("-views")
+        kwarg = {
+            "story": story,
+        }
+        return render(request, 'story.html', kwarg)
+
+
+def storyListSortBy(request, sort_by):
+    story = Story.objects.filter()
+    if sort_by == "time":
+        story = story.order_by("-created_time")
+    elif sort_by == "hot":
+        story = story.order_by("-views")
+    print(story)
+    kwarg = {
+        "story": story,
+    }
+    return render(request, 'story.html', kwarg)
 
 
 def storyListCategory(request, category):
+    print("storyListCategory")
+    print("method =", request.method)
+    if request.method == "GET":
+        story = Story.objects.filter(category=category).order_by('-created_time')
+        kwarg = {
+            "story": story,
+        }
+        return render(request, 'story.html', kwarg)
+    elif request.method == "POST":
+        method = request.POST.get("sort_by")
+        story = request.POST.get("story")
+        if method == "time":
+            story.order_by("-created_time")
+        elif method == "hot":
+            story.order_by("-views")
+        kwarg = {
+            "story": story,
+        }
+        return render(request, 'story.html', kwarg)
+
+
+def storyListCategorySortBy(request, category, sort_by):
     story = Story.objects.filter(category=category)
-    return render(request, 'story.html', locals())
+    if sort_by == "time":
+        story = story.order_by("-created_time")
+    elif sort_by == "hot":
+        story = story.order_by("-views")
+    print(story)
+    kwarg = {
+        "story": story,
+    }
+    return render(request, 'story.html', kwarg)
 
 
 def getStory(request, story_id):

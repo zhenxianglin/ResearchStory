@@ -8,9 +8,11 @@ from django.conf import settings
 app_name = 'Story'
 urlpatterns = [
     path(r'', storyList, name='storyList'),
+    path(r'_sort_by=<str:sort_by>', storyListSortBy, name='storyListSortBy'),
     path(r'story_id=<int:story_id>', getStory, name='getStory'),
+    path(r'category=<str:category>_sort_by=<str:sort_by>', storyListCategorySortBy, name='storyListCategorySortBy'),
     path(r'category=<str:category>', storyListCategory, name='storyListCategory'),
     path(r'upload/',upload,name='upload'),
 
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  ## 没有这一句无法显示上传的图片(有也没用)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  ## 没有这一句无法显示上传的图片(有也没用)
 
