@@ -1,32 +1,176 @@
 {% extends "base.html" %}
 
+{% load static %}
 {% block content %}
+    <script src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'prism/prism.css' %}">
 
-    <p>Stories</p >
+    <div>
 
-    <ul>
-    <p>title_name: </p >
-        <li><a>{{ title_name }}</a></li>
-    <p>created_time: </p >
-        <li><a>{{ created_time }}</a></li>
-    <p>category: </p >
-        <li><a>{{ category }}</a></li>
-    <p>views: </p >
-        <li><a>{{ views }}</a></li>
-    <p>text: </p >
+        <p>Stories</p>
+
+        <ul>
+            <p>title_name: </p>
+            <li><a>{{ title_name }}</a></li>
+            <p>created_time: </p>
+            <li><a>{{ created_time }}</a></li>
+            <p>category: </p>
+            <li><a>{{ category }}</a></li>
+            <p>views: </p>
+            <li><a>{{ views }}</a></li>
+            <p>text: </p>
             <li><a>{{ text }}</a></li>
-    <p>paper_link: </p >
-        {% if paper_link %}
-            <li><a href="#">{{ paper_link }}</a></li>
-        {% else %}
-            <li>No Papaer Link.</li>
-        {% endif %}
-    <p>Video: </p >
-        {% if video %}
-            <iframe width="560" height="315" src="{{video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        {% else %}
-            <li>No video.</li>
-        {% endif %}
-    </ul>
+            <p>paper_link: </p>
+            {% if paper_link %}
+                <li><a href="#">{{ paper_link }}</a></li>
+            {% else %}
+                <li>No Papaer Link.</li>
+            {% endif %}
+            <p>Video: </p>
+            {% if video %}
+                <iframe width="560" height="315" src="{{ video }}" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+            {% else %}
+                <li>No video.</li>
+            {% endif %}
+        </ul>
+
+    </div>
+    <!-- 发表评论 -->
+    <hr/>
+    {% if user.is_authenticated %}
+        <div>
+            <form action="{% url "comment:post_comment" story.id %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="body">
+                        <strong>
+                            Add comment：
+                        </strong>
+                    </label>
+                    <div>
+                        {{ comment_form.media }}
+                        {{ comment_form.body }}
+                    </div>
+                    {#                    <textarea type="text" class="form-control" id="body" name="body" rows="2" ,#}
+                    {#                              placeholder="Please enter a comment"></textarea>#}
+                </div>
+                <!-- 提交按钮 -->
+                <button type="submit" class="btn btn-primary ">Post</button>
+            </form>
+        </div>
+
+        <br>
+    {% else %}
+        <br>
+        <h5 class="row justify-content-center">
+            Please <a href="{% url 'Users:login' %}"> login </a> to reply.
+        </h5>
+        <br>
+    {% endif %}
+
+    <!-- 显示评论 -->
+    {% load mptt_tags %}
+    <h4>Total comments: {{ comments.count }}</h4>
+    <div class="row">
+        {% recursetree comments %}
+            {% with comment=node %}
+                <div class="{% if comment.reply_to %} offset-1 col-11 {% else %} col-12 {% endif %}">
+                    <hr/>
+
+                    <p>
+                        <strong style="color: pink">
+                            {{ comment.user }}
+                        </strong>
+
+
+                        <!-- 显示被回复人 -->
+                        {% if comment.reply_to %}
+                            <i class="far fa-arrow-alt-circle-right"
+                               style="color: cornflowerblue;"
+                            ></i>
+                            <strong style="color: pink">
+                                <span style="color: blue" class="arrow-outer">  @</span> {{ comment.reply_to }}
+                            </strong>
+                        {% endif %}
+
+                    </p>
+                    <div>{{ comment.body|safe }}</div>
+
+                    <div>
+                        <span style="color: gray">
+                        {{ comment.created|date:"Y-m-d H:i:s" }}
+                        </span>
+
+
+                        <!-- 加载 modal 的按钮 -->
+                        {% if user.is_authenticated %}
+                            <button type="button"
+                                    class="btn btn-light btn-sm text-muted"
+                                    onclick="load_modal({{ story.id }}, {{ comment.id }})">Reply
+                            </button>
+                        {% else %}
+                            <a class="btn btn-light btn-sm text-muted"
+                               href="{% url 'Users:login' %}">
+                                Reply
+                            </a>
+                        {% endif %}
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade"
+                         id="comment_{{ comment.id }}"
+                         tabindex="-1"
+                         role="dialog"
+                         aria-labelledby="CommentModalCenter"
+                         aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content" style="height: 480px">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Replying
+                                        to {{ comment.user }}：</h5>
+                                </div>
+                                <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% if not comment.is_leaf_node %}
+                        <div class="children">
+                            {{ children }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endwith %}
+        {% endrecursetree %}
+    </div>
+
+
+    <!--，唤醒二级回复的 modal -->
+    <script>
+        // 加载 modal
+        function load_modal(story_id, comment_id) {
+            let modal_body = '#modal_body_' + comment_id;
+            let modal_id = '#comment_' + comment_id;
+
+            // 加载编辑器
+            if ($(modal_body).children().length === 0) {
+                let content = '<iframe src="/comment/post_comment/' + story_id + '/' + comment_id + '" frameborder="0" style="width: 100%; height: 100%;"></iframe>';
+                $(modal_body).append(content);
+            }
+            ;
+            $(modal_id).modal('show');
+        }
+         // 处理二级回复
+    {#function post_reply_and_show_it(new_comment_id) {#}
+    {#    let next_url = "{% url 'Story:gerStory' story.id %}";#}
+    {#    // 去除 url 尾部 '/' 符号#}
+    {#    next_url = next_url.charAt(next_url.length - 1) == '/' ? next_url.slice(0, -1) : next_url;#}
+    {#    // 刷新并定位到锚点#}
+    {#    window.location.replace(next_url + "#comment_elem_" + new_comment_id);#}
+    {#};#}
+
+    </script>
 
 {% endblock content %}
+

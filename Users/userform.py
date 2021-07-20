@@ -11,6 +11,14 @@ class LoginFom(forms.Form):
                                widget=forms.PasswordInput(attrs={'placeholder': 'Please enter the password.'})
                                )
 
+    class Meta:
+        model = User
+        fields = (
+            'username',
+            'password',
+        )
+
+
 
 class RegisterForm(UserCreationForm):
     username = forms.CharField(label='Username', max_length=128,
@@ -57,4 +65,6 @@ class RegisterForm(UserCreationForm):
             'first_name',
             'usertype',
             'email',
+            'password1',
+            'password2',
         )

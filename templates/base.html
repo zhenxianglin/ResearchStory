@@ -2,12 +2,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Boostrap stardand model</title>
     <!--    <meta name="viewport" content="width=device-width,initial-scale=1">-->
-    <link href="static/bootstrap-4.6.0-dist/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'bootstrap-4.6.0-dist/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
@@ -23,12 +24,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'MainPage:index' %}">Home <span
+                    <a class="nav-link" href="{% url 'MainPage:index' %}"> Home <span
                             class="sr-only">(current)</span></a>
                 </li>
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"> Story <span
+                    <a class="nav-link" href="{% url "Story:storyList" %}"> Story <span
                             class="sr-only">(current)</span></a>
                 </li>
 
@@ -42,6 +43,7 @@
                         <a class="dropdown-item" href="{% url 'Story:storyListCategory' 'ComputerScience' %}">ComputerScience</a>
                         <a class="dropdown-item" href="{% url 'Story:storyListCategory' 'Physics' %}">Physics</a>
                         <a class="dropdown-item" href="{% url 'Story:storyListCategory' 'ElectricalEngineering' %}">ElectricalEngineering</a>
+
                     </div>
                 </li>
 
@@ -80,7 +82,6 @@
                 </svg>
 
             </ul>
-
 
 
         </div>

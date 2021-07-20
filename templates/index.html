@@ -12,16 +12,12 @@
 
 {% extends 'base.html' %}
 
-
-
-
 {% block header %}
     <div class="jumbotron">
         <h2>Follow your passion for research.</h2>
         <h3>
-            <a>Register an account</a> to immerse
+            <a href="{% url "Users:register" %}">Register an account</a> to immerse
             yourself in the innovative and interesting research stories.
-
         </h3>
         <h3>
             Extensive video resources and freely developed discussion environment.
@@ -32,8 +28,6 @@
 {% endblock header %}
 
 {% block content %}
-
-
 
     <h2>最热</h2>
     <div class="card">
