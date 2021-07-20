@@ -50,10 +50,10 @@
 
 {% block content %}
 
-<form method="post" action="{% url 'Story:upload' %}" class="form">
-
-    {% csrf_token %}
-    <!-- 名字，类别-->
+{#<form method="post" action="{% url 'Story:upload' %}" class="form">#}
+{##}
+{#    {% csrf_token %}#}
+<!-- 名字，类别-->
 <div class="container">
   <div class="form-group"style="background-color: lightblue" >
     <label class="control-label" ></label>
@@ -79,7 +79,29 @@
   </div>
   <div class="form-group" style="background-color: lightgoldenrodyellow">
     <label class="control-label"></label>
-    <h3 class="display-6 text-left ">VideolUrl</h3>
+    <h3 class="display-6 text-left ">VideoUrl</h3>
+    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+      Where is Url
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+          </div>
+          <div class="modal-body">
+            <img src="youtube.png" alt="image broken" style="width:100%;">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <input class="form-control" type="text" placeholder="Please Enter Your VideolUrl" />
   </div>
   <div class="form-group" style="background-color: lightpink">
@@ -96,7 +118,7 @@
   </div>
   </div>
 
-  <button type="button" class="btn btn-primary btn-lg btn-block">Update</button>
+  <button type="button" class="btn btn-primary btn-lg btn-block">Submit</button>
 
 <!--上传文件框-->
   <div class="form-group" >
@@ -105,14 +127,21 @@
 
 </div>
 
-    {{ form.as_p }}
+
+
+
+
+
+
+
+{#    {{ form.as_p }}#}
 
 {#    {% buttons %}#}
-    <button name="submit" class="btn btn-primary">Upload</button>
+{#    <button name="submit" class="btn btn-primary">Upload</button>#}
 {#    {% endbuttons %}#}
 
-    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
+{#    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>#}
 
 
-</form>
+{#</form>#}
 {% endblock content %}
