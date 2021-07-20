@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',  # 富文本编辑器上传图片模块
     'mptt',
     'password_reset',
+    'meeting',
 
     # allauth 启动必须项
     'django.contrib.sites',
@@ -138,7 +139,7 @@ WSGI_APPLICATION = 'ResearchStory.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'rschDB',
+        'NAME': 'researchstory',
         'USER': 'postgres',
         'PASSWORD': '93239323',
         'HOST': 'comp9323-postgres.c4ewkd5opwpk.us-east-2.rds.amazonaws.com',
