@@ -8,7 +8,7 @@ from Story.models import Story
 from comment.forms import CommentForm
 from comment.models import Comment
 
-from notifications.signals import notify
+#from notifications.signals import notify
 from Users.models import User
 
 
