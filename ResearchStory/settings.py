@@ -24,11 +24,12 @@ SECRET_KEY = 'django-insecure-yr2d^+f(@&0^74&9f3)=n_(bd_%o49-#b7cu6yq=14u&75gce!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 # Application definition
 
 INSTALLED_APPS = [
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,14 +41,15 @@ INSTALLED_APPS = [
     'Story',
     'forum',
     'comment',
+    'meeting',
+
 
     # 第三方应用程序
-    'bootstrap3',
     'ckeditor',  # 富文本编辑器
     'ckeditor_uploader',  # 富文本编辑器上传图片模块
     'mptt',
     'password_reset',
-    'meeting',
+
 
     # allauth 启动必须项
     'django.contrib.sites',
@@ -139,7 +141,7 @@ WSGI_APPLICATION = 'ResearchStory.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'researchstory',
+        'NAME': 'comp9323',
         'USER': 'postgres',
         'PASSWORD': '93239323',
         'HOST': 'comp9323-postgres.c4ewkd5opwpk.us-east-2.rds.amazonaws.com',
@@ -178,7 +180,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Shanghai'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 

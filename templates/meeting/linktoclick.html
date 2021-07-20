@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+    <h2>Meeting To Discuss</h2>
+
+    <span>
+{#      <a href="{% url "meeting:new_meeting" %}"><button type="button" class="btn btn-dark">New Meeting</button></a>#}
+      <a href="/admin/meeting/link/"><button type="button" class="btn btn-dark">New Meeting</button></a>
+    </span>
+
+{% endblock header %}
+
+
+{% block content %}
+    <div style="text-align: center;">
+    <h2>Current Meetings:</h2>
+    </div>
+    <hr/>
+
+    {% for meeting in current_meetings %}
+        <hr/>
+        <li>
+            <div style="text-align: center;">
+                <h2><i><b>{{ meeting.meeting_name }}</b></i></h2>
+                <h3>Start Time: {{ meeting.start_time }}</h3>
+                <h3>End Time: {{ meeting.end_time }}</h3>
+                <h6>Organiger: {{ meeting.user }}</h6>
+            </div>
+
+            <div class="jumbotron">
+                <div style="text-align: center;">
+                    <a href="{{ meeting.meeting_link }}">
+                        <button type="button" class="btn btn-dark">Link to Join:
+                            <b>{{ meeting.meeting_name }}</b>
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </li>
+
+
+    {% endfor %}
+
+{% endblock content %}
+
