@@ -1,20 +1,26 @@
 {% extends 'base.html' %}
 
-
+{% load static %}
 {% block header %}
-    <h2>Meeting To Discuss</h2>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+{#            <img src="static/image/meeting_logo.jpeg" width="60" height="60" alt="" loading="lazy">#}
+            <h2>Meeting To Discuss</h2>
+        </a>
+        <span>
+{#                    <a href="/"><button type="button" class="btn btn-info">Home</button></a>#}
+                    <a href="/admin/meeting/link/"><button type="button" class="btn btn-dark">New
+                            Meeting</button></a>
+                </span>
+    </nav>
 
-    <span>
-{#      <a href="{% url "meeting:new_meeting" %}"><button type="button" class="btn btn-dark">New Meeting</button></a>#}
-      <a href="/admin/meeting/link/"><button type="button" class="btn btn-dark">New Meeting</button></a>
-    </span>
 
 {% endblock header %}
 
 
 {% block content %}
     <div style="text-align: center;">
-    <h2>Current Meetings:</h2>
+        <h2>Current Meetings:</h2>
     </div>
     <hr/>
 
