@@ -2,44 +2,123 @@
 
 {% load static %}
 {% block content %}
+<style type="text/css">
+
+        div.title{
+        width: 100%;
+        background: white;
+        margin: 0 auto;
+        text-align: center;
+        padding:10px;
+        }
+
+        div.info{
+        height: 40px;
+        width: 100%;
+        background: white;
+        text-align: center;
+        margin: 0 auto;
+        }
+
+        div.article{
+        width: 100%;
+        background: #f1f1f1;
+        margin: 0 auto;
+        padding: 20px;
+        }
+
+        div.link{
+        height: 40px;
+        width: 100%;
+        background: white;
+        margin: 0 auto;
+        }
+
+        div.video{
+        height: 315px;
+        width: 560px;
+        background: #f1f1f1;
+        margin: 0 auto;
+        }
+
+        h1 {
+            color: black;
+            font-size: 32px;
+        }
+
+        p1 {
+            color: black;
+            font-size: 16px;
+        }
+
+        p2 {
+            color: black;
+            font-size: 20px;
+        }
+
+        .column.left {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 60%;
+            box-sizing: border-box;
+            height: 800px;
+            overflow: scroll;
+        }
+
+        .column.right {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 40%;
+            box-sizing: border-box;
+            height: 800px;
+            overflow: scroll;
+        }
+
+        @media screen and (max-width: 1000px) {
+            .column.left, .column.right {
+            width: 100%;
+            margin:0 auto;
+            }
+        }
+    </style>
+
     <script src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'prism/prism.css' %}">
 
     <div>
 
-        <p>Stories</p>
+        <div class="row">
+        <div class="column left">
+            <div class="title">
+                <h1>{{ title_name }}</h1>
+            </div>
 
-        <ul>
-            <p>title_name: </p>
-            <li><a>{{ title_name }}</a></li>
-            <p>created_time: </p>
-            <li><a>{{ created_time }}</a></li>
-            <p>category: </p>
-            <li><a>{{ category }}</a></li>
-            <p>views: </p>
-            <li><a>{{ views }}</a></li>
-            <p>text: </p>
-            <li><a>{{ text }}</a></li>
-            <p>paper_link: </p>
-            {% if paper_link %}
-                <li><a href="#">{{ paper_link }}</a></li>
-            {% else %}
-                <li>No Papaer Link.</li>
-            {% endif %}
-            <p>Video: </p>
-            {% if video %}
+            <div class="info">
+                <p1>{{ created_time }}</p1>
+            </div>
+
+            <div class="article">
+                <p1>{{ text }}</p1>
+            </div>
+
+            <div class="link">
+                <a href="#">  论文链接： {{ paper_link }}</a>
+            </div>
+
+            <div class="video">
+                {% if video %}
                 <iframe width="560" height="315" src="{{ video }}" title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
-            {% else %}
-                <li>No video.</li>
-            {% endif %}
-        </ul>
+                {% else %}
+                    <li>No video.</li>
+                {% endif %}
+            </div>
+        </div>
 
-    </div>
-    <!-- 发表评论 -->
-    <hr/>
-    {% if user.is_authenticated %}
+        <div class="column right">
+
+{% if user.is_authenticated %}
         <div>
             <form action="{% url "comment:post_comment" story.id %}" method="post">
                 {% csrf_token %}
@@ -171,6 +250,10 @@
     {#};#}
 
     </script>
+        </div>
+    </div>
+    </div>
+
 
 {% endblock content %}
 

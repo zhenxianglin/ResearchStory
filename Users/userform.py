@@ -19,7 +19,6 @@ class LoginFom(forms.Form):
         )
 
 
-
 class RegisterForm(UserCreationForm):
     username = forms.CharField(label='Username', max_length=128,
                                error_messages={
@@ -27,10 +26,6 @@ class RegisterForm(UserCreationForm):
                                },
                                widget=forms.TextInput(attrs={'placeholder': 'Please enter a username'}))
 
-    age = forms.IntegerField(label="Age")
-    gender = forms.ChoiceField(label="Gender", choices=User.SEX_ITEMS)
-    last_name = forms.CharField(label="Last Name", max_length=128)
-    first_name = forms.CharField(label="First Name", max_length=128)
     usertype = forms.ChoiceField(label='User Type', choices=User.ROLES)
 
     email = forms.EmailField(label="Email Address",
@@ -43,7 +38,8 @@ class RegisterForm(UserCreationForm):
                                     'required': 'The password cannot be empty. ',
                                 },
                                 widget=forms.PasswordInput(attrs={'placeholder': 'Please enter the password.'}),
-                                help_text=(" - The password should be no less than 8 characters. <br/> - Your password can’t be too similar to your other personal information.<br/>  - Your password can’t be entirely numeric."),
+                                help_text=(
+                                    " - The password should be no less than 8 characters. <br/> - Your password can’t be too similar to your other personal information.<br/>  - Your password can’t be entirely numeric."),
                                 )
 
     password2 = forms.CharField(label='Password confirmation', min_length=8, max_length=256,
@@ -59,10 +55,6 @@ class RegisterForm(UserCreationForm):
         model = User
         fields = (
             'username',
-            'age',
-            'gender',
-            'last_name',
-            'first_name',
             'usertype',
             'email',
             'password1',
