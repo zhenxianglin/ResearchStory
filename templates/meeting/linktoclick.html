@@ -4,16 +4,15 @@
 {% block header %}
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="/">
-{#            <img src="https://github.com/blastxiaol/ResearchStory/blob/front-end/static/image/meeting.png?raw=true" width="200" height="100" alt="" loading="lazy">#}
+            {#            <img src="https://github.com/blastxiaol/ResearchStory/blob/front-end/static/image/meeting.png?raw=true" width="200" height="100" alt="" loading="lazy">#}
             <h2>Meeting To Discuss</h2>
         </a>
         <span>
-{#                    <a href="/"><button type="button" class="btn btn-info">Home</button></a>#}
-                    <a href="/admin/meeting/link/"><button type="button" class="btn btn-dark">New
+{#                    <a href="/"><button type="button" class="btn btn-info">xxxxx</button></a>#}
+            <a href="/admin/meeting/link/"><button type="button" class="btn btn-dark">New
                             Meeting</button></a>
-                </span>
+        </span>
     </nav>
-
 
 {% endblock header %}
 
@@ -21,20 +20,21 @@
 {% block content %}
     <div style="text-align: center;">
         <h2>Current Meetings:</h2>
+        <h7>{{ date_and_time }}</h7>
     </div>
     <hr/>
 
     {% for meeting in current_meetings %}
         <hr/>
         <li>
-            <div style="text-align: center;">
-                <h2><i><b>{{ meeting.meeting_name }}</b></i></h2>
-                <h3>Start Time: {{ meeting.start_time }}</h3>
-                <h3>End Time: {{ meeting.end_time }}</h3>
-                <h6>Organiger: {{ meeting.user }}</h6>
-            </div>
 
             <div class="jumbotron">
+                <div style="text-align: center;">
+                    <h2><i><b>{{ meeting.meeting_name }}</b></i></h2>
+                    <h3>Start Time: {{ meeting.start_time }}</h3>
+                    <h3>End Time: {{ meeting.end_time }}</h3>
+                    <h6>Organiger: {{ meeting.user }}</h6>
+                </div>
                 <div style="text-align: center;">
                     <a href="{{ meeting.meeting_link }}">
                         <button type="button" class="btn btn-dark">Link to Join:
@@ -44,9 +44,6 @@
                 </div>
             </div>
         </li>
-
-
     {% endfor %}
-
 {% endblock content %}
 

@@ -33,5 +33,4 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
 
     path('meeting/', include(('meeting.urls', 'meeting'), namespace='meeting')),
-
 ]

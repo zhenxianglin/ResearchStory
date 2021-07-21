@@ -180,7 +180,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -206,8 +206,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'Users/login/'
 
 # abc
-# user login required
-LOGIN_URL = 'Users/login/'
+
 
 # SMTP服务器
 EMAIL_HOST = 'smtp.gmail.com'
