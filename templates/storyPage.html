@@ -9,8 +9,9 @@
         background: white;
         margin: 0 auto;
         text-align: center;
-        padding:10px;
+        padding-top:40px;
         }
+
 
         div.info{
         height: 40px;
@@ -18,6 +19,7 @@
         background: white;
         text-align: center;
         margin: 0 auto;
+        margin-bottom: 40px;
         }
 
         div.article{
@@ -28,17 +30,29 @@
         }
 
         div.link{
-        height: 40px;
         width: 100%;
         background: white;
         margin: 0 auto;
+        padding: 10px;
         }
 
         div.video{
         height: 315px;
         width: 560px;
         background: #f1f1f1;
-        margin: 0 auto;
+        margin: 20px auto;
+        }
+
+
+        div.intro{
+            background:#78cdd1;
+            width: 100%;
+            padding:20px;
+        }
+
+        div.normal{
+            width: 100%;
+            padding:20px;
         }
 
         h1 {
@@ -46,9 +60,28 @@
             font-size: 32px;
         }
 
+        h2 {
+            color: black;
+            font-size: 24px;
+        }
+
         p1 {
             color: black;
             font-size: 16px;
+            white-space: pre-wrap;
+        }
+
+        p1b {
+            background:#f1f1f1;
+            color: black;
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+
+        p3 {
+            color: black;
+            font-size: 14px;
+            white-space: pre-wrap;
         }
 
         p2 {
@@ -61,8 +94,6 @@
             padding-right: 10px;
             width: 60%;
             box-sizing: border-box;
-            height: 800px;
-            overflow: scroll;
         }
 
         .column.right {
@@ -71,7 +102,7 @@
             width: 40%;
             box-sizing: border-box;
             height: 800px;
-            overflow: scroll;
+            overflow: visible;
         }
 
         @media screen and (max-width: 1000px) {
@@ -80,6 +111,58 @@
             margin:0 auto;
             }
         }
+
+        div.footer{
+        height: 160px;
+        width:100%;
+        background: #f1f1f1;
+        text-align: center;
+        padding-top:80px;
+        margin-top:10px;
+        }
+
+        div.pic{
+        width:85%;
+        margin: 0px auto;
+        margin-bottom: 30px;
+        }
+
+        img.type1{
+        width:100%;
+        }
+
+        div.comment{
+        background: #78cdd1;
+        width:100%;
+        }
+
+        div.all_comment{
+        background: #f1f1f1;
+        width:100%;
+        padding:15px;
+        }
+
+        .button1 {
+            background-color: #ff8800;
+            border: none;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            }
+
+        .button2 {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            }
     </style>
 
     <script src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
@@ -87,81 +170,94 @@
 
     <div>
 
+        <div class="normal">
+            <button class="button1">Category</button> <p3> ComputerScience</p3>
+            <button class="button2">Tags</button> <p3> Deepfake</p3> <p3> Voice</p3>
+        </div>
+        <div class="title">
+            <h1>{{ title_name }}</h1>
+        </div>
+
+        <div class="info">
+            <p1>{{ created_time }}</p1>
+        </div>
+
         <div class="row">
-        <div class="column left">
-            <div class="title">
-                <h1>{{ title_name }}</h1>
-            </div>
+            <div class="column left">
+                <div class="pic">
+                    <img class="type1" src="./media/{{img}}">
+                </div>
 
-            <div class="info">
-                <p1>{{ created_time }}</p1>
-            </div>
+                <div class="article">
+                    <p1>{{ text }}</p1>
+                </div>
 
-            <div class="article">
-                <p1>{{ text }}</p1>
-            </div>
-
-            <div class="link">
-                <a href="#">  论文链接： {{ paper_link }}</a>
-            </div>
-
-            <div class="video">
-                {% if video %}
-                <iframe width="560" height="315" src="{{ video }}" title="YouTube video player" frameborder="0"
+                <div class="video">
+                    {% if video %}
+                    <iframe width="560" height="315"
+                        src= {{ video }}
+                        title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
-                {% else %}
-                    <li>No video.</li>
-                {% endif %}
-            </div>
-        </div>
-
-        <div class="column right">
-
-{% if user.is_authenticated %}
-        <div>
-            <form action="{% url "comment:post_comment" story.id %}" method="post">
-                {% csrf_token %}
-                <div class="form-group">
-                    <label for="body">
-                        <strong>
-                            Add comment：
-                        </strong>
-                    </label>
-                    <div>
-                        {{ comment_form.media }}
-                        {{ comment_form.body }}
-                    </div>
-                    {#                    <textarea type="text" class="form-control" id="body" name="body" rows="2" ,#}
-                    {#                              placeholder="Please enter a comment"></textarea>#}
+                    {% else %}
+                        <li>No video.</li>
+                    {% endif %}
                 </div>
-                <!-- 提交按钮 -->
-                <button type="submit" class="btn btn-primary ">Post</button>
-            </form>
-        </div>
 
-        <br>
-    {% else %}
-        <br>
-        <h5 class="row justify-content-center">
-            Please <a href="{% url 'Users:login' %}"> login </a> to reply.
-        </h5>
-        <br>
-    {% endif %}
+                <div class="link">
+                    <p1>Paper Link：</p1>
+                    <a href="#"><p1> {{ paper_link }} </p1> </a>
+                </div>
 
-    <!-- 显示评论 -->
-    {% load mptt_tags %}
-    <h4>Total comments: {{ comments.count }}</h4>
-    <div class="row">
-        {% recursetree comments %}
-            {% with comment=node %}
-                <div class="{% if comment.reply_to %} offset-1 col-11 {% else %} col-12 {% endif %}">
-                    <hr/>
+                <div class="comment">
+                    <div class="normal">
+                        <h4>COMMENT AREA</h4>
+                    </div>
 
-                    <p>
-                        <strong style="color: pink">
-                            {{ comment.user }}
-                        </strong>
+                    {% if user.is_authenticated %}
+                <div>
+                    <form action="{% url "comment:post_comment" story.id %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <div class="normal">
+                                <p1>Add comment:</p1>
+                            </div>
+                            <div>
+                                {{ comment_form.media }}
+                                {{ comment_form.body }}
+                            </div>
+                            {#                    <textarea type="text" class="form-control" id="body" name="body" rows="2" ,#}
+                            {#                              placeholder="Please enter a comment"></textarea>#}
+                        </div>
+                        <!-- 提交按钮 -->
+                        <button type="submit" class="btn btn-primary ">Post</button>
+                    </form>
+                </div>
+
+                <br>
+            {% else %}
+                <br>
+                <h5 class="row justify-content-center">
+                    Please <a href="{% url 'Users:login' %}"> login </a> to reply.
+                </h5>
+                <br>
+            {% endif %}
+
+                    <div class="all_comment">
+                    <!-- 显示评论 -->
+
+                    {% load mptt_tags %}
+                    <h4>Total comments: {{ comments.count }}</h4>
+                    <div class="row">
+                {% recursetree comments %}
+                    {% with comment=node %}
+                        <div class="{% if comment.reply_to %} offset-1 col-11 {% else %} col-12 {% endif %}">
+                            <hr/>
+
+                         <p>
+                             <strong style="color: pink">
+                                 {{ comment.user }}
+                             </strong>
 
 
                         <!-- 显示被回复人 -->
@@ -225,8 +321,8 @@
     </div>
 
 
-    <!--，唤醒二级回复的 modal -->
-    <script>
+                    <!--，唤醒二级回复的 modal -->
+                    <script>
         // 加载 modal
         function load_modal(story_id, comment_id) {
             let modal_body = '#modal_body_' + comment_id;
@@ -250,10 +346,30 @@
     {#};#}
 
     </script>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="column right">
+
+                <div class="intro">
+                    <h2>Field Background</h2>
+                    <p3>Machines with brains are the future, and The Verge is here to explain it all. From Google and Facebook’s use of machine learning to rule the web, to cutting-edge research and why Alexa still sucks at conversation. We want to dispel the hype of AI and distill what it is you need to know.</p3>
+                </div>
+                <div class="intro">
+                    <h2>Researcher Introduction</h2>
+                    <p3>Machines with brains are the future, and The Verge is here to explain it all. From Google and Facebook’s use of machine learning to rule the web, to cutting-edge research and why Alexa still sucks at conversation. We want to dispel the hype of AI and distill what it is you need to know.</p3>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
 
+<div class="footer">
+    <p1>Contact Us</p1>
+</div>
 
 {% endblock content %}
 
