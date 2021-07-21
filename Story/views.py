@@ -8,7 +8,7 @@ from django.db.models import Q
 
 from comment.models import Comment
 from comment.forms import CommentForm
-
+import re
 
 def upload(request):
     if request.method == "GET":
@@ -163,7 +163,15 @@ def getStory(request, story_id):
     created_time = story.created_time
     category = story.category
     views = story.views
+
+    img = story.img
+
     text = story.text
+    text = re.sub(r'\<.*?\>', '', text)
+    text = re.sub(r'&nbsp;', ' ', text)
+    text = re.sub(r'&rsquo;', '\'', text)
+    text = re.sub(r'&rdquo;', '\"', text)
+
     video = story.video
     paper_link = story.paper_link
 
@@ -177,6 +185,7 @@ def getStory(request, story_id):
     comment_form = CommentForm()
 
     kwarg = {
+        "img": img,
         "title_name": title_name,
         "created_time": created_time,
         "category": category,
@@ -191,5 +200,4 @@ def getStory(request, story_id):
     }
 
     story.viewed()
-
     return render(request, 'storyPage.html', kwarg)
