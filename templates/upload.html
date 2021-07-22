@@ -42,7 +42,7 @@
 
   <!-- optionally if you need translation for your language then include the locale file as mentioned below (replace LANG.js with your language locale) -->
   <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.2/js/locales/LANG.js"></script>
-    <h2>Upload you story</h2>
+    <h2 class="display-4 text-center">Upload you story</h2>
 
 {% endblock header %}
 
@@ -54,9 +54,9 @@
 {#    {% csrf_token %}#}
 <!-- 名字，类别-->
 <div class="container">
-  <div class="form-group"style="background-color: lightblue" >
+  <div class="form-group"style="background-color: lightgray" >
     <label class="control-label" ></label>
-    <h3 class="display-6 text-left ">Category</h3>
+    <h3 class="display-6 text-center ">Category</h3>
     <br>
     <div class="btn-group btn-block">
       <button type="button"  class="btn btn-secondary dropdown-toggle " data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
@@ -71,17 +71,17 @@
       </div>
     </div>
   </div>
-  <div class="form-group" style="background-color: lavender">
+  <div class="form-group" style="background-color: lightgray">
     <label class="control-label"></label>
-    <h3 class="display-6 text-left ">Title</h3>
+    <h3 class="display-6 text-center ">Title</h3>
       <form method="post" action="{% url 'Story:upload' %}" class="form">
           {% csrf_token %}
     <input class="form-control" type="text" placeholder="Please Enter Your Title" />
   </div>
-  <div class="form-group" style="background-color: lightgoldenrodyellow">
+  <div class="form-group" style="background-color: lightgray">
     <label class="control-label"></label>
-    <h3 class="display-6 text-left ">VideoUrl</h3>
-    <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    <h3 class="display-6 text-center ">VideoUrl</h3>
+    <button class="btn btn-dark" data-toggle="modal" data-target="#myModal">
       Where is Url
     </button>
     <!-- Modal -->
@@ -104,14 +104,14 @@
 
     <input class="form-control" type="text" placeholder="Please Enter Your VideolUrl" />
   </div>
-  <div class="form-group" style="background-color: lightpink">
+  <div class="form-group" style="background-color: lightgray">
     <label class="control-label"></label>
-    <h3 class="display-6 text-left ">PaperLink</h3>
+    <h3 class="display-6 text-center ">PaperLink</h3>
     <input class="form-control" type="text" placeholder="Please Enter Your PaperLink" />
   </div>
 
-  <div class="form-group" style="background-color: lightseagreen">
-    <h3 class="display-6 text-left ">Text</h3>
+  <div class="form-group" style="background-color: lightgray">
+    <h3 class="display-6 text-center ">Text</h3>
     <label class="control-label"></label>
   <div class="input-group input-group-lg">
     <textarea class="form-control" aria-label="With textarea" rows="10" placeholder="Please Enter Your Text"></textarea>
