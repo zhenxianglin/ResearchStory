@@ -3,13 +3,17 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 
-from Story.models import Story
-from comment.forms import CommentForm
 from comment.models import Comment
+from comment.forms import CommentForm
+from Story.models import Story
 
-#from notifications.signals import notify
+
 from Users.models import User
+from django.views import View
+
+
 
 
 @login_required

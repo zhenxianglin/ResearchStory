@@ -43,13 +43,11 @@ INSTALLED_APPS = [
     'comment',
     'meeting',
 
-
     # 第三方应用程序
     'ckeditor',  # 富文本编辑器
     'ckeditor_uploader',  # 富文本编辑器上传图片模块
     'mptt',
     'password_reset',
-
 
     # allauth 启动必须项
     'django.contrib.sites',

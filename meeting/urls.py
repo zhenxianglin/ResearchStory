@@ -7,6 +7,7 @@ app_name = 'meeting'
 
 urlpatterns = [
     path(r'', views.current_meeting, name='current_meeting'),
-    # path('new_meeting', views.new_meeting, name='new_meeting'),
+
+    path(r'new_meeting', views.new_meeting, name='new_meeting'),
 
 ]

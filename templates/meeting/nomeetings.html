@@ -10,7 +10,7 @@
         </a>
         <span>
 {#                    <a href="/"><button type="button" class="btn btn-info">xxxxx</button></a>#}
-            <a href="/admin/meeting/link/"><button type="button" class="btn btn-dark">New
+            <a href="{% url "meeting:new_meeting" %}"><button type="button" class="btn btn-dark">Add A New
                             Meeting</button></a>
         </span>
     </nav>
@@ -29,7 +29,7 @@
 
     <div class="jumbotron">
         <div class="d-flex justify-content-center">
-            <a href="/admin/meeting/link/">
+            <a href="{% url "meeting:new_meeting" %}">
                 <button type="button" class="btn btn-dark">Welcome to create a meeting for online discussion.</button>
             </a>
         </div>

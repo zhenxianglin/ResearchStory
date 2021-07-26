@@ -10,6 +10,7 @@ from comment.models import Comment
 from comment.forms import CommentForm
 import re
 
+
 def upload(request):
     if request.method == "GET":
         form = StoryForm()
@@ -41,6 +42,7 @@ def search(request):
             "story": story,
         }
         return render(request, 'story.html', kwargs)
+
 
 def advancedSearch(request):
     if request.method == "GET":
@@ -176,13 +178,12 @@ def getStory(request, story_id):
     paper_link = story.paper_link
 
     comments = Comment.objects.filter(story=story_id)
+    comment_form = CommentForm()
 
     try:
         video = f"https://www.youtube.com/embed/{video.split('/')[-1]}"
     except AttributeError:
         pass
-
-    comment_form = CommentForm()
 
     kwarg = {
         "img": img,

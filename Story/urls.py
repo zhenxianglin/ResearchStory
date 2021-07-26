@@ -10,6 +10,7 @@ urlpatterns = [
     path(r'', storyList, name='storyList'),
     path(r'_sort_by=<str:sort_by>', storyListSortBy, name='storyListSortBy'),
     path(r'story_id=<int:story_id>', getStory, name='getStory'),
+
     path(r'category=<str:category>_sort_by=<str:sort_by>', storyListCategorySortBy, name='storyListCategorySortBy'),
     path(r'category=<str:category>', storyListCategory, name='storyListCategory'),
     path(r'upload/', upload, name='upload'),

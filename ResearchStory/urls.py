@@ -28,9 +28,6 @@ urlpatterns = [
     path(r'comment/', include(('comment.urls', 'comment'), namespace='comment')),
 
     path(r'password_reset/', include('password_reset.urls')),
-
-    # django-allauth
     path('accounts/', include('allauth.urls')),
-
     path('meeting/', include(('meeting.urls', 'meeting'), namespace='meeting')),
 ]

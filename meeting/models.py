@@ -18,7 +18,7 @@ class Link(models.Model):
     sunday = models.BooleanField(default=False)
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    data_added = models.DateTimeField(auto_now_add=True, editable=False)
+    data_added = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ('-data_added',)
