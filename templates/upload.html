@@ -48,35 +48,43 @@
 
 
 {% block content %}
-
+<form method="post" action="{% url 'Story:upload' %}" class="form">
+          {% csrf_token %}
 {#   <form method="post" action="{% url 'Story:upload' %}" class="form">#}
 {##}
 {#    {% csrf_token %}#}
 <!-- 名字，类别-->
 <div class="container">
-  <div class="form-group"style="background-color: lightgray" >
+  <div class="form-group" style="background-color: lightgray" >
     <label class="control-label" ></label>
     <h3 class="display-6 text-center ">Category</h3>
     <br>
-    <div class="btn-group btn-block">
-      <button type="button"  class="btn btn-secondary dropdown-toggle " data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">
-        Choose Your Category
-      </button>
-      <div class="dropdown-menu dropdown-menu-lg-right">
-        <button class="dropdown-item" type="button">Data Science</button>
-        <button class="dropdown-item" type="button">Nature</button>
-        <button class="dropdown-item" type="button">History</button>
-        <div role="separator" class="dropdown-divider"></div>
-        <button class="dropdown-item" type="button">Others</button>
-      </div>
+{#    <div class="btn-group btn-block">#}
+{#      <button type="button"  class="btn btn-secondary dropdown-toggle " data-toggle="dropdown" data-display="static" aria-haspopup="true" aria-expanded="false">#}
+{#        Choose Your Category#}
+{#      </button>#}
+{#        </div>#}
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="basic-addon1">Category:</span>
+          <select type="text" class="form-control" name="category"  required>
+            <option value="ComputerScience">ComputerScience</option>
+            <option value="Physics">Physics</option>
+            <option value="ElectricalEngineering">Electrical Engineer</option>
+          </select>
+
+{#      <div class="dropdown-menu dropdown-menu-lg-right">#}
+{#        <button class="dropdown-item" type="button">Data Science</button>#}
+{#        <button class="dropdown-item" type="button">Nature</button>#}
+{#        <button class="dropdown-item" type="button">History</button>#}
+{#        <div role="separator" class="dropdown-divider"></div>#}
+{#        <button class="dropdown-item" type="button">Others</button>#}
+{#      </div>#}
     </div>
   </div>
   <div class="form-group" style="background-color: lightgray">
     <label class="control-label"></label>
     <h3 class="display-6 text-center ">Title</h3>
-      <form method="post" action="{% url 'Story:upload' %}" class="form">
-          {% csrf_token %}
-    <input class="form-control" type="text" placeholder="Please Enter Your Title" />
+    <input class="form-control" name="title" type="text" placeholder="Please Enter Your Title" />
   </div>
   <div class="form-group" style="background-color: lightgray">
     <label class="control-label"></label>
@@ -102,34 +110,35 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <input class="form-control" type="text" placeholder="Please Enter Your VideolUrl" />
+    <input class="form-control" name="videoUrl" type="text" placeholder="Please Enter Your VideolUrl" />
   </div>
   <div class="form-group" style="background-color: lightgray">
     <label class="control-label"></label>
     <h3 class="display-6 text-center ">PaperLink</h3>
-    <input class="form-control" type="text" placeholder="Please Enter Your PaperLink" />
+    <input class="form-control" name="paperLink" type="text" placeholder="Please Enter Your PaperLink" />
   </div>
 
   <div class="form-group" style="background-color: lightgray">
     <h3 class="display-6 text-center ">Text</h3>
     <label class="control-label"></label>
   <div class="input-group input-group-lg">
-    <textarea class="form-control" aria-label="With textarea" rows="10" placeholder="Please Enter Your Text"></textarea>
+    <textarea class="form-control" name="text" aria-label="With textarea" rows="10" placeholder="Please Enter Your Text"></textarea>
   </div>
   </div>
 {#     {% buttons %}#}
+
   <button name="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
 {#    {% endbuttons %}#}
 <!--上传文件框-->
+    </div>
+
   <div class="form-group" >
-  <input id="input-b3" name="input-b3[]" type="file" class="file" multiple
+  <input id="input-b3" name="img" type="file" class="file" multiple
          data-show-upload="false" data-show-caption="true" data-msg-placeholder="Select {files} for upload...">
 
 </div>
-
+</form>
 {% endblock content %}
-
-
 
 
 
@@ -143,4 +152,3 @@
 {#    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>#}
 
 
-{#</form>#}
