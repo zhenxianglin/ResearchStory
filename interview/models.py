@@ -15,7 +15,7 @@ class Interview(models.Model):
     start_time = models.TimeField(default='12:00:00')
     end_time = models.TimeField(default='12:00:00')
 
-    organiger = models.ForeignKey(User, on_delete=models.CASCADE)
+    organizer = models.ForeignKey(User, on_delete=models.CASCADE)
 
     monday = models.BooleanField(default=False)
     tuesday = models.BooleanField(default=False)

@@ -59,6 +59,7 @@ def current_meeting(request):
     # # return render(request, 'meeting/linktoclick.html', context)
 
 
+@login_required
 def new_meeting(request):
     """add a new meeting for discussion freely"""
     current_time = datetime.now()
