@@ -188,6 +188,11 @@ def getStory(request, story_id):
     comments = Comment.objects.filter(story=story_id)
     comment_form = CommentForm()
 
+    tags = story.tags
+    author = story.author
+    author_intro = story.author_intro
+    background = story.background
+
 
     try:
         video = f"https://www.youtube.com/embed/{video.split('/')[-1]}"
@@ -239,6 +244,11 @@ def getStory(request, story_id):
 
         'data_and_time':date_and_time,
         'current_intervew':current_interview,
+
+        'tags': tags,
+        'author': author,
+        'author_intro': author_intro,
+        'background': background,
     }
 
     story.viewed()
