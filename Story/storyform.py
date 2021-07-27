@@ -24,6 +24,18 @@ class StoryForm(forms.Form):
                               )
     paperLink = forms.URLField(label='paperLink', max_length=512,
                                widget=forms.URLInput(attrs={'Placeholder': 'Please enter your paper link'}))
+    author=forms.CharField(label='author', max_length=128,
+                            widget=forms.TextInput(attrs={'placeholder': 'Please enter author name'})
+                            )
+    author_intro=forms.CharField(label='author_intro', max_length=128,
+                            widget=forms.TextInput(attrs={'placeholder': 'Please enter author introduction'})
+                            )
+    background=forms.CharField(label='background', max_length=128,
+                            widget=forms.TextInput(attrs={'placeholder': 'Please enter background introduction'})
+                            )
+    tags=forms.CharField(label='tags', max_length=128,
+                            widget=forms.TextInput(attrs={'placeholder': 'Please enter tags'})
+                            )
 
     class Meta:
         model = Story
@@ -35,6 +47,11 @@ class StoryForm(forms.Form):
             'text',
             'img'
             'videoUrl',
+            'author',
+            'author_intro',
+            'background',
+            'tags',
+
         )
 
 

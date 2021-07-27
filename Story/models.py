@@ -25,6 +25,16 @@ class Story(models.Model):
     video = models.URLField(verbose_name="video", blank=True, null=True)
     paper_link = models.URLField(verbose_name="paper_link", null=True, blank=True)
 
+    author = models.CharField(verbose_name="author", max_length=100,default='author')
+    author_intro = models.CharField(verbose_name="author_intro", max_length=100,default='author introduction')
+    background = models.CharField(verbose_name="background", max_length=100,default='background')
+    tags = models.CharField(verbose_name="tags", max_length=100,default=category)
+
+
+
+
+
+
     def __str__(self):
         return self.title_name
 
