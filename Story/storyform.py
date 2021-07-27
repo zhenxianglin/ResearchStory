@@ -24,16 +24,16 @@ class StoryForm(forms.Form):
                               )
     paperLink = forms.URLField(label='paperLink', max_length=512,
                                widget=forms.URLInput(attrs={'Placeholder': 'Please enter your paper link'}))
-    author=forms.CharField(label='author', max_length=128,
+    author=forms.CharField(label='author', max_length=100,
                             widget=forms.TextInput(attrs={'placeholder': 'Please enter author name'})
                             )
-    author_intro=forms.CharField(label='author_intro', max_length=128,
+    author_intro=forms.CharField(label='author_intro', max_length=1000,
                             widget=forms.TextInput(attrs={'placeholder': 'Please enter author introduction'})
                             )
-    background=forms.CharField(label='background', max_length=128,
+    background=forms.CharField(label='background', max_length=1000,
                             widget=forms.TextInput(attrs={'placeholder': 'Please enter background introduction'})
                             )
-    tags=forms.CharField(label='tags', max_length=128,
+    tags=forms.CharField(label='tags', max_length=100,
                             widget=forms.TextInput(attrs={'placeholder': 'Please enter tags'})
                             )
 
