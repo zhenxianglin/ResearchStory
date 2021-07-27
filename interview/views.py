@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 
 
-# @login_required
+@login_required
 def new_interview(request, story_id):
     """book a new interview """
     story = Story.objects.get(id=story_id)
