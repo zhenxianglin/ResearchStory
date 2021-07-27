@@ -221,6 +221,7 @@
                     </a>
                 </div>
 
+
                 <div class="comment">
                     <div class="normal">
                         <h4>COMMENT AREA</h4>
@@ -235,7 +236,6 @@
                                     <div class="normal">
                                         <p1>Post a Comment:</p1>
                                     </div>
-
                                     <textarea type="text" class="form-control" id="body" name="body" rows="4"
                                               placeholder="Please enter a comment"></textarea>
                                 </div>
@@ -399,7 +399,7 @@
                                     by Dr.Lin.
                                     <h4>Start Time: {{ current_intervew.start_time }}</h4>
                                     <h4>End Time: {{ current_intervew.end_time }}</h4>
-                                    <h6>Organiger: {{ current_intervew.organiger }}</h6>
+                                    <h6>Organizer: {{ current_intervew.organiger }}</h6>
                                 </div>
                                 <div style="text-align: center;">
                                     <a href="{{ current_intervew.interview_link }}">
@@ -412,6 +412,8 @@
                         </li>
                     {% endif %}
                 </div>
+
+
             </div>
         </div>
     </div>
