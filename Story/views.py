@@ -13,7 +13,6 @@ from interview.models import Interview
 from datetime import datetime
 
 
-
 def upload(request):
     if request.method == "GET":
         form = StoryForm()
@@ -188,13 +187,12 @@ def getStory(request, story_id):
     comments = Comment.objects.filter(story=story_id)
     comment_form = CommentForm()
 
-
     try:
         video = f"https://www.youtube.com/embed/{video.split('/')[-1]}"
     except AttributeError:
         pass
 
-    interview_list = Interview.objects.filter(related_story_name = story_id)
+    interview_list = Interview.objects.filter(related_story_name=story_id)
     current_time = datetime.now()
     date_and_time = current_time.strftime("%Y-%m-%d, %A,  %H:%M:%S")
     current_hour = current_time.hour  # 3:00 pm -> 15
@@ -222,7 +220,6 @@ def getStory(request, story_id):
             continue
         current_interview = interview
 
-
     kwarg = {
         "img": img,
         "title_name": title_name,
@@ -237,8 +234,8 @@ def getStory(request, story_id):
         'comment_form': comment_form,
         'story': story,
 
-        'data_and_time':date_and_time,
-        'current_intervew':current_interview,
+        'data_and_time': date_and_time,
+        'current_intervew': current_interview,
     }
 
     story.viewed()
