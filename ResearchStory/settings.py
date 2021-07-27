@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'meeting',
     'interview',
 
-
     # 第三方应用程序
     'ckeditor',  # 富文本编辑器
     'ckeditor_uploader',  # 富文本编辑器上传图片模块
@@ -64,6 +63,7 @@ INSTALLED_APPS = [
 # 媒体文件配置
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 CKEDITOR_UPLOAD_PATH = "img"  # 上传图片保存路径，如果没有图片存储或者使用自定义存储位置，那么则直接写  ' ' ,如果是使用django本身的存储方式，那么你就指名一个目录用来存储即可。
 # CKEDITOR_IMAGE_BACKEND = 'pillow'
 # 富文本编辑器ckeditor配置

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block header %}
+    <hr/>
+    <div style="text-align: center;">
+    <span>
+        <h2>
+             <a href="#"><button type="button" class="btn btn-dark"> User Profile</button></a>
+        </h2>
+    </span>
+    </div>
+    <hr/>
+{% endblock header %}
+
+{% block content %}
+    <div style="text-align: center;">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12">
+                    <br>
+                    <div class="col-md-4">Username: {{ user.username }}</div>
+                    <br>
+                    {% if profile.avatar %}
+                        <div class="col-md-4">Avatar</div>
+                        <img src="{{ profile.avatar.url }}" style="max-width: 20%; border-radius: 15%;"
+                             class="col-md-4">
+                    {% else %}
+                        <h5 class="col-md-4">No avatar yet</h5>
+                    {% endif %}
+
+                    <form method="post" action="." enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- avatar -->
+{#                        <div class="form-group col-md-4">#}
+{#                            <label for="avatar">Upload An Avatar</label>#}
+{#                            <input type="file" class="form-control-file" name="avatar" id="avatar">#}
+{#                        </div>#}
+                        {{ profile_form.as_p }}
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+
+
+                    </form>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+{% endblock content %}
