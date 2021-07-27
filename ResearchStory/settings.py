@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'forum',
     'comment',
     'meeting',
+    'interview',
+
 
     # 第三方应用程序
     'ckeditor',  # 富文本编辑器

@@ -9,6 +9,9 @@ from django.db.models import Q
 from comment.models import Comment
 from comment.forms import CommentForm
 import re
+from interview.models import Interview
+from datetime import datetime
+
 
 
 def upload(request):
@@ -159,6 +162,10 @@ def storyListCategorySortBy(request, category, sort_by):
     return render(request, 'story.html', kwarg)
 
 
+def time_in_mins(hr, min):
+    return hr * 60 + min
+
+
 def getStory(request, story_id):
     story = Story.objects.get(id=story_id)
     title_name = story.title_name
@@ -181,10 +188,40 @@ def getStory(request, story_id):
     comments = Comment.objects.filter(story=story_id)
     comment_form = CommentForm()
 
+
     try:
         video = f"https://www.youtube.com/embed/{video.split('/')[-1]}"
     except AttributeError:
         pass
+
+    interview_list = Interview.objects.filter(related_story_name = story_id)
+    current_time = datetime.now()
+    date_and_time = current_time.strftime("%Y-%m-%d, %A,  %H:%M:%S")
+    current_hour = current_time.hour  # 3:00 pm -> 15
+    current_min = current_time.minute  # 3:00 pm -> 0
+    # interview_list = list(Interview.objects.filter(related_story_name=story_id))
+    current_interview = None
+    for interview in interview_list:
+        start_time_hour = interview.start_time.hour
+        start_time_min = interview.start_time.minute
+        end_time_hour = interview.end_time.hour
+        end_time_min = interview.end_time.minute
+        day_list = []
+        if interview.monday == True:
+            day_list.append('Monday')
+        if interview.tuesday == True:
+            day_list.append('Tuesday')
+        if interview.wednesday == True:
+            day_list.append('Wednesday')
+        if interview.thursday == True:
+            day_list.append('Thursday')
+        if interview.friday == True:
+            day_list.append('Friday')
+        if ((day_list.count(current_time.strftime('%A')) == 0)
+                or (time_in_mins(end_time_hour, end_time_min)) < time_in_mins(current_hour, current_min)):
+            continue
+        current_interview = interview
+
 
     kwarg = {
         "img": img,
@@ -199,6 +236,9 @@ def getStory(request, story_id):
         'comments': comments,
         'comment_form': comment_form,
         'story': story,
+
+        'data_and_time':date_and_time,
+        'current_intervew':current_interview,
     }
 
     story.viewed()

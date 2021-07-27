@@ -1,58 +1,59 @@
 {% extends "base.html" %}
 
 {% load static %}
+
 {% block content %}
-<style type="text/css">
+    <style type="text/css">
 
-        div.title{
-        width: 100%;
-        background: white;
-        margin: 0 auto;
-        text-align: center;
-        padding-top:40px;
-        }
-
-
-        div.info{
-        height: 40px;
-        width: 100%;
-        background: white;
-        text-align: center;
-        margin: 0 auto;
-        margin-bottom: 40px;
-        }
-
-        div.article{
-        width: 100%;
-        background: #f1f1f1;
-        margin: 0 auto;
-        padding: 20px;
-        }
-
-        div.link{
-        width: 100%;
-        background: white;
-        margin: 0 auto;
-        padding: 10px;
-        }
-
-        div.video{
-        height: 315px;
-        width: 560px;
-        background: #f1f1f1;
-        margin: 20px auto;
-        }
-
-
-        div.intro{
-            background:#78cdd1;
+        div.title {
             width: 100%;
-            padding:20px;
+            background: white;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 40px;
         }
 
-        div.normal{
+
+        div.info {
+            height: 40px;
             width: 100%;
-            padding:20px;
+            background: white;
+            text-align: center;
+            margin: 0 auto;
+            margin-bottom: 40px;
+        }
+
+        div.article {
+            width: 100%;
+            background: #f1f1f1;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        div.link {
+            width: 100%;
+            background: white;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        div.video {
+            height: 315px;
+            width: 560px;
+            background: #f1f1f1;
+            margin: 20px auto;
+        }
+
+
+        div.intro {
+            background: #78cdd1;
+            width: 100%;
+            padding: 20px;
+        }
+
+        div.normal {
+            width: 100%;
+            padding: 20px;
         }
 
         h1 {
@@ -72,7 +73,7 @@
         }
 
         p1b {
-            background:#f1f1f1;
+            background: #f1f1f1;
             color: black;
             font-size: 16px;
             white-space: pre-wrap;
@@ -107,39 +108,39 @@
 
         @media screen and (max-width: 1000px) {
             .column.left, .column.right {
-            width: 100%;
-            margin:0 auto;
+                width: 100%;
+                margin: 0 auto;
             }
         }
 
-        div.footer{
-        height: 160px;
-        width:100%;
-        background: #f1f1f1;
-        text-align: center;
-        padding-top:80px;
-        margin-top:10px;
+        div.footer {
+            height: 160px;
+            width: 100%;
+            background: #f1f1f1;
+            text-align: center;
+            padding-top: 80px;
+            margin-top: 10px;
         }
 
-        div.pic{
-        width:85%;
-        margin: 0px auto;
-        margin-bottom: 30px;
+        div.pic {
+            width: 85%;
+            margin: 0px auto;
+            margin-bottom: 30px;
         }
 
-        img.type1{
-        width:100%;
+        img.type1 {
+            width: 100%;
         }
 
-        div.comment{
-        background: #78cdd1;
-        width:100%;
+        div.comment {
+            background: #78cdd1;
+            width: 100%;
         }
 
-        div.all_comment{
-        background: #f1f1f1;
-        width:100%;
-        padding:15px;
+        div.all_comment {
+            background: #f1f1f1;
+            width: 100%;
+            padding: 15px;
         }
 
         .button1 {
@@ -151,7 +152,7 @@
             text-decoration: none;
             display: inline-block;
             font-size: 14px;
-            }
+        }
 
         .button2 {
             background-color: #008CBA;
@@ -162,7 +163,7 @@
             text-decoration: none;
             display: inline-block;
             font-size: 14px;
-            }
+        }
     </style>
 
     <script src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
@@ -171,8 +172,11 @@
     <div>
 
         <div class="normal">
-            <button class="button1">Category</button> <p3> {{category}}</p3>
-            <button class="button2">Tags</button> <p3> Deepfake</p3> <p3> Voice</p3>
+            <button class="button1">Category</button>
+            <p3> {{ category }}</p3>
+            <button class="button2">Tags</button>
+            <p3> Deepfake</p3>
+            <p3> Voice</p3>
         </div>
         <div class="title">
             <h1>{{ title_name }}</h1>
@@ -185,7 +189,7 @@
         <div class="row">
             <div class="column left">
                 <div class="pic">
-                    <img class="type1" src="./media/{{img}}">
+                    <img class="type1" src="./media/{{ img }}">
                 </div>
 
                 <div class="article">
@@ -194,9 +198,9 @@
 
                 <div class="video">
                     {% if video %}
-                    <iframe width="560" height="315"
-                        src= {{ video }}
-                        title="YouTube video player" frameborder="0"
+                        <iframe width="560" height="315"
+                                src={{ video }}
+                                        title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
                     {% else %}
@@ -206,7 +210,9 @@
 
                 <div class="link">
                     <p1>Paper Link：</p1>
-                    <a href="#"><p1> {{ paper_link }} </p1> </a>
+                    <a href="#">
+                        <p1> {{ paper_link }} </p1>
+                    </a>
                 </div>
 
                 <div class="comment">
@@ -215,137 +221,127 @@
                     </div>
 
                     {% if user.is_authenticated %}
-                <div>
-                    <form action="{% url "comment:post_comment" story.id %}" method="post">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <div class="normal">
-                                <p1>Add comment:</p1>
-                            </div>
-                            <div>
-                                {{ comment_form.media }}
-                                {{ comment_form.body }}
-                            </div>
-                            {#                    <textarea type="text" class="form-control" id="body" name="body" rows="2" ,#}
-                            {#                              placeholder="Please enter a comment"></textarea>#}
-                        </div>
-                        <!-- 提交按钮 -->
-                        <button type="submit" class="btn btn-primary ">Post</button>
-                    </form>
-                </div>
+                        <div>
+                            <form action="{% url "comment:post_comment" story.id %}" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="normal">
+                                        <p1>Post a Comment:</p1>
+                                    </div>
 
-                <br>
-            {% else %}
-                <br>
-                <h5 class="row justify-content-center">
-                    Please <a href="{% url 'Users:login' %}"> login </a> to reply.
-                </h5>
-                <br>
-            {% endif %}
+                                    <textarea type="text" class="form-control" id="body" name="body" rows="4"
+                                              placeholder="Please enter a comment"></textarea>
+                                </div>
+                                <!-- 提交按钮 -->
+                                <button type="submit" class="btn btn-primary ">Post</button>
+                            </form>
+                        </div>
+
+                        <br>
+                    {% else %}
+                        <br>
+                        <h5 class="row justify-content-center">
+                            Please <a href="{% url 'Users:login' %}"> login </a> to reply.
+                        </h5>
+                        <br>
+                    {% endif %}
 
                     <div class="all_comment">
-                    <!-- 显示评论 -->
+                        <!-- 显示评论 -->
 
-                    {% load mptt_tags %}
-                    <h4>Total comments: {{ comments.count }}</h4>
-                    <div class="row">
-                {% recursetree comments %}
-                    {% with comment=node %}
-                        <div class="{% if comment.reply_to %} offset-1 col-11 {% else %} col-12 {% endif %}">
-                            <hr/>
+                        {% load mptt_tags %}
+                        <h4>Total comments: {{ comments.count }}</h4>
+                        <div class="row">
+                            {% recursetree comments %}
+                                {% with comment=node %}
+                                    <div class="{% if comment.reply_to %} offset-1 col-11 {% else %} col-12 {% endif %}">
+                                        <hr/>
 
-                         <p>
-                             <strong style="color: pink">
-                                 {{ comment.user }}
-                             </strong>
+                                        <p>
+                                            <strong style="color: pink">
+                                                {{ comment.user }}
+                                            </strong>
 
 
-                        <!-- 显示被回复人 -->
-                        {% if comment.reply_to %}
-                            <i class="far fa-arrow-alt-circle-right"
-                               style="color: cornflowerblue;"
-                            ></i>
-                            <strong style="color: pink">
-                                <span style="color: blue" class="arrow-outer">  @</span> {{ comment.reply_to }}
-                            </strong>
-                        {% endif %}
+                                            <!-- 显示被回复人 -->
+                                            {% if comment.reply_to %}
+                                                <i class="far fa-arrow-alt-circle-right"
+                                                   style="color: cornflowerblue;"
+                                                ></i>
+                                                <strong style="color: pink">
+                                                    <span style="color: black"
+                                                          class="arrow-outer">  @</span> {{ comment.reply_to }}
+                                                </strong>
+                                            {% endif %}
 
-                    </p>
-                    <div>{{ comment.body|safe }}</div>
+                                        </p>
+                                        <div>{{ comment.body|safe }}</div>
 
-                    <div>
+                                        <div>
                         <span style="color: gray">
                         {{ comment.created|date:"Y-m-d H:i:s" }}
                         </span>
 
 
-                        <!-- 加载 modal 的按钮 -->
-                        {% if user.is_authenticated %}
-                            <button type="button"
-                                    class="btn btn-light btn-sm text-muted"
-                                    onclick="load_modal({{ story.id }}, {{ comment.id }})">Reply
-                            </button>
-                        {% else %}
-                            <a class="btn btn-light btn-sm text-muted"
-                               href="{% url 'Users:login' %}">
-                                Reply
-                            </a>
-                        {% endif %}
-                    </div>
+                                            <!-- 加载 modal 的按钮 -->
+                                            {% if user.is_authenticated %}
+                                                <button type="button"
+                                                        class="btn btn-light btn-sm text-muted"
+                                                        onclick="load_modal({{ story.id }}, {{ comment.id }})">Reply
+                                                </button>
+                                            {% else %}
+                                                <a class="btn btn-light btn-sm text-muted"
+                                                   href="{% url 'Users:login' %}">
+                                                    Reply
+                                                </a>
+                                            {% endif %}
+                                        </div>
 
-                    <!-- Modal -->
-                    <div class="modal fade"
-                         id="comment_{{ comment.id }}"
-                         tabindex="-1"
-                         role="dialog"
-                         aria-labelledby="CommentModalCenter"
-                         aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                            <div class="modal-content" style="height: 480px">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalCenterTitle">Replying
-                                        to {{ comment.user }}：</h5>
-                                </div>
-                                <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
-                            </div>
+                                        <!-- Modal -->
+                                        <div class="modal fade"
+                                             id="comment_{{ comment.id }}"
+                                             tabindex="-1"
+                                             role="dialog"
+                                             aria-labelledby="CommentModalCenter"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                <div class="modal-content" style="height: 480px">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Replying
+                                                            to {{ comment.user }}：</h5>
+                                                    </div>
+                                                    <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% if not comment.is_leaf_node %}
+                                            <div class="children">
+                                                {{ children }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endwith %}
+                            {% endrecursetree %}
                         </div>
-                    </div>
-                    {% if not comment.is_leaf_node %}
-                        <div class="children">
-                            {{ children }}
-                        </div>
-                    {% endif %}
-                </div>
-            {% endwith %}
-        {% endrecursetree %}
-    </div>
 
 
-                    <!--，唤醒二级回复的 modal -->
-                    <script>
-        // 加载 modal
-        function load_modal(story_id, comment_id) {
-            let modal_body = '#modal_body_' + comment_id;
-            let modal_id = '#comment_' + comment_id;
+                        <!--，唤醒二级回复的 modal -->
+                        <script>
+                            // 加载 modal
+                            function load_modal(story_id, comment_id) {
+                                let modal_body = '#modal_body_' + comment_id;
+                                let modal_id = '#comment_' + comment_id;
 
-            // 加载编辑器
-            if ($(modal_body).children().length === 0) {
-                let content = '<iframe src="/comment/post_comment/' + story_id + '/' + comment_id + '" frameborder="0" style="width: 100%; height: 100%;"></iframe>';
-                $(modal_body).append(content);
-            }
-            ;
-            $(modal_id).modal('show');
-        }
-         // 处理二级回复
-    {#function post_reply_and_show_it(new_comment_id) {#}
-    {#    let next_url = "{% url 'Story:gerStory' story.id %}";#}
-    {#    // 去除 url 尾部 '/' 符号#}
-    {#    next_url = next_url.charAt(next_url.length - 1) == '/' ? next_url.slice(0, -1) : next_url;#}
-    {#    // 刷新并定位到锚点#}
-    {#    window.location.replace(next_url + "#comment_elem_" + new_comment_id);#}
-    {#};#}
+                                // 加载编辑器
+                                if ($(modal_body).children().length === 0) {
+                                    let content = '<iframe src="/comment/post_comment/' + story_id + '/' + comment_id + '" frameborder="0" style="width: 100%; height: 100%;"></iframe>';
+                                    $(modal_body).append(content);
+                                }
+                                ;
+                                $(modal_id).modal('show');
+                            }
 
-    </script>
+                        </script>
                     </div>
 
                 </div>
@@ -357,19 +353,69 @@
 
                 <div class="intro">
                     <h2>Field Background</h2>
-                    <p3>Machines with brains are the future, and The Verge is here to explain it all. From Google and Facebook’s use of machine learning to rule the web, to cutting-edge research and why Alexa still sucks at conversation. We want to dispel the hype of AI and distill what it is you need to know.</p3>
+                    <p3>Machines with brains are the future, and The Verge is here to explain it all. From Google and
+                        Facebook’s use of machine learning to rule the web, to cutting-edge research and why Alexa still
+                        sucks at conversation. We want to dispel the hype of AI and distill what it is you need to know.
+                    </p3>
                 </div>
                 <div class="intro">
                     <h2>Researcher Introduction</h2>
-                    <p3>Machines with brains are the future, and The Verge is here to explain it all. From Google and Facebook’s use of machine learning to rule the web, to cutting-edge research and why Alexa still sucks at conversation. We want to dispel the hype of AI and distill what it is you need to know.</p3>
+                    <p3>Machines with brains are the future, and The Verge is here to explain it all. From Google and
+                        Facebook’s use of machine learning to rule the web, to cutting-edge research and why Alexa still
+                        sucks at conversation. We want to dispel the hype of AI and distill what it is you need to know.
+                    </p3>
+                </div>
+
+                <hr/>
+                <div>
+                    {% if current_intervew == 'None' %}
+                        <div style="text-align: center;">
+                            <h4>No interview Today :)</h4>
+                            <h7>{{ data_and_time }}</h7>
+                        </div>
+                        <hr/>
+                        <div class="jumbotron">
+                            <div class="d-flex justify-content-center">
+                                <a href="#">
+                                    <button type="button" class="btn btn-dark">Welcome to interview by appointment with
+                                        Dr.Lin.
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div style="text-align: center;">
+                            <h3>Current interview:</h3>
+                            <h7>{{ data_and_time }}</h7>
+                        </div>
+                        <li>
+                            <div class="jumbotron">
+                                <div style="text-align: center;">
+                                    <h4><i><b>{{ current_intervew.interview_name }}</b></i></h4>
+                                    Related to Research Story:<h6>"{{ current_intervew.related_story_name }}"</h6> Post
+                                    by Dr.Lin.
+                                    <h4>Start Time: {{ current_intervew.start_time }}</h4>
+                                    <h4>End Time: {{ current_intervew.end_time }}</h4>
+                                    <h6>Organiger: {{ current_intervew.organiger }}</h6>
+                                </div>
+                                <div style="text-align: center;">
+                                    <a href="{{ current_intervew.interview_link }}">
+                                        <button type="button" class="btn btn-dark">Link to Join:
+                                            <b>{{ current_intervew.interview_name }}</b>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 
-<div class="footer">
-    <p1>Contact Us</p1>
-</div>
+    <div class="footer">
+        <p1>Contact Us</p1>
+    </div>
 
 {% endblock content %}
 

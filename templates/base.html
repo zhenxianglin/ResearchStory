@@ -52,10 +52,9 @@
                             class="sr-only">(current)</span></a>
                 </li>
 
-
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url "meeting:current_meeting" %}"> Meeting <span
-                            class="sr-only">(current)</span></a>
+                            class="sr-only"></span></a>
                 </li>
 
             </ul>
@@ -110,7 +109,7 @@
                                     <div style="color: #323534;text-align: center;line-height: 36px;font-size: 15px">
                                         {% if user.is_authenticated %}
                                             <a>Hello, {{ user.username }}.</a>
-                                            <a href="{% url 'Users:logout' %}">Logout</a>#}
+                                            <a href="{% url 'Users:logout' %}">Logout</a>
                                         {% else %}
                                             <a href="{% url 'Users:register' %}">Register</a>
                                             <a href="{% url 'Users:login' %}">Login</a>
@@ -154,19 +153,9 @@
                                             帮助中心</p>
                                     </div>
                                 </div>
-
                             </div>
-
                 </li>
-
             </form>
-
-
-
-
-
-
-
         </div>
     </nav>
 </div>

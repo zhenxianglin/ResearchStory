@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block header %}
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            <h2>interview To Discuss</h2>
+        </a>
+{#        <span>#}
+{#                    <a href="/"><button type="button" class="btn btn-info">xxxxx</button></a>#}
+{#            <a href="#"><button type="button" class="btn btn-dark">Add A New#}
+{#                            interview</button></a>#}
+{#        </span>#}
+    </nav>
+
+{% endblock header %}
+
+
+{% block content %}
+<div style="text-align: center;">
+    <h2>Current interview:</h2>
+    <h7>{{ date_and_time }}</h7>
+</div>
+<hr/>
+
+{#    {% for meeting in current_meetings %}#}
+<hr/>
+<li>
+    <div class="jumbotron">
+        <div style="text-align: center;">
+            <h2><i><b>{{ current_interview.interview_name }}</b></i></h2>
+            <h3>{{ current_interview.related_story_name }}</h3>
+            <h3>Start Time: {{ current_interview.start_time }}</h3>
+            <h3>End Time: {{ current_interview.end_time }}</h3>
+            <h6>Organiger: {{ current_interview.organiger }}</h6>
+        </div>
+        <div style="text-align: center;">
+            <a href="{{ current_interview.interview_link }}">
+                <button type="button" class="btn btn-dark">Link to Join:
+                    <b>{{ current_interview.interview_name }}</b>
+                </button>
+            </a>
+        </div>
+    </div>
+</li>
+{#{% endfor %}#}
+{% endblock content %}
+

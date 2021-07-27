@@ -30,4 +30,7 @@ urlpatterns = [
     path(r'password_reset/', include('password_reset.urls')),
     path('accounts/', include('allauth.urls')),
     path('meeting/', include(('meeting.urls', 'meeting'), namespace='meeting')),
+
+    # path('', include(('interview.urls', 'interview'), namespace='interview')),
+
 ]

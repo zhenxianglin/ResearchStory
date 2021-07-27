@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/">
+            <h2>Interview To Discuss</h2>
+        </a>
+        <span>
+{#                    <a href="/"><button type="button" class="btn btn-info">xxxxx</button></a>#}
+            <a href="#"><button type="button" class="btn btn-dark">Add A New
+                            interview</button></a>
+        </span>
+    </nav>
+
+
+{% endblock header %}
+
+
+{% block content %}
+    <div style="text-align: center;">
+        <h2>No interview Today :)</h2>
+        <h7>{{ date_and_time }}</h7>
+    </div>
+    <hr/>
+    <hr/>
+
+    <div class="jumbotron">
+        <div class="d-flex justify-content-center">
+            <a href="#">
+                <button type="button" class="btn btn-dark">Welcome to create for online discussion.</button>
+            </a>
+        </div>
+    </div>
+
+{% endblock content %}
