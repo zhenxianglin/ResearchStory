@@ -179,8 +179,12 @@ def getStory(request, story_id):
     text = re.sub(r'\<.*?\>', '', text)
     text = re.sub(r'&nbsp;', ' ', text)
     text = re.sub(r'&rsquo;', '\'', text)
+    text = re.sub(r'&lsquo;', '\'', text)
     text = re.sub(r'&rdquo;', '\"', text)
     text = re.sub(r'&ldquo;', '\"', text)
+    text = re.sub(r'&#39;', '\'', text)
+    text = re.sub(r'&mdash;', '-', text)
+    text = re.sub(r'&quot;', '\"', text)
 
     video = story.video
     paper_link = story.paper_link
