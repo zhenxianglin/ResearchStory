@@ -347,17 +347,12 @@
                                 ;
                                 $(modal_id).modal('show');
                             }
-
                         </script>
                     </div>
-
                 </div>
-
-
             </div>
 
             <div class="column right">
-
                 <div class="intro">
                     <h2>Researcher Introduction</h2>
                     <p3>{{author_intro}}
@@ -379,9 +374,9 @@
                         <hr/>
                         <div class="jumbotron">
                             <div class="d-flex justify-content-center">
-                                <a href="#">
+                                <a href="{% url 'interview:new_interview' story.id %}">
                                     <button type="button" class="btn btn-dark">Welcome to interview by appointment with
-                                        Dr.Lin.
+                                        Researcher.
                                     </button>
                                 </a>
                             </div>
@@ -396,7 +391,7 @@
                                 <div style="text-align: center;">
                                     <h4><i><b>{{ current_intervew.interview_name }}</b></i></h4>
                                     Related to Research Story:<h6>"{{ current_intervew.related_story_name }}"</h6> Post
-                                    by Dr.Lin.
+                                    by XXXX.
                                     <h4>Start Time: {{ current_intervew.start_time }}</h4>
                                     <h4>End Time: {{ current_intervew.end_time }}</h4>
                                     <h6>Organizer: {{ current_intervew.organizer }}</h6>
@@ -412,7 +407,6 @@
                         </li>
                     {% endif %}
                 </div>
-
 
             </div>
         </div>

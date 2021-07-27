@@ -31,6 +31,6 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('meeting/', include(('meeting.urls', 'meeting'), namespace='meeting')),
 
-    # path('', include(('interview.urls', 'interview'), namespace='interview')),
+    path('', include(('interview.urls', 'interview'), namespace='interview')),
 
 ]
