@@ -14,7 +14,14 @@
 
 
 <body>
+{#<style type="text/css">#}
+{#    div.bg {#}
+{#           background:url("/static/assets/img/homeimg1.jpeg") ;#}
+{#           background-size:auto;}#}
+{##}
+{#</style>#}
 <div class="container " style="background-color: transparent">
+{#<div class="row bg">#}
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
         <a class="navbar-brand mb-md-0" href="#">Research</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -24,7 +31,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
+                <li class="nav-item active" style="">
                     <a class="nav-link" href="{% url 'MainPage:index' %}"> Home <span
                             class="sr-only">(current)</span></a>
                 </li>
@@ -160,8 +167,12 @@
             </form>
         </div>
     </nav>
+{#    <img src="/static/assets/img/homeimg1.jpeg" class="img-fluid" alt="Responsive image">#}
 </div>
-
+</div>
+{#<div class="container">#}
+{#<img src="/static/assets/img/homeimg1.jpeg" class="img-fluid" alt="Responsive image">#}
+{#</div>#}
 <div class="container">
 
     <div class="page-header">
