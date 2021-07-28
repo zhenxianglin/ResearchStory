@@ -111,8 +111,9 @@
         }
 
         .button2 {
-            background-color: #008CBA;
-            border: none;
+            background= #909090;
+            border-color: #008CBA;
+            border: solid;
             color: white;
             padding: 0px;
             text-align: center;
@@ -124,8 +125,9 @@
         }
 
         .button1 {
-            background-color: #ff8800;
-            border: none;
+            background= #909090;
+            border-color: #ff8800;
+            border: solid;
             color: white;
             padding: 0px;
             text-align: center;
@@ -141,22 +143,22 @@
     <div class="top">
         <div class="top_item">
             <a href="{% url 'Story:storyList' %}">
-                <button class="button1">All Stories</button>
+                <button class="button1" id="1">All Stories</button>
             </a>
         </div>
         <div class="top_item">
             <a href="{% url 'Story:storyListCategory' 'ComputerScience' %}">
-                <button class="button1">Computer Science</button>
+                <button class="button1" id="2">Computer Science</button>
             </a>
         </div>
         <div class="top_item">
             <a href="{% url 'Story:storyListCategory' 'Physics' %}">
-                <button class="button1">Physics</button>
+                <button class="button1" id="3">Physics</button>
             </a>
         </div>
         <div class="top_item">
             <a href="{% url 'Story:storyListCategory' 'ElectricalEngineering' %}">
-                <button class="button1">Electrical Engineering</button>
+                <button class="button1" id="4">Electrical Engineering</button>
             </a>
         </div>
 
@@ -164,12 +166,12 @@
         </div>
         <div class="top_item">
             <a id="latest_stories" href="{% url 'Story:storyListSortBy' 'time' %}">
-                <button class="button2">Latest Stories</button>
+                <button class="button2" id="5">Latest Stories</button>
             </a>
         </div>
         <div class="top_item">
             <a id="most_viewed" href="{% url 'Story:storyListSortBy' 'hot' %}">
-                <button class="button2">Most Viewed</button>
+                <button class="button2" id="6">Most Viewed</button>
             </a>
         </div>
     </div>
@@ -185,18 +187,50 @@
                     }
                     return(false);
                 }
+
+                function getSort() {
+                    var query = window.location.href;
+                    query = query.replace("_","/")
+                    var vars = query.split("/");
+                    for (var i=0;i<vars.length;i++) {
+                        var pair = vars[i].split("=");
+                        if(pair.length > 1 && pair[0] == 'sort_by'){return pair[1];}
+                    }
+                }
+
                 var c = getQueryString("category")
+                document.getElementById("1").style.background = "#ff8800";
+                document.getElementById("2").style.background = "#909090";
+                document.getElementById("3").style.background = "#909090";
+                document.getElementById("4").style.background = "#909090";
+                document.getElementById("5").style.background = "#909090";
+                document.getElementById("6").style.background = "#909090";
+
+                var d = getSort();
+                if(d == 'time') {
+                    document.getElementById("5").style.background = "#008CBA";
+                }
+                if(d == 'hot') {
+                    document.getElementById("6").style.background = "#008CBA";
+                }
+
                 if(c == 'ComputerScience') {
                     document.getElementById("latest_stories").href = "{% url 'Story:storyListCategorySortBy' 'ComputerScience' 'time' %}";
                     document.getElementById("most_viewed").href = "{% url 'Story:storyListCategorySortBy' 'ComputerScience' 'hot' %}";
+                    document.getElementById("2").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
                 }
                 if(c == 'Physics') {
                     document.getElementById("latest_stories").href = "{% url 'Story:storyListCategorySortBy' 'Physics' 'time' %}";
                     document.getElementById("most_viewed").href = "{% url 'Story:storyListCategorySortBy' 'Physics' 'hot' %}";
+                    document.getElementById("3").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
                 }
                 if(c == 'ElectricalEngineering') {
                     document.getElementById("latest_stories").href = "{% url 'Story:storyListCategorySortBy' 'ElectricalEngineering' 'time' %}";
                     document.getElementById("most_viewed").href = "{% url 'Story:storyListCategorySortBy' 'ElectricalEngineering' 'hot' %}";
+                    document.getElementById("4").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
                 }
         </script>
 
