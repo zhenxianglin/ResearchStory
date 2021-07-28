@@ -17,4 +17,5 @@ class InterviewForm(forms.ModelForm):
                   'wednesday',
                   'thursday',
                   'friday',
+                  'more_details',
                   )
