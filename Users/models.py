@@ -31,6 +31,7 @@ class Profile(models.Model):
         ("S", 'Secret'),
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+
     age = models.PositiveIntegerField(null=True, verbose_name="age")
     gender = models.CharField(choices=SEX_ITEMS, max_length=100, verbose_name="gender")
 

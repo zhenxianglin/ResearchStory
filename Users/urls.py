@@ -15,6 +15,6 @@ urlpatterns = [
 
     path(r'register/', views.register, name='register'),
 
-    path(r'edit/<int:id>/', views.profile_edit, name='edit'),
+    path(r'edit/<int:user_id>/', views.profile_edit, name='edit'),
 
 ]

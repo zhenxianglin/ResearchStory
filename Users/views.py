@@ -45,19 +45,19 @@ def register(request):
     context = {"form": form}
     return render(request, 'Users/register.html', context)
 
+
 @login_required(login_url='/userprofile/login/')
-def profile_edit(request, id):
-    user = User.objects.get(id=id)
+def profile_edit(request, user_id):
+    user = User.objects.get(id=user_id)
 
     # 旧教程代码
     # profile = Profile.objects.get(user_id=id)
     # 新教程代码： 获取 Profile
-    if Profile.objects.filter(user_id=id).exists():
+    if Profile.objects.filter(user_id=user_id).exists():
         # user_id 是 OneToOneField 自动生成的字段
-        profile = Profile.objects.get(user_id=id)
+        profile = Profile.objects.get(user_id=user_id)
     else:
         profile = Profile.objects.create(user=user)
-
 
     if request.method == 'POST':
         # 验证修改数据者，是否为用户本人
@@ -82,18 +82,18 @@ def profile_edit(request, id):
 
             profile.save()
             # 带参数的 redirect()
-            return redirect("userprofile:edit", id=id)
+            # return redirect("Users:edit", id=user_id)
         else:
             return HttpResponse("The registration form is entered incorrectly. Please re-enter~")
 
     elif request.method == 'GET':
         profile_form = ProfileForm()
-        context = { 'profile_form': profile_form, 'profile': profile, 'user': user }
+        context = {'profile_form': profile_form,
+                   'profile': profile,
+                   'user': user}
         return render(request, 'Users/edit.html', context)
     else:
         return HttpResponse("Please use GET or POST to request data.")
-
-
 
 #
 # @login_required
