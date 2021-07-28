@@ -2,7 +2,7 @@ from .models import Story
 from django import forms
 from ckeditor.fields import RichTextField
 from django.db import models
-
+from ckeditor.widgets import CKEditorWidget
 from datetime import datetime
 
 
@@ -17,26 +17,26 @@ class StoryForm(forms.Form):
     # viewsNum=forms.IntegerField(label='viewsNum')
     # text=forms.CharField(widget=forms.Textarea)
     # text=RichTextUploadingField(default='xxx', verbose_name='text')
-    text = RichTextField(default='xxx')
+    text = RichTextField()
+
     img = models.ImageField(upload_to='img', null=False)
     videoUrl = forms.URLField(label='videoUrl', max_length=512,
                               widget=forms.URLInput(attrs={'placeholder': 'Please enter your content'})
                               )
     paperLink = forms.URLField(label='paperLink', max_length=512,
                                widget=forms.URLInput(attrs={'Placeholder': 'Please enter your paper link'}))
-    author=forms.CharField(label='author', max_length=100,
-                            widget=forms.TextInput(attrs={'placeholder': 'Please enter author name'})
-                            )
-    author_intro=forms.CharField(label='author_intro', max_length=1000,
-                            widget=forms.TextInput(attrs={'placeholder': 'Please enter author introduction'})
-                            )
-    background=forms.CharField(label='background', max_length=1000,
-                            widget=forms.TextInput(attrs={'placeholder': 'Please enter background introduction'})
-                            )
-    tags=forms.CharField(label='tags', max_length=100,
-                            widget=forms.TextInput(attrs={'placeholder': 'Please enter tags'})
-                            )
-
+    author = forms.CharField(label='author', max_length=100,
+                             widget=forms.TextInput(attrs={'placeholder': 'Please enter author name'})
+                             )
+    author_intro = forms.CharField(label='author_intro', max_length=1000,
+                                   widget=forms.TextInput(attrs={'placeholder': 'Please enter author introduction'})
+                                   )
+    background = forms.CharField(label='background', max_length=1000,
+                                 widget=forms.TextInput(attrs={'placeholder': 'Please enter background introduction'})
+                                 )
+    tags = forms.CharField(label='tags', max_length=100,
+                           widget=forms.TextInput(attrs={'placeholder': 'Please enter tags'})
+                           )
     class Meta:
         model = Story
         fields = (

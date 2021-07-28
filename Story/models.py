@@ -22,6 +22,7 @@ class Story(models.Model):
     views = models.PositiveIntegerField(verbose_name='views number', default=0, auto_created=True)
     img= models.ImageField(verbose_name="front page", upload_to='img', null=False)
     text = RichTextField()
+
     video = models.URLField(verbose_name="video", blank=True, null=True)
     paper_link = models.URLField(verbose_name="paper_link", null=True, blank=True)
 
@@ -29,10 +30,6 @@ class Story(models.Model):
     author_intro = models.CharField(verbose_name="author_intro", max_length=1000,default='author introduction')
     background = models.CharField(verbose_name="background", max_length=1000,default='background')
     tags = models.CharField(verbose_name="tags", max_length=100,default=category)
-
-
-
-
 
 
     def __str__(self):
