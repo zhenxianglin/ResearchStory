@@ -23,7 +23,7 @@ class Interview(models.Model):
     thursday = models.BooleanField(default=False)
     friday = models.BooleanField(default=False)
 
-    more_details = models.TextField(verbose_name="Please provide more details about this Interview appointment.")
+    more_details = models.TextField(verbose_name="Provide more details.")
 
     data_added = models.DateTimeField(auto_now_add=True)
 
