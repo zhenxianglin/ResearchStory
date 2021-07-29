@@ -55,6 +55,7 @@
         div.normal {
             width: 100%;
             padding: 20px;
+            background: white;
         }
 
         h1 {
@@ -97,14 +98,20 @@
             white-space: pre-wrap;
         }
 
+        .row {
+        background: white;
+        margin:0px;
+        }
         .column.left {
             padding-left: 10px;
             padding-right: 10px;
             width: 60%;
             box-sizing: border-box;
+            background:white;
         }
 
         .column.right {
+            background:white;
             padding-left: 10px;
             padding-right: 10px;
             width: 40%;
@@ -185,12 +192,15 @@
             <button class="button2">Tags</button>
             <p3> {{tags}}</p3>
         </div>
+
+        <div class="normal">
         <div class="title">
             <h1>{{ title_name }}</h1>
         </div>
 
         <div class="info">
             <p1>By {{ author }}</p1><p1>    |   {{ created_time }}</p1>
+        </div>
         </div>
 
         <div class="row">
