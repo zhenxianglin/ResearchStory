@@ -16,7 +16,7 @@ def forumList(request):
         return render(request, 'forum/forum_list.html', kwargs)
 
 
-def post_forum(request, parent_forum_id=None):
+def post_forum(request, parent_forum_id):
     if request.method == 'POST':
         forum = ForumForm(request.POST)
 
