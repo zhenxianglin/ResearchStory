@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.urls import path
-
+from forum import views
 from .views import *
 from django.conf.urls.static import static
 from django.conf import settings
@@ -24,8 +24,7 @@ app_name = 'forum'
 
 urlpatterns = [
     path(r'', forumList, name='forumList'),
-
-
+    path(r'post_forum/<int:parent_forum_id>', views.post_forum, name='forum_reply'),
 
 ]
 
