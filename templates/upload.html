@@ -134,7 +134,7 @@
                     <textarea class="form-control" id='text' name="text" aria-label="With textarea" rows="10"
                               placeholder="Please Enter Your Text"></textarea>
                     <script type="text/javascript">
-                        CKEDITOR.replace('text');
+                        CKEDITOR.replace('text',{ toolbar:'Basic', height:370, width:1530 });
                     </script>
 
                 </div>
@@ -169,5 +169,3 @@
 {#    {% endbuttons %}#}
 
 {#    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>#}
-
-
