@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="content">
+        <div class="row">
+            {% for f in forum %}
+                <div class="title">
+                        <a href="story_id={{ f.title }}"><h1>{{ st }}</h1></a>
+                </div>
+
+
+            {% endfor %}
+        </div>
+
+
+
+    </div>
+{% endblock content %}
