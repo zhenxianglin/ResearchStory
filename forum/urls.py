@@ -13,28 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import include, path
+from django.conf.urls import url
+from django.urls import path
+
+from .views import *
 from django.conf.urls.static import static
 from django.conf import settings
 
+app_name = 'forum'
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(r'', forumList, name='forumList'),
 
-    path(r'Users/', include(('Users.urls', 'Users'), namespace='Users')),
 
-    path(r'', include(('MainPage.urls', 'MainPage'), namespace='MainPage')),
-
-    path(r'story/', include(('Story.urls', 'Story'), namespace='Story')),
-
-    path(r'comment/', include(('comment.urls', 'comment'), namespace='comment')),
-
-    path(r'password_reset/', include('password_reset.urls')),
-    path('accounts/', include('allauth.urls')),
-    path('meeting/', include(('meeting.urls', 'meeting'), namespace='meeting')),
-
-    path('', include(('interview.urls', 'interview'), namespace='interview')),
-    path(r'forum/', include(('forum.urls', 'forum'), namespace='forum')),
 
 ]
 

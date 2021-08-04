@@ -18,9 +18,9 @@ class Story(models.Model):
                                          ('Physics', 'Physics'),
                                          ("ElectricalEngineering", "ElectricalEngineering"),
                                          ),
-                                blank=False, null=False)
+                                blank=False, null=True)
     views = models.PositiveIntegerField(verbose_name='views number', default=0, auto_created=True)
-    img= models.ImageField(verbose_name="front page", upload_to='img', null=False)
+    img= models.ImageField(verbose_name="front page", upload_to='img', null=True)
     text = RichTextField()
 
     video = models.URLField(verbose_name="video", blank=True, null=True)
