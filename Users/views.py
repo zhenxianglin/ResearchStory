@@ -46,7 +46,7 @@ def register(request):
     return render(request, 'Users/register.html', context)
 
 
-@login_required(login_url='/userprofile/login/')
+@login_required
 def profile_edit(request, user_id):
     user = User.objects.get(id=user_id)
 
