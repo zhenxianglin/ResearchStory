@@ -21,7 +21,7 @@ def forumList(request):
         if form.is_valid():
             forum=Forum()
             forum.title=request.POST.get('title')
-            forum.author=request.author
+            forum.author=request.user
             #forum.created_time=request.POST.get('created_time')
             forum.text=request.POST.get('text')
             forum.save()
