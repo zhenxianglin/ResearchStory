@@ -24,7 +24,7 @@ app_name = 'forum'
 
 urlpatterns = [
     path(r'', forumList, name='forumList'),
-    path(r'post_forum/<int:parent_forum_id>', post_forum, name='post_forum'),
+    path(r'post_forum=<int:parent_forum_id>', post_forum, name='post_forum'),
 
 ]
 

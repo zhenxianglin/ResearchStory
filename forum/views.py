@@ -17,8 +17,8 @@ def forumList(request):
         if form.is_valid():
             forum=Forum()
             forum.title=request.POST.get('title')
-            forum.author=request.POST.get('author')
-            forum.created_time=request.POST.get('created_time')
+            #forum.author=request.POST.get('author')
+            #forum.created_time=request.POST.get('created_time')
             forum.text=request.POST.get('text')
             forum.save()
             return HttpResponseRedirect(reverse("forum:forumList"))
