@@ -26,7 +26,7 @@ def forumList(request):
             forum.text=request.POST.get('text')
             forum.save()
             return HttpResponseRedirect(reverse("forum:forumList"))
-
+    return render(request, 'forum/forum_list.html', locals())
 
 
 
