@@ -10,8 +10,12 @@ from forum.ForumForm import ForumForm
 
 def forumList(request):
     if request.method == "GET":
+        form = ForumForm()
         forum = Forum.objects.filter().order_by('created_time')
-        #kwargs = {"forum": forum, }
+        kwargs = {"forum": forum,
+                  "form": form,
+                  }
+        return render(request, 'forum/forum_list.html', kwargs)
     elif request.method=="POST":
         form=ForumForm(data=request.POST)
         if form.is_valid():
@@ -22,7 +26,7 @@ def forumList(request):
             forum.text=request.POST.get('text')
             forum.save()
             return HttpResponseRedirect(reverse("forum:forumList"))
-    return render(request, 'forum/forum_list.html', locals())
+
 
 
 
