@@ -54,6 +54,13 @@ def upload(request):
     return render(request, 'upload.html', locals())
 
 
+def delete(request, story_id):
+    story = Story.objects.filter(id=story_id)
+    if story:
+        story.delete()
+    return HttpResponseRedirect(reverse("Story:storyList"))
+
+
 def search(request):
     if request.method == "POST":
         keyword = request.POST.get("keyword")
