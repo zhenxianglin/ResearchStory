@@ -59,17 +59,24 @@
                         <div>
                             <form method="post" action="{% url "forum:forumList"  %}" >
                                 {% csrf_token %}
-                                {{ form.as_p }}
-{#                                {{ form.text }}#}
-{#                                {{ forum.author }}#}
-{#                                {{ forum.created_time }}#}
-{#                                <div class="form-group">#}
-{#                                    <div class="normal">#}
-{#                                        <p1>Post a Topic:</p1>#}
-{#                                    </div>#}
-{#                                    <textarea type="text" class="form-control" id="body" name="text" rows="4"#}
-{#                                              placeholder="Please enter a topic"></textarea>#}
-{#                                </div>#}
+                                <div class="form-group">
+                                    <div class="normal">
+                                        <p1>Post a Topic:</p1>
+                                    </div>
+
+{#                                    {{ request.user.id }}#}
+                                    <input type="text" class="form-control" name="title" rows="4"
+                                              placeholder="Please enter a topic"></input>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="normal">
+                                        <p1>Add some content:</p1>
+                                    </div>
+                                    <textarea type="text" class="form-control" id="text" name="text" rows="4"
+                                              placeholder="Please enter the content"></textarea>
+                                </div>
                                 <!-- 提交按钮 -->
                                 <button type="submit" class="btn btn-primary ">Post</button>
                             </form>
