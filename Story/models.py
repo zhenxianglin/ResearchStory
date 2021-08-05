@@ -8,7 +8,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
-
+from Users.models import User
 
 class Story(models.Model):
     title_name = models.CharField(verbose_name="title", max_length=100)
@@ -30,6 +30,8 @@ class Story(models.Model):
     author_intro = models.CharField(verbose_name="author_intro", max_length=1000,default='author introduction')
     background = models.CharField(verbose_name="background", max_length=1000,default='background')
     tags = models.CharField(verbose_name="tags", max_length=100,default=category)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user1', null=True)
 
 
     def __str__(self):
