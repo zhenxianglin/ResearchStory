@@ -16,7 +16,10 @@ from datetime import datetime
 def edit(request,story_id):
     story=Story.objects.get(id=story_id)
     if request.method == "GET":
-        form = StoryForm(instance=story)
+         form = StoryForm(instance=story)
+         kwargs={"form":form,
+                 "story":story,}
+         return render(request, 'edit.html', kwargs)
     elif request.method == "POST":
         form = StoryForm(instance=story,data=request.POST)
         if form.is_valid():
@@ -26,8 +29,16 @@ def edit(request,story_id):
             story.video = request.POST.get('videoUrl')
             story.paper_link = request.POST.get('paperLink')
             story.img = request.POST.get('img')
+            story.author = request.POST.get('author')
+            story.author_intro = request.POST.get('author_intro')
+            story.background = request.POST.get('background')
+            story.tags = request.POST.get('tags')
+            story.user = request.user
             story.save()
             return HttpResponseRedirect(reverse("Story:getStory"))
+        else:
+            print('invalid')
+
     return render(request, 'edit.html', locals())
 
 

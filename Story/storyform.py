@@ -6,7 +6,7 @@ from ckeditor.widgets import CKEditorWidget
 from datetime import datetime
 
 
-class StoryForm(forms.Form):
+class StoryForm(forms.ModelForm):
     title = forms.CharField(label='title', max_length=128,
                             widget=forms.TextInput(attrs={'placeholder': 'Please enter your title'})
                             )
@@ -42,10 +42,10 @@ class StoryForm(forms.Form):
         fields = (
             'title',
             'category',
-            'viewsNum',
+            #'viewsNum',
             'paperLink',
             'text',
-            'img'
+            'img',
             'videoUrl',
             'author',
             'author_intro',
