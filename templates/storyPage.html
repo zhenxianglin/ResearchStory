@@ -99,19 +99,20 @@
         }
 
         .row {
-        background: white;
-        margin:0px;
+            background: white;
+            margin: 0px;
         }
+
         .column.left {
             padding-left: 10px;
             padding-right: 10px;
             width: 60%;
             box-sizing: border-box;
-            background:white;
+            background: white;
         }
 
         .column.right {
-            background:white;
+            background: white;
             padding-left: 10px;
             padding-right: 10px;
             width: 40%;
@@ -191,7 +192,7 @@
             <button class="button1">Category</button>
             <p3> {{ category }}</p3>
             <button class="button2">Tags</button>
-            <p3> {{tags}}</p3>
+            <p3> {{ tags }}</p3>
         </div>
         {% if user.is_authenticated %}
             {% if user.id == story.user.id %}
@@ -204,22 +205,23 @@
         {% endif %}
 
         {% if user.is_authenticated %}
-                    {% if user.id == story.user.id %}
-                        <div class="normal">
-                            <a href="delete={{ story.id }}">
-                                <button class="button1">Delete</button>
-                            </a >
-                        </div>
-                    {% endif %}
-                {% endif %}
+            {% if user.id == story.user.id %}
+                <div class="normal">
+                    <a href="delete={{ story.id }}">
+                        <button class="button1">Delete</button>
+                    </a>
+                </div>
+            {% endif %}
+        {% endif %}
         <div class="normal">
-        <div class="title">
-            <h1>{{ title_name }}</h1>
-        </div>
+            <div class="title">
+                <h1>{{ title_name }}</h1>
+            </div>
 
-        <div class="info">
-            <p1>By {{ author }}</p1><p1>    |   {{ created_time }}</p1>
-        </div>
+            <div class="info">
+                <p1>By {{ author }}</p1>
+                <p1> | {{ created_time }}</p1>
+            </div>
         </div>
 
         <div class="row">
@@ -246,13 +248,13 @@
 
                 <div class="link">
                     <p1>Paper Link：</p1>
-                    <a href="{{paper_link}}">
+                    <a href="{{ paper_link }}">
                         <p1> {{ paper_link }} </p1>
                     </a>
                 </div>
 
 
-             <hr/>
+                <hr/>
                 <div class="comment">
                     <div class="normal">
                         <h4>COMMENT AREA</h4>
@@ -381,12 +383,12 @@
             <div class="column right">
                 <div class="intro">
                     <h2>Researcher Introduction</h2>
-                    <p3>{{author_intro}}
+                    <p3>{{ author_intro }}
                     </p3>
                 </div>
                 <div class="intro">
                     <h2>Field Background</h2>
-                    <p4>{{background}}
+                    <p4>{{ background }}
                     </p4>
                 </div>
 
@@ -401,7 +403,8 @@
                         <div class="jumbotron">
                             <div class="d-flex justify-content-center">
                                 <a href="{% url 'interview:new_interview' story.id %}">
-                                    <button type="button" class="btn btn-dark">Welcome to make interview appointment with
+                                    <button type="button" class="btn btn-dark">Welcome to make interview appointment
+                                        with
                                         Researcher.
                                     </button>
                                 </a>

@@ -36,6 +36,8 @@ urlpatterns = [
     path('', include(('interview.urls', 'interview'), namespace='interview')),
     path(r'forum/', include(('forum.urls', 'forum'), namespace='forum')),
 
+    path(r'', include(('Videos.urls', 'Videos'), namespace='Videos')),
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

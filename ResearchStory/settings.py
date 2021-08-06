@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'comment',
     'meeting',
     'interview',
+    'Videos',
+    'embed_video',
 
     # 第三方应用程序
     'ckeditor',  # 富文本编辑器
