@@ -26,14 +26,23 @@
             }
 
     </style>
+    <style type="text/css">
+    label.xrequired:before {
+        content: '* ';
+        color: red;
+    }
+    </style>
+
+{#<input type="text" value=""/>#}
+
     <div class="content" >
         <div class="container">
             <br>
             <br>
             <br>
             <div class="form-group row justify-content-center" >
-                <label class="control-label"></label>
-                <h5>Category</h5>
+{#                <label class="xrequired">用户名 : </label>#}
+                <label class="xrequired">Category</label>
 
                 <div class="input-group-prepend " >
 {#                    <span class="input-group-text" id="basic-addon1">Category:</span>#}
@@ -50,46 +59,46 @@
             <div class="form-group row justify-content-center">
 {#                <span class="input-group-text" id="basic-addon1" style="width:100px;height:38px">Title:</span>#}
 {#                <label class="control-label"></label>#}
-                <h5>Title</h5>
-                <input style="width:500px ; margin-left:70px" class="form-control" name="title" type="text" placeholder="Please Enter Your Title"/>
+                <label class="xrequired">Title</label>
+                <input style="width:500px ; margin-left:55px" class="form-control" name="title" type="text" placeholder="Please Enter Your Title"/>
             </div>
 
             <div class="form-group row justify-content-center">
 {#                <label class="control-label"></label>#}
-                <h5>Tags</h5>
+                <label >Tags</label>
                 <input style="width:500px ; margin-left:63px" class="form-control" name="tags" type="text" placeholder="Please Enter tags"/>
             </div>
 
 
             <div class="form-group row justify-content-center" >
 {#                <label class="control-label"></label>#}
-                <h5>VideoUrl</h5>
+                <label>VideoUrl</label>
 
-                <input style="width:500px ; margin-left:30px" class="form-control" name="videoUrl" type="text" placeholder="Please Enter Your VideolUrl"/>
+                <input style="width:500px ; margin-left:35px" class="form-control" name="videoUrl" type="text" placeholder="Please Enter Your VideolUrl"/>
             </div>
             <div class="form-group row justify-content-center" >
 {#                <label class="control-label"></label>#}
-                <h5>PaperLink</h5>
-                <input style="width:500px ; margin-left:15px" class="form-control" name="paperLink" type="text" placeholder="Please Enter Your PaperLink"/>
+                <label>PaperLink</label>
+                <input style="width:500px ; margin-left:20px" class="form-control" name="paperLink" type="text" placeholder="Please Enter Your PaperLink"/>
             </div>
 
 
              <div class="form-group row justify-content-center" >
 {#                <label class="control-label"></label>#}
-                <h5>Author</h5>
+                <label>Author</label>
                 <input style="width:500px ; margin-left:47px" class="form-control" name="author" type="text" placeholder="Please Enter author"/>
             </div>
 
             <div class="form-group row justify-content-center" >
-            <h5>Author Intro</h5>
+            <label>Author Intro</label>
 {#            <label class="control-label"></label>#}
-                <textarea style="max-width:500px" class="form-control" name="author_intro" aria-label="With textarea"  placeholder="Please Enter Your Author Intro"></textarea>
+                <textarea style="max-width:500px;margin-left:10px" class="form-control" name="author_intro" aria-label="With textarea"  placeholder="Please Enter Your Author Intro"></textarea>
             </div>
 
 
 
             <div class="form-group row justify-content-center" >
-            <h5>Background</h5>
+            <label class="xrequired">Background</label>
 {#            <label class="control-label"></label>#}
                 <textarea style="max-width:500px" class="form-control" name="background" aria-label="With textarea" rows="3" placeholder="Please Enter Your story background"></textarea>
             </div>
@@ -98,7 +107,7 @@
 
 
             <div class="form-group row justify-content-center" >
-                <h5>TextContent</h5>
+                <label class="xrequired">TextContent</label>
 {#                <label class="control-label"></label>#}
 {#                <div class="input-group input-group-lg">#}
                     <textarea class="form-control" id='text' name="text" aria-label="With textarea" rows="5"
@@ -111,7 +120,7 @@
             </div>
 
             <div class="form-group row justify-content-center">
-            <h5>Image</h5>
+            <label>Image</label>
 {#            <div class="input-group mb-3">#}
 {#          <div class="input-group-prepend">#}
 {#          </div>#}
