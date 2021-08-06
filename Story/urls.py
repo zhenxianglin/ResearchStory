@@ -16,8 +16,8 @@ urlpatterns = [
     path(r'upload/', upload, name='upload'),
     path(r'advanced_search/', advancedSearch, name='advancedSearch'),
     path(r'search/', search, name='search'),
-    path(r'edit=<int:story_id>', edit, name='edit')
-  path(r'delete=<int:story_id>', delete, name="delete")
+    path(r'edit=<int:story_id>', edit, name='edit'),
+    path(r'delete=<int:story_id>', delete, name="delete"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

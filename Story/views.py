@@ -11,33 +11,36 @@ from comment.forms import CommentForm
 import re
 from interview.models import Interview
 from datetime import datetime
+from django.contrib import messages
 
 
 def edit(request,story_id):
     story=Story.objects.get(id=story_id)
     if request.method == "GET":
          form = StoryForm(instance=story)
-         kwargs={"form":form,
-                 "story":story,}
-         return render(request, 'edit.html', kwargs)
+         '''kwargs={"form":form,
+                 # "story":story,
+         }
+         return render(request, 'edit.html', kwargs)'''
     elif request.method == "POST":
         form = StoryForm(instance=story,data=request.POST)
-        if form.is_valid():
-            story.title_name = request.POST.get('title')
-            story.category = request.POST.get('category')
-            story.text = request.POST.get('text')
-            story.video = request.POST.get('videoUrl')
-            story.paper_link = request.POST.get('paperLink')
-            story.img = request.POST.get('img')
-            story.author = request.POST.get('author')
-            story.author_intro = request.POST.get('author_intro')
-            story.background = request.POST.get('background')
-            story.tags = request.POST.get('tags')
-            story.user = request.user
-            story.save()
-            return HttpResponseRedirect(reverse("Story:getStory"))
-        else:
-            print('invalid')
+        #if form.is_valid():
+        story.title_name = request.POST.get('title')
+        story.category = request.POST.get('category')
+        story.text = request.POST.get('text')
+        story.video = request.POST.get('videoUrl')
+        story.paper_link = request.POST.get('paperLink')
+        story.img = request.POST.get('img')
+        story.author = request.POST.get('author')
+        story.author_intro = request.POST.get('author_intro')
+        story.background = request.POST.get('background')
+        story.tags = request.POST.get('tags')
+        story.user = request.user
+        story.save()
+        return HttpResponseRedirect(reverse("Story:getStory"))
+
+        # if form.is_valid():
+        #     return HttpResponseRedirect(reverse("Story:getStory"))
 
     return render(request, 'edit.html', locals())
 

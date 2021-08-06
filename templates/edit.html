@@ -11,7 +11,7 @@
 
 
 {% block content %}
-    <form method="post" action="{% url 'Story:upload' %}" class="form">
+    <form method="post" action="{% url 'Story:edit' story.id %}" class="form">
         {% csrf_token %}
 
         <!-- 名字，类别-->
@@ -35,7 +35,7 @@
                 <h5>Category</h5>
 
                 <div class="input-group-prepend " >
-                    <select type="text" class="form-control" name="category" style="width:500px; margin-left:20px" required >
+                    <select type="text" class="form-control" value={{story.category}} name="category" style="width:500px; margin-left:20px" required >
                         <option value="ComputerScience">ComputerScience</option>
                         <option value="Physics">Physics</option>
                         <option value="ElectricalEngineering">Electrical Engineer</option>
@@ -47,44 +47,46 @@
             <div class="form-group row justify-content-center">
 
                 <h5>Title</h5>
-                <input style="width:500px ; margin-left:70px" class="form-control" name="title" type="text" placeholder="Please Enter Your Title" value={{story.title_name}} />
-            </div>
+                <input style="width:500px ; margin-left:70px" class="form-control" name="title_name" type="text" placeholder="Please Enter Your Title" value={{story.title_name}} >
 
+            </div>
+<!--&lt;!&ndash;            {{form.as_ul}}&ndash;&gt;-->
+<!--            {% for field in form %}-->
+<!--                {{ field.errors }}-->
+<!--                {{ field.label_tag }}:-->
+<!--            {% endfor %}-->
             <div class="form-group row justify-content-center">
                 <h5>Tags</h5>
-                <input style="width:500px ; margin-left:63px" class="form-control" name="tags" type="text" placeholder="Please Enter tags"/>
+                <input style="width:500px ; margin-left:63px" class="form-control" name="tags" type="text" placeholder="Please Enter tags" value={{story.tags}} />
             </div>
 
 
             <div class="form-group row justify-content-center" >
                 <h5>VideoUrl</h5>
 
-                <input style="width:500px ; margin-left:30px" class="form-control" name="videoUrl" type="text" placeholder="Please Enter Your VideolUrl"/>
+                <input style="width:500px ; margin-left:30px" class="form-control" name="video" type="text" placeholder="Please Enter Your VideolUrl" value={{story.video}} />
             </div>
             <div class="form-group row justify-content-center" >
                 <h5>PaperLink</h5>
-                <input style="width:500px ; margin-left:15px" class="form-control" name="paperLink" type="text" placeholder="Please Enter Your PaperLink"/>
+                <input style="width:500px ; margin-left:15px" class="form-control" name="paperLink" type="text" placeholder="Please Enter Your PaperLink" value={{story.paper_link}} />
             </div>
 
 
              <div class="form-group row justify-content-center" >
-{#                <label class="control-label"></label>#}
                 <h5>Author</h5>
-                <input style="width:500px ; margin-left:47px" class="form-control" name="author" type="text" placeholder="Please Enter author"/>
+                <input style="width:500px ; margin-left:47px" class="form-control" name="author" type="text" placeholder="Please Enter author" value={{story.author}} />
             </div>
 
             <div class="form-group row justify-content-center" >
             <h5>Author Intro</h5>
-{#            <label class="control-label"></label>#}
-                <textarea style="max-width:500px" class="form-control" name="author_intro" aria-label="With textarea"  placeholder="Please Enter Your Author Intro"></textarea>
+                <textarea style="max-width:500px" class="form-control" name="author_intro" aria-label="With textarea"  placeholder="Please Enter Your Author Intro" >{{story.author_intro}}</textarea>
             </div>
 
 
 
             <div class="form-group row justify-content-center" >
             <h5>Background</h5>
-{#            <label class="control-label"></label>#}
-                <textarea style="max-width:500px" class="form-control" name="background" aria-label="With textarea" rows="3" placeholder="Please Enter Your story background"></textarea>
+                <textarea style="max-width:500px" class="form-control" name="background" aria-label="With textarea" rows="3" placeholder="Please Enter Your story background" >{{story.background}}</textarea>
             </div>
 
 
@@ -92,15 +94,12 @@
 
             <div class="form-group row justify-content-center" >
                 <h5>TextContent</h5>
-{#                <label class="control-label"></label>#}
-{#                <div class="input-group input-group-lg">#}
                     <textarea class="form-control" id='text' name="text" aria-label="With textarea" rows="5"
-                              placeholder="Please Enter Your Text"></textarea>
+                              placeholder="Please Enter Your Text" >{{story.text}}</textarea>
                     <script type="text/javascript">
                         CKEDITOR.replace('text',{ toolbar:'Basic', height:370, width:500 });
                     </script>
 
-{#                </div>#}
             </div>
 
 

@@ -138,7 +138,7 @@ WSGI_APPLICATION = 'ResearchStory.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'comp9323',
+        'NAME': 'test1',
         'USER': 'postgres',
         'PASSWORD': '93239323',
         'HOST': 'comp9323-postgres.c4ewkd5opwpk.us-east-2.rds.amazonaws.com',
