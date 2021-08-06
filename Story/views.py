@@ -90,7 +90,7 @@ def search(request):
 def advancedSearch(request):
     if request.method == "GET":
         form = AdvancedSearchForm()
-        return render(request, 'search/advancedSearchPage.html', locals())
+        return render(request, 'advancedSearchPage.html', locals())
     elif request.method == "POST":
         keyword = request.POST.get("keyword")
         keyword_negate = request.POST.get("keyword_negate")
@@ -112,7 +112,7 @@ def advancedSearch(request):
         if keyword_negate == "on":
             que = ~que
 
-        if category != "All":
+        if category != "ALL":
             if operator1 == "AND":
                 que &= Q(category=category)
             else:
@@ -201,6 +201,25 @@ def storyListCategorySortBy(request, category, sort_by):
     }
     return render(request, 'story.html', kwarg)
 
+def storyFind(request, category, sort_by, title):
+    que = Q()
+    if title != '_all':
+        for word in title.split():
+            que &= Q(title_name__icontains=word)
+
+    if category != "ALL":
+        que &= Q(category=category)
+
+    story = Story.objects.filter(que)
+    if sort_by == "time":
+        story = story.order_by("-created_time")
+    elif sort_by == "hot":
+        story = story.order_by("-views")
+
+    kwarg = {
+        "story": story,
+    }
+    return render(request, 'story.html', kwarg)
 
 def time_in_mins(hr, min):
     return hr * 60 + min

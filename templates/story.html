@@ -72,12 +72,7 @@
             padding: 15px;
         }
 
-        @media screen and (max-width: 700px) {
-            div.column {
-                width: 600px;
-                margin: 15px auto;
-            }
-        }
+
 
         div.top {
             width: 100%;
@@ -102,19 +97,6 @@
             float: left;
             text-align: center;
             padding:5px;
-        }
-
-
-        .button3 {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            width: 100%;
-            height: 100%;
         }
 
         .button2 {
@@ -147,26 +129,82 @@
             height: 100%;
         }
 
+
+        div.search{
+            width: 600px;
+            margin: 50px auto;
+            display: flex;
+            /*border: 1px solid red;*/
+        }
+        div.search input{
+            float: left;//左浮动
+            flex: 4;
+            height: 50px;
+            outline: none;
+            border: 1px solid #909090;
+            width: 400px;
+            padding-left: 10px;
+        }
+        div.search button{
+            float: right;
+            flex: 1;
+            height: 50px;
+            background-color: #909090;
+            color: white;
+            border-style: none;
+            outline: none;
+        }
+        div.search button i{
+            font-style: normal;
+        }
+        div.search button:hover{
+            background-color: #4CAF50;
+        }
+
+        @media screen and (max-width: 800px) {
+            div.column {
+                width: 600px;
+                margin: 15px auto;
+            }
+            div.content {
+                width:720px;
+            }
+            div.top {
+                width:720px;
+            }
+            div.row {
+                width:600px;
+            }
+        }
+
     </style>
 
+    <div class="search">
+        <input type="text" placeholder="请输入..." name="keyword" id="input1" value="" oninput="change()"/>
+        <a id="search"><button>Search</button></a>
+
+        <a href="{% url 'Story:advancedSearch'%}">
+            <button class="button1">Advanced Search</button>
+        </a>
+    </div>
     <div class="top">
         <div class="top_item">
-            <a href="{% url 'Story:storyList' %}">
+            <a href="{% url 'Story:storyList' %}" id="a1">
                 <button class="button1" id="1">All Stories</button>
             </a>
         </div>
         <div class="top_item">
-            <a href="{% url 'Story:storyListCategory' 'ComputerScience' %}">
+            <a href="{% url 'Story:storyListCategory' 'ComputerScience' %}" id="a2">
                 <button class="button1" id="2">Computer Science</button>
             </a>
         </div>
         <div class="top_item">
-            <a href="{% url 'Story:storyListCategory' 'Physics' %}">
+            <a href="{% url 'Story:storyListCategory' 'Physics' %}" id="a3">
                 <button class="button1" id="3">Physics</button>
             </a>
         </div>
         <div class="top_item">
-            <a href="{% url 'Story:storyListCategory' 'ElectricalEngineering' %}">
+            <a href="{% url 'Story:storyListCategory' 'ElectricalEngineering' %}" id="a4">
                 <button class="button1" id="4">Electrical Engineering</button>
             </a>
         </div>
@@ -188,7 +226,7 @@
     <script>
                 function getQueryString(name) {
                     var query = window.location.href;
-                    query = query.replace("_","/")
+                    query = query.replace(/_/g,"/")
                     var vars = query.split("/");
                     for (var i=0;i<vars.length;i++) {
                         var pair = vars[i].split("=");
@@ -197,17 +235,7 @@
                     return(false);
                 }
 
-                function getSort() {
-                    var query = window.location.href;
-                    query = query.replace("_","/")
-                    var vars = query.split("/");
-                    for (var i=0;i<vars.length;i++) {
-                        var pair = vars[i].split("=");
-                        if(pair.length > 1 && pair[0] == 'sort_by'){return pair[1];}
-                    }
-                }
 
-                var c = getQueryString("category")
                 document.getElementById("1").style.background = "#ff8800";
                 document.getElementById("2").style.background = "#909090";
                 document.getElementById("3").style.background = "#909090";
@@ -215,33 +243,72 @@
                 document.getElementById("5").style.background = "#008CBA";
                 document.getElementById("6").style.background = "#909090";
 
-                var d = getSort();
+                var c = getQueryString("category");
+                var title = '';
+                if(getQueryString("title")){
+                    title = getQueryString("title");
+                }
+                else{
+                    title = '_all';
+                }
+                if(title == ''){
+                    title = '_all';
+                }
+                var t = title;
+                if(title == '_all'){
+                    t = '';
+                }
+                document.getElementById("input1").placeholder = t;
+
+                var d = getQueryString("by");
+                var sort_by = 'time';
+
                 if(d == 'time') {
                     document.getElementById("5").style.background = "#008CBA";
                 }
                 if(d == 'hot') {
                     document.getElementById("5").style.background = "#909090";
                     document.getElementById("6").style.background = "#008CBA";
+                    sort_by = 'hot'
                 }
 
+
                 if(c == 'ComputerScience') {
-                    document.getElementById("latest_stories").href = "{% url 'Story:storyListCategorySortBy' 'ComputerScience' 'time' %}";
-                    document.getElementById("most_viewed").href = "{% url 'Story:storyListCategorySortBy' 'ComputerScience' 'hot' %}";
                     document.getElementById("2").style.background = "#ff8800";
                     document.getElementById("1").style.background = "#909090";
                 }
                 if(c == 'Physics') {
-                    document.getElementById("latest_stories").href = "{% url 'Story:storyListCategorySortBy' 'Physics' 'time' %}";
-                    document.getElementById("most_viewed").href = "{% url 'Story:storyListCategorySortBy' 'Physics' 'hot' %}";
                     document.getElementById("3").style.background = "#ff8800";
                     document.getElementById("1").style.background = "#909090";
                 }
                 if(c == 'ElectricalEngineering') {
-                    document.getElementById("latest_stories").href = "{% url 'Story:storyListCategorySortBy' 'ElectricalEngineering' 'time' %}";
-                    document.getElementById("most_viewed").href = "{% url 'Story:storyListCategorySortBy' 'ElectricalEngineering' 'hot' %}";
                     document.getElementById("4").style.background = "#ff8800";
                     document.getElementById("1").style.background = "#909090";
                 }
+
+
+                document.getElementById("a1").href = "category=".concat("ALL" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a2").href = "category=".concat("ComputerScience" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a3").href = "category=".concat("Physics" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a4").href = "category=".concat("ElectricalEngineering" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("latest_stories").href = "category=".concat(c ,"_sort_by=", "time" ,"_title=", title);
+                document.getElementById("most_viewed").href = "category=".concat(c ,"_sort_by=", "hot" ,"_title=", title);
+                document.getElementById("search").href = "category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
+
+                function change() {
+                    title = document.getElementById("input1").value;
+                    if(title == ''){
+                        title = '_all';
+                    }
+                    document.getElementById("a1").href = "category=".concat("ALL" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a2").href = "category=".concat("ComputerScience" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a3").href = "category=".concat("Physics" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a4").href = "category=".concat("ElectricalEngineering" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("latest_stories").href = "category=".concat(c ,"_sort_by=", "time" ,"_title=", title);
+                    document.getElementById("most_viewed").href = "category=".concat(c ,"_sort_by=", "hot" ,"_title=", title);
+                    document.getElementById("search").href = "category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
+                }
+
         </script>
 
     <div class="content">
