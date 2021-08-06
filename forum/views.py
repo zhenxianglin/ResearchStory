@@ -54,6 +54,7 @@ def post_forum(request,parent_forum_id):
             return HttpResponse('There is something wrong with this form. Please fill it out again. ')
 
     elif request.method == 'GET':
-        forum = ForumForm()
-        kwargs = {"forum": forum}
+        forumform = ForumForm()
+        forum=Forum.objects.get(id=parent_forum_id)
+        kwargs = {"forumform": forumform,"forum":forum}
         return render(request, 'forum/forum_reply.html', kwargs)
