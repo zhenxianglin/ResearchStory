@@ -37,7 +37,7 @@ def edit(request,story_id):
         story.tags = request.POST.get('tags')
         story.user = request.user
         story.save()
-        return HttpResponseRedirect(reverse("Story:getStory"))
+        return HttpResponseRedirect(reverse("Story:getStory",args=[story_id]))
 
         # if form.is_valid():
         #     return HttpResponseRedirect(reverse("Story:getStory"))
