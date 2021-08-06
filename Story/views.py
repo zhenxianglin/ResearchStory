@@ -11,33 +11,37 @@ from comment.forms import CommentForm
 import re
 from interview.models import Interview
 from datetime import datetime
+from django.contrib import messages
 
+from ResearchStory.settings import MEDIA_ROOT
 
 def edit(request,story_id):
     story=Story.objects.get(id=story_id)
     if request.method == "GET":
          form = StoryForm(instance=story)
-         kwargs={"form":form,
-                 "story":story,}
-         return render(request, 'edit.html', kwargs)
+         '''kwargs={"form":form,
+                 # "story":story,
+         }
+         return render(request, 'edit.html', kwargs)'''
     elif request.method == "POST":
         form = StoryForm(instance=story,data=request.POST)
-        if form.is_valid():
-            story.title_name = request.POST.get('title')
-            story.category = request.POST.get('category')
-            story.text = request.POST.get('text')
-            story.video = request.POST.get('videoUrl')
-            story.paper_link = request.POST.get('paperLink')
-            story.img = request.POST.get('img')
-            story.author = request.POST.get('author')
-            story.author_intro = request.POST.get('author_intro')
-            story.background = request.POST.get('background')
-            story.tags = request.POST.get('tags')
-            story.user = request.user
-            story.save()
-            return HttpResponseRedirect(reverse("Story:getStory"))
-        else:
-            print('invalid')
+        #if form.is_valid():
+        story.title_name = request.POST.get('title')
+        story.category = request.POST.get('category')
+        story.text = request.POST.get('text')
+        story.video = request.POST.get('videoUrl')
+        story.paper_link = request.POST.get('paperLink')
+        story.img = request.POST.get('img')
+        story.author = request.POST.get('author')
+        story.author_intro = request.POST.get('author_intro')
+        story.background = request.POST.get('background')
+        story.tags = request.POST.get('tags')
+        story.user = request.user
+        story.save()
+        return HttpResponseRedirect(reverse("Story:getStory",args=[story_id]))
+
+        # if form.is_valid():
+        #     return HttpResponseRedirect(reverse("Story:getStory"))
 
     return render(request, 'edit.html', locals())
 
@@ -45,24 +49,79 @@ def edit(request,story_id):
 def upload(request):
     if request.method == "GET":
         form = StoryForm()
+        return render(request, 'upload.html', locals())
     elif request.method == "POST":
+        kwargs = {}
         form = StoryForm(data=request.POST)
-        if form.is_valid():
-            story = Story()
+        story = Story()
+        mistake = False
+
+        if request.POST.get('title'):
+            print("title: ", request.POST.get('title'))
             story.title_name = request.POST.get('title')
+        else:
+            kwargs["title"] = "You must write title name."
+            mistake = True
+
+        if request.POST.get('category'):
+            print("category: ", request.POST.get('category'))
             story.category = request.POST.get('category')
+        else:
+            kwargs["category"] = "You must choose a category."
+            mistake = True
+
+        if request.POST.get('text'):
+            print("text: ", request.POST.get('text'))
             story.text = request.POST.get('text')
-            story.video = request.POST.get('videoUrl')
-            story.paper_link = request.POST.get('paperLink')
+        else:
+            kwargs["text"] = "You must write something in text form."
+            mistake = True
+
+        if request.POST.get('background'):
+            print("background: ", request.POST.get('background'))
+            story.background = request.POST.get('background')
+        else:
+            kwargs["background"] = "You must provide a reseach background."
+            mistake = True
+
+        if request.POST.get('author'):
+            print("Author: ", request.POST.get('author'))
+            story.author = request.POST.get('author')
+        else:
+            user = request.POST.get('user')
+            story.author = user.username
+            print("Author: ", user.username)
+
+        if request.POST.get("author_intro"):
+            print("author_intro: ", request.POST.get("author_intro"))
+            story.author_intro = request.POST.get('author_intro')
+        else:
+            story.author_intro = "This author does not introduce himself/herself."
+            print("Author_intro: ", story.author_intro )
+
+        if request.POST.get('img'):
+            print("img: ", request.POST.get('img'))
             story.img = request.POST.get('img')
-            story.author=request.POST.get('author')
-            story.author_intro=request.POST.get('author_intro')
-            story.background=request.POST.get('background')
-            story.tags=request.POST.get('tags')
-            story.user=request.user
+        else:
+            story.img = "default.png"
+            print(story.img)
+
+        print("tag: ", request.POST.get('tags'))
+        story.tags = request.POST.get('tags')
+
+        print("video: ", request.POST.get("videoUrl"))
+        story.video = request.POST.get('videoUrl')
+
+        print("paper_link: ", request.POST.get("paper_link"))
+        story.paper_link = request.POST.get('paperLink')
+
+        story.user = request.user
+
+        if not mistake:
             story.save()
             return HttpResponseRedirect(reverse("Story:storyList"))
-    return render(request, 'upload.html', locals())
+        else:
+            return render(request, "Fail/upload_fail.html", kwargs)
 
 
 def delete(request, story_id):
