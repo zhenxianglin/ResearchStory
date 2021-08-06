@@ -7,7 +7,7 @@ from datetime import datetime
 
 
 class StoryForm(forms.ModelForm):
-    title_name = forms.CharField(label='title_name', max_length=128,
+    title = forms.CharField(label='title', max_length=128,
                             widget=forms.TextInput(attrs={'placeholder': 'Please enter your title'})
                             )
     category = forms.ChoiceField(label='category', choices=(('ComputerScience', 'ComputerScience'),
@@ -20,7 +20,7 @@ class StoryForm(forms.ModelForm):
     text = RichTextField()
 
     img = models.ImageField(upload_to='img', null=False)
-    video = forms.URLField(label='videoUrl', max_length=512,
+    videoUrl = forms.URLField(label='videoUrl', max_length=512,
                               widget=forms.URLInput(attrs={'placeholder': 'Please enter your content'})
                               )
     paperLink = forms.URLField(label='paperLink', max_length=512,
@@ -40,13 +40,13 @@ class StoryForm(forms.ModelForm):
     class Meta:
         model = Story
         fields = (
-            'title_name',
+            'title',
             'category',
             #'viewsNum',
             'paperLink',
             'text',
             'img',
-            'video',
+            'videoUrl',
             'author',
             'author_intro',
             'background',
