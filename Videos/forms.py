@@ -1,12 +1,21 @@
-# from django import forms
-# from comment.models import Comment
-#
-#
-# class CommentForm(forms.ModelForm):
-#     body = forms.CharField(error_messages={'required': 'Can not be empty！', },
-#                            widget=forms.Textarea(attrs={'placeholder': 'Please enter the content of the comment ...'})
-#                            )
-#
-#     class Meta:
-#         model = Comment
-#         fields = ['body']
+from django import forms
+from Videos.models import VideoComment, Video, Classification
+
+
+class VideoCommentForm(forms.ModelForm):
+    class Meta:
+        model = VideoComment
+        fields = ['content']
+
+
+class NewVideoForm(forms.ModelForm):
+    class Meta:
+        model = Video
+        fields = [
+            'title',
+            'desc',
+            'url',
+            'file',
+            'classification',
+        ]
+        widgets = {'desc': forms.Textarea(attrs={'cols': 60})}

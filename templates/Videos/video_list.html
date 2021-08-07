@@ -1,73 +1,81 @@
 {% extends 'base.html' %}
 
 {% load embed_video_tags %}
+{% block header %}
+    {#    <div class="col-10 mx-auto mt-5 text-center">#}
+    {#            <h3 class="mb-5">Videos</h3>#}
+    {#        </div>#}
+    <hr/>
+    <div class="classification">
+        <h3 class=" mb-2 mb-2">
+            <a class="ui red label" href="{% url "Videos:video_list" %}">ALL -</a>
+            {% for item in classification_list %}
+                <a class="ui label" href="?c={{ item.id }}">{{ item.title }} -</a>
+            {% endfor %}
+        </h3>
+        <hr/>
+    </div>
+    <span>
+     <a href="{% url "Videos:new_video" %}"><button type="button" class="btn btn-dark">Upload A New Interview Video
+                            Meeting</button></a>
+    </span>
+    <hr/>
 
+
+{% endblock header %}
 
 
 {% block content %}
     <style type="text/css">
 
-    div.content {
-              display: grid;
-              grid-template-columns: 33.33% 33.33% 33.33%;
-              grid-template-rows: 300px 300px 300px;
-              grid-row-gap: 20px;
-              grid-column-gap: 20px;
-    }
-    div.product-buyer-name {
+        div.content {
+            display: grid;
+            grid-template-columns: 33.33% 33.33% 33.33%;
+            grid-template-rows: 300px 300px 300px;
+            grid-row-gap: 20px;
+            grid-column-gap: 20px;
+        }
 
-        max-width: 400px;
-
-        max-height: 60px;
-
-        overflow: hidden;
-
-        text-overflow: ellipsis;
-
-        white-space: nowrap;
-
+        div.product-buyer-name {
+            max-width: 400px;
+            max-height: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
 
     </style>
     <div class="container">
-        <div class="col-10 mx-auto mt-5 text-center">
-            <h1 class="mb-5">Videos</h1>
-        </div>
 
-
-{#                <div class="d-flex flex-wrap">#}
-       <div class="content">
-                    {% for item in videos %}
-
-                        <div class="card ">
-                            <div class="card-header product-buyer-name" style="height: 60px">{{ item.title }}#} </div>
-
-                            <div class="card-body">{% video item.url '284x160' %}#}</div>
-                            <div class="card-footer">{{ item.created_time }}</div>
+        <div class="content">
+            {% for item in videos %}
+                <div class="card ">
+                    {% if item.file %}
+                        <div class="card-header product-buyer-name" style="height: 60px"><a
+                                href="{% url "Videos:video_detail" item.id %}">{{ item.title }}</a></div>
+                        <div class="card-body">
+                            <video class="embed-responsive embed-responsive-16by9" autoplay loop muted
+                                   controls="controls">
+                                <source src="{{ item.file.url }}" type="video/mp4"/>
+                            </video>
                         </div>
-{#                        </div>#}
-{#                        <div class="px-3 mb-5">#}
-{##}
-{#                            {% video item.url '426x240' %}#}
-{#                            <div class="d-flex justify-content-start">#}
-{#                                {{ item.title }}#}
-{#                            </div>#}
-{##}
-{#                        </div>#}
-
-                    {% endfor %}
-       </div>
+                        <div class="card-footer">
+                            <h7>Post on {{ item.created_time|date:"Y-m-d H:i" }} by {{ item.uploader }}</h7>
+                        </div>
+                    {% else %}
+                        <div class="card-header product-buyer-name" style="height: 60px"><a
+                                href="{% url "Videos:video_detail" item.id %}">{{ item.title }}</a></div>
+                        <div class="card-body">
+                                {% video item.url '300x180' %}
+                        </div>
+                        <div class="card-footer">
+                            <h7>Post on {{ item.created_time|date:"Y-m-d H:i" }} by {{ item.uploader }}</h7>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
     </div>
-{##}
-{#                </div>#}
-
-
-
-
-
-
-
-
 {% endblock content %}
 

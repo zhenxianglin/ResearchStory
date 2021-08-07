@@ -10,6 +10,7 @@ from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from Users.models import User
 
+
 class Story(models.Model):
     title_name = models.CharField(verbose_name="title", max_length=100)
     created_time = models.DateTimeField(verbose_name='publish time', auto_now_add=True)
