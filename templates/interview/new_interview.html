@@ -2,7 +2,7 @@
 
 {% block header %}
     <link rel="stylesheet" href="/static/bootstrap-4.6.0-dist/css/timepicker.css" />
-    <script src="/static/bootstrap-4.6.0-dist/js/timepicker.js"></script>
+    <script src="./static/bootstrap-4.6.0-dist/js/timepicker.js"></script>
      <div style="text-align: center;">
         <a class="navbar-brand" href="{% url 'Story:getStory' story.id %}">
             <h4>{{ story.title_name }} </h4>
@@ -13,6 +13,18 @@
 
 
 {% block content %}
+    <style type="text/css">
+        div.content {
+                margin: 0 auto;
+                padding-top:10px;
+                padding-bottom:20px;
+                padding-left:15px;
+                background-color:rgba(255,255,255,0.8);
+            }
+
+
+    </style>
+    <div class="content">
     <div style="text-align: center;">
         <h3>Book a new interview about the research story： </h3>
         <h7>{{ date_and_time }}</h7>
@@ -113,9 +125,13 @@
         </form>
 
     </div>
+    </div>
 
-<script>
+
+{% endblock content %}
+{% block js %}
+    <script>
 		$('input').timePicker();
 </script>
-{% endblock content %}
+{% endblock %}
 
