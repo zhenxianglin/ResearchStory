@@ -1,57 +1,60 @@
 {% extends 'base.html' %}
 
-
-{% block header %}
-
-{#    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>#}
-
-
-{% endblock header %}
-
 {% block content %}
+
+<style>
+    div.container{
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    div.body{
+        margin: 0 auto;
+        margin-top: 50px;
+        width: 1000px;
+    }
+
+    div.lg-3{
+        width: 600px;
+        background: rgba(255,255,255,0.8);
+        margin: 0 auto;
+        padding: 10px;
+        padding-bottom: 50px;
+    }
+
+    div.group{
+        padding-top: 20px;
+        width: 100%;
+        text-align:center;
+    }
+
+    div.input-group{
+        padding-top: 20px;
+        width: 100%;
+        text-align:center;
+    }
+
+
+</style>
 
 <form method="post" action="{% url 'Story:advancedSearch' %}" class="form">
     {% csrf_token %}
     <div class="container">
-        <div class="row">
-
-            <div class="col-lg-4 " >
-
-                <h3> search result sorted by</h3>
-            </div>
-            <div class="col-lg-4"></div>
-            <div class="col-lg-1">
-                <button name="submit" class="btn btn-primary" style="float:left">relation</button>
-
-            </div>
-            <div class="col-lg-1">
-                <button name="submit" class="btn btn-primary" style="float:left">timing</button>
-
-            </div>
-            <div class="col-lg-1">
-                <button name="submit" class="btn btn-primary" style="float:left">replying</button>
-
-            </div>
-            <div class="col-lg-1">
-                <button name="submit" class="btn btn-primary" style="float:left">category</button>
-
-            </div>
-
-        </div>
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="input-group mb-3">
-                    <h4>Advanced Search</h4>
-
+        <div class="body">
+            <div class="lg-3">
+                <div class="group">
+                    <h4 id="h">Advanced Search</h4>
                 </div>
-                <div class="input-group mb-3">
+
+
+                <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Title</span>
                   </div>
                   <input type="text" class="form-control" name="keyword"  aria-label="Username" aria-describedby="basic-addon1">
 
                 </div>
-                <div class="input-group mb-3">
+                <div class="input-group">
 
                     <select type="text" class="form-control"
                         name="operator1" placeholder="usertype" required>
@@ -60,7 +63,7 @@
                 </select>
 
                 </div>
-                <div class="input-group mb-3">
+                <div class="input-group">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">Category:</span>
                   </div>
@@ -73,7 +76,7 @@
                 </select>
                 </div>
 
-                <div class="input-group mb-3">
+                <div class="input-group">
                     <select type="text" class="form-control"
                         name="operator2" placeholder="usertype" required>
                     <option value="AND">AND</option>
@@ -81,43 +84,104 @@
                     </select>
                 </div>
 
-
-                <div class="input-group mb-3">
+                <div class="input-group">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1" name="start_at">Start at:</span>
+                    <span class="input-group-text" id="basic-addon1">Start Time:</span>
                   </div>
+                    <select id="select1" type="text" class="form-control"
+                        name="start_at" placeholder="usertype" required onchange="change_s()">
+                    <option id="s0" value="0">all</option>
+                    <option id="s1" value="1">1 day ago</option>
+                    <option id="s2" value="2">1 week ago</option>
+                    <option id="s3" value="3">4 weeks ago</option>
+                    <option id="s4" value="4">6 months ago</option>
+                    </select>
 
-                  <input type="text" class="form-control" name="title"  aria-label="Username" aria-describedby="basic-addon1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="38" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
-                      <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
-                      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                    </svg>
-                </div>
-                <div class="input-group mb-3">
                   <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1" name="end_at">End at:</span>
+                    <span class="input-group-text" id="basic-addon1">End Time:</span>
                   </div>
-
-                  <input type="text" class="form-control" name="title"  aria-label="Username" aria-describedby="basic-addon1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="38" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
-                      <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
-                      <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                    </svg>
+                    <select id="select2" type="text" class="form-control"
+                        name="end_at" placeholder="usertype" required onchange="change_e()">
+                    <option id="e0" value="0">all</option>
+                    <option id="e1" value="1">1 day ago</option>
+                    <option id="e2" value="2">1 week ago</option>
+                    <option id="e3" value="3">4 weeks ago</option>
+                    <option id="e4" value="4">6 months ago</option>
+                    </select>
                 </div>
-                <button name="submit" class="btn btn-primary" style="float:left">search</button>
-                <button name="submit" class="btn btn-secondary" style="float:left;margin-left:10px;">reset</button>
+
+                <script>
+                function formatDate(date) {
+                    var date = new Date(date);
+                    var YY = date.getFullYear() + '-';
+                    var MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                    var DD = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+                    var hh = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+                    var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+                    var ss = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+                    return YY + MM + DD +" "+hh + mm + ss;
+                }
+
+                document.getElementById("s0").value = formatDate(0);
+                var mDate = new Date();
+                document.getElementById("e0").value = formatDate(mDate.getTime());
+
+                function countTime(t1, gap) {
+                    t2 = t1 - 86400000*gap;
+                    return t2;
+                }
+
+                function change_s() {
+                    var myDate = new Date();
+                    t = myDate.getTime();
+
+                    s = document.getElementById("select1").value;
+                    if(s == 0){
+                        document.getElementById("s0").value = formatDate(countTime(t, 3000));
+                    }
+                    if(s == 1){
+                        document.getElementById("s1").value = formatDate(countTime(t, 1));
+                    }
+                    if(s == 2){
+                        document.getElementById("s2").value = formatDate(countTime(t, 7));
+                    }
+                    if(s == 3){
+                        document.getElementById("s3").value = formatDate(countTime(t, 28));
+                    }
+                    if(s == 4){
+                        document.getElementById("s4").value = formatDate(countTime(t, 180));
+                    }
+                }
+
+                function change_e() {
+                    var myDate = new Date();
+                    t = myDate.getTime();
+                    s = document.getElementById("select2").value;
+                    if(s == 0){
+                        document.getElementById("e0").value = formatDate(countTime(t, 0));
+                    }
+                    if(s == 1){
+                        document.getElementById("e1").value = formatDate(countTime(t, 1));
+                    }
+                    if(s == 2){
+                        document.getElementById("e2").value = formatDate(countTime(t, 7));
+                    }
+                    if(s == 3){
+                        document.getElementById("e3").value = formatDate(countTime(t, 28));
+                    }
+                    if(s == 4){
+                        document.getElementById("e4").value = formatDate(countTime(t, 180));
+                    }
+                }
 
 
+                </script>
 
-
-
+                <div class="group">
+                    <button name="submit" class="btn btn-primary">search</button>
+                </div>
 
             </div>
-
-            <div class="col-lg-10">
-
-
-        </div>
     </div>
 
     </div>

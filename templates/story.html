@@ -144,8 +144,10 @@
             border: 1px solid #909090;
             width: 400px;
             padding-left: 10px;
+            font-size: 17px;
+            border-radius: 10px 0px 0px 10px;
         }
-        div.search button{
+        .button_s{
             float: right;
             flex: 1;
             height: 50px;
@@ -153,38 +155,56 @@
             color: white;
             border-style: none;
             outline: none;
+            font-size: 17px;
+            width: 65px;
+            border-radius: 0px 10px 10px 0px;
         }
-        div.search button i{
-            font-style: normal;
+        .button_as{
+            float: right;
+            flex: 1;
+            height: 50px;
+            background-color: #909090;
+            color: white;
+            border-style: none;
+            outline: none;
+            font-size: 14px;
+            margin-left: 15px;
+            width: 125px;
+            border-radius: 10px;
         }
         div.search button:hover{
             background-color: #4CAF50;
+            font-weight: 750;
         }
 
-        @media screen and (max-width: 800px) {
-            div.column {
-                width: 600px;
-                margin: 15px auto;
-            }
-            div.content {
-                width:720px;
-            }
+        .button1:hover{
+            border: 3px solid #ff8800;
+        }
+
+        .button2:hover{
+            border: 3px solid #008CBA;
+        }
+
+        @media screen and (max-width: 1200px) {
             div.top {
-                width:720px;
+                width:1200px;
             }
             div.row {
-                width:600px;
+                width:1200px;
+            }
+            div.content {
+                width:1200px;
             }
         }
 
     </style>
 
     <div class="search">
-        <input type="text" placeholder="请输入..." name="keyword" id="input1" value="" oninput="change()"/>
-        <a id="search"><button>Search</button></a>
+        <input type="text" placeholder="Find stories..." name="keyword" id="input1" value="" oninput="change()"/>
+        <a id="search"><button class="button_s">Search</button></a>
 
         <a href="{% url 'Story:advancedSearch'%}">
-            <button class="button1">Advanced Search</button>
+            <button class="button_as">Advanced Search</button>
         </a>
     </div>
     <div class="top">
@@ -258,7 +278,7 @@
                 if(title == '_all'){
                     t = '';
                 }
-                document.getElementById("input1").placeholder = t;
+                document.getElementById("input1").value = t;
 
                 var d = getQueryString("by");
                 var sort_by = 'time';
@@ -300,6 +320,7 @@
                     if(title == ''){
                         title = '_all';
                     }
+                    document.getElementById("input1").placeholder = '';
                     document.getElementById("a1").href = "category=".concat("ALL" ,"_sort_by=", sort_by ,"_title=", title);
                     document.getElementById("a2").href = "category=".concat("ComputerScience" ,"_sort_by=", sort_by ,"_title=", title);
                     document.getElementById("a3").href = "category=".concat("Physics" ,"_sort_by=", sort_by ,"_title=", title);
