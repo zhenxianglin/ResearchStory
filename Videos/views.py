@@ -51,7 +51,6 @@ def video_detail(request, video_id):
                'video_comments': video_comments,
                'video_comment_form': video_comment_form,
                }
-
     return render(request, 'Videos/video_detail.html', context)
 
 
@@ -80,14 +79,15 @@ def new_video(request):
     if request.method != 'POST':
         form = NewVideoForm()
     else:
-        form = NewVideoForm(data=request.POST)
+        form = NewVideoForm(data=request.POST, files=request.FILES)
         if form.is_valid():
             new_form = form.save(commit=False)
-            new_form.uploader = request.user
+            new_form.uploader  = request.user
             new_form.save()
-
             return HttpResponseRedirect(reverse("Videos:video_list"))
-    context = {"form": form,'classification':classification}
+    context = {"form": form,
+               'classification' : classification,
+               }
     return render(request, 'Videos/new_video.html', context)
 
 
@@ -101,10 +101,21 @@ def edit_video(request, video_id):
     if request.method != "POST":
         form = NewVideoForm(instance=video)
     else:
-        form = NewVideoForm(instance=video, data=request.POST)
-
+        form = NewVideoForm(instance=video, data=request.POST,files=request.FILES)
+        #
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('Videos:video_detail', args=[video.id]))
-    context = {'video': video, 'form': form,'classification':classification}
+        return HttpResponseRedirect(reverse('Videos:video_detail', args=[video_id]))
+    context = {'video': video,
+               'form': form,
+               'classification': classification,
+               }
     return render(request, "Videos/edit_video.html", context)
+
+
+@login_required
+def video_delete(request, video_id):
+    video = Video.objects.filter(id=video_id)
+    if video:
+        video.delete()
+    return HttpResponseRedirect(reverse("Videos:video_list"))

@@ -13,5 +13,6 @@ urlpatterns = [
 
     path("edit_video/<int:video_id>/",views.edit_video, name = 'edit_video'),
 
+    path(r'video_delete=<int:video_id>', views.video_delete, name="video_delete"),
 
 ]

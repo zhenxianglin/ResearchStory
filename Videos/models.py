@@ -3,6 +3,7 @@ from embed_video.fields import EmbedVideoField
 from Users.models import User
 from Story.models import Story
 from django.urls import reverse
+from .validators import file_size
 
 
 class Classification(models.Model):
@@ -22,7 +23,8 @@ class Video(models.Model):
     desc = models.TextField(max_length=320, blank=True, null=True)
 
     url = EmbedVideoField(blank=True, null=True)
-    file = models.FileField(upload_to='video/%y', blank=True, null=True)
+
+    file = models.FileField(upload_to='video/%y', validators=[file_size], blank=True, null=True)
 
     classification = models.ForeignKey(Classification, on_delete=models.CASCADE, null=True)
 
@@ -54,5 +56,3 @@ class VideoComment(models.Model):
 
     def __str__(self):
         return self.content[:30]
-
-

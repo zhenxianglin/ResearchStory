@@ -1,81 +1,22 @@
 {% extends 'base.html' %}
+{% load embed_video_tags %}
 
 
 {% block content %}
-    <style type="text/css">
-        div.content {
-                margin: 0 auto;
-                padding-top:10px;
-                padding-bottom:20px;
-                padding-left:15px;
-                background-color:rgba(255,255,255,0.8);
-            }
+    <div class="mt-5">
+    <p>Add a new interview video</p>
 
-
-    </style>
-    <div class="content">
-        <div class="text">
-          <h3 class="display-4" style="margin-left: 10px">Add a new interview video</h3>
-          <p class="lead" >This is a video uploading page, — makes short story video uploading. In this page, you will enjoy the educational videos.</p>
-          <hr class="my-4">
-        </div>
-
-
-    <form action="{% url "Videos:new_video" %}" method="post" >
+    <form action="" method="post" enctype="multipart/form-data">
 
     {% csrf_token %}
-{#        {{ form.as_p }}#}
-    <div class="row justify-content-center form-group">
-                <div class="p" style="width:70px;height:40px;float:left">Tittle:</div>
-                <input type="text" class="form-control" style="width:340px;height:30px;float:right;margin-left: 10px"
-                                   name='title' placeholder="Username" required>
-
-            </div>
-    <div class="row justify-content-center form-group">
-                <div class="p" style="width:70px;height:40px;float:left">Describe:</div>
-                <input type="text" class="form-control" style="width:340px;height:90px;float:right;margin-left: 10px"
-                                   name='desc' placeholder="Add some describe of video" required>
-
-            </div>
-     <div class="row justify-content-center form-group">
-                <div class="p" style="width:70px;height:40px;float:left">Urls:</div>
-                <input type="text" class="form-control" style="width:340px;height:30px;float:right;margin-left: 10px"
-                                   name='url' placeholder="url" >
-
-
-            </div>
-        <div class="row justify-content-center form-group">
-            <div class="p" style="width:70px;height:40px;float:left;margin-right: 10px">File:</div>
-            {{ form.file }}
-
-        </div>
-        <div class="row justify-content-center">
-            <p style="margin-left: 30px">Tips: You can choose one in upload url or file</p>
-        </div>
-
-    <div class="row form-group justify-content-center">
-            <div class="p" style="width:110px;height:40px;float:left;margin-right: 30px">Classification:</div>
-{#            <div class="input-group-prepend " >#}
-{##}
-{#        {{ form.classification }}#}
-{#        <select type="text" id='classification' class="form-control" name='classification' style="width:340px"  >#}
-{#            {% for item in classification %}#}
-{#            <option value="{{ item.title }}">{{ item.title }}</option>#}
-{#              <option value="ComputerScience">ComputerScience</option>#}
-{#              <option value="Physics">Physics</option>#}
-{#              <option value="ElectricalEngineering">Electrical Engineer</option>#}
-{#              <option value="Others">Others</option>#}
-{#            {% endfor %}#}
-{#        </select>#}
-    </div>
-        <div style="text-align:center">
-{#            <div class="btn btn-success justify-content-center" name="submit" >SUBMIT</div>#}
-            <button name="submit">SUBMIT</button>
-
-        </div>
-
-
+    {{ form.as_p }}
+     <button class="btn btn-success btn-lg">SUBMIT</button>
     </form>
+
+
     </div>
+    <p>Add a new interview video</p>
+
+
 
 {% endblock content %}

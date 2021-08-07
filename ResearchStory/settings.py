@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'interview',
     'Videos',
     'embed_video',
+    'chunked_upload',
 
     # 第三方应用程序
     'ckeditor',  # 富文本编辑器

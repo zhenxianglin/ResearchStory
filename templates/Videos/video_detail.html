@@ -3,39 +3,21 @@
 {% load static %}
 
 {% block header %}
+    <span>
+     <a href="{% url "Videos:new_video" %}"><button type="button" class="btn btn-dark">Upload A New Interview Video
+                            Meeting</button></a>
+    </span>
+    <hr/>
 
 {% endblock header %}
 
 
 
 {% block content %}
-     <style type="text/css">
-        div.content {
-                margin: 0 auto;
-                padding-top:10px;
-                padding-bottom:20px;
-                padding-left:15px;
-                background-color:rgba(255,255,255,0.8);
-            }
-
-
-    </style>
-    <div class="content">
-
-    <span>
-        <a class="ui red label" href="{% url "Videos:video_list" %}">
-                <button class="btn btn-secondary">ALL</button>
-            </a>
-     <a href="{% url "Videos:new_video" %}"><button type="button" class="btn btn-dark" style="margin-left: 680px">Upload A New Video
-                            (Meeting or Interview)</button></a>
-    </span>
     <hr/>
-
-
 
     <div style="text-align: center;">
         <div class="container">
-        <h3 class=" mt-2 mb-2 text-left">{{ video.title }}</h3>
             {% if video.file %}
                 <video class="embed-responsive embed-responsive-16by9" controls="controls">
                     <source src="{{ video.file.url }}" type="video/mp4"/>
@@ -44,29 +26,18 @@
                 {% video video.url '1000x600' %}
             {% endif %}
             <hr/>
-        <div class="row">
-            <h5 class="text-left mt-2 mb-2">Title:{{ video.title }}</h5>
-             {% if video.uploader.id == user.id %}
-                        <p style="margin-top: 10px;margin-left: 900px"><a href="{% url "Videos:edit_video" video.id %}">Edit Video</a></p>
+            <h3 class="text-center mt-2 mb-2">{{ video.title }}</h3>
+            {% if video.uploader.id == user.id %}
+                <h5><a href="{% url "Videos:edit_video" video.id %}">Edit</a></h5>
+                <h5><a href="{% url "Videos:video_delete" video.id %}">Delete</a></h5>
             {% endif %}
-        </div>
-            <div class="row">
-                <div class="col-md-1">
-                    <img src="{{ video.uploader.profile.avatar.url }}" class=".rounded" style="height: 50px;width: 50px" alt="Cinque Terre" >
-{#                    <img src="{{ video.uploader.profile.avatar.url }}" style="max-width: 10%; border-radius: 10%;"#}
-{#                 class=" col-md-4 offset-md-4">#}
+            <h4>{{ video.uploader }}</h4>
+            <img src="{{ video.uploader.profile.avatar.url }}" style="max-width: 10%; border-radius: 10%;"
+                 class="col-md-4 offset-md-4">
 
-                </div>
-                <div class="col-md-11 text-left">
-                    <h6> User:{{ video.uploader }}</h6>
-                    <p>Published on {{ video.uploader }} </p>
-                    <p>Research Area: {{ video.classification }}</p>
-                    <p>{{ video.desc }}</p>
-                </div>
-
-
-            </div>
-
+            <h4>Published on {{ video.uploader }} </h4>
+            <h5>Research Area: {{ video.classification }}</h5>
+            <h4>{{ video.desc }}</h4>
         </div>
     </div>
 
@@ -108,7 +79,6 @@
             </p>
             <pre style="font-family: inherit; font-size: 1em;">{{ comment.content }}</pre>
         {% endfor %}
-    </div>
     </div>
 
 {% endblock content %}
