@@ -19,7 +19,7 @@ class StoryForm(forms.ModelForm):
     # text=RichTextUploadingField(default='xxx', verbose_name='text')
     text = RichTextField()
 
-    img = models.ImageField(upload_to='img', null=False)
+    img = models.ImageField(upload_to='img/', null=False)
     videoUrl = forms.URLField(label='videoUrl', max_length=512,
                               widget=forms.URLInput(attrs={'placeholder': 'Please enter your content'})
                               )

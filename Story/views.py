@@ -11,6 +11,7 @@ from comment.forms import CommentForm
 import re
 from interview.models import Interview
 from datetime import datetime
+import os
 from django.contrib import messages
 
 from ResearchStory.settings import MEDIA_ROOT
@@ -99,9 +100,15 @@ def upload(request):
             story.author_intro = "This author does not introduce himself/herself."
             print("Author_intro: ", story.author_intro )
 
-        if request.POST.get('img'):
-            print("img: ", request.POST.get('img'))
-            story.img = request.POST.get('img')
+        if request.FILES.get('img'):
+            f = request.FILES['img']
+            filepath = os.path.join(MEDIA_ROOT, 'img/' + f.name)
+            with open(filepath, 'wb') as fp:
+                for info in f.chunks():
+                    fp.write(info)  # chunks是以文件流的方式来接受文件，分段写入
+            print('filepath:', filepath)
+            print("img: ", request.FILES.get('img'))
+            story.img = 'img/' + f.name
         else:
             story.img = "default.png"
             print(story.img)
@@ -116,6 +123,8 @@ def upload(request):
         story.paper_link = request.POST.get('paperLink')
 
         story.user = request.user
+        # story.img = 'img/'+request.POST.get('img')
+        # print(request.FILES['file'])
 
         if not mistake:
             story.save()

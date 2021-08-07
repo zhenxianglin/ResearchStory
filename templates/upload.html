@@ -10,7 +10,7 @@
 
 
 {% block content %}
-    <form method="post" action="{% url 'Story:upload' %}" class="form">
+    <form method="post" action="{% url 'Story:upload' %}" enctype="multipart/form-data">
         {% csrf_token %}
 <!--        {#   <form method="post" action="{% url 'Story:upload' %}" class="form">#}-->
 <!--        {##}-->
@@ -118,17 +118,17 @@
 
 {#                </div>#}
             </div>
+            {{ form.img }}
 
-            <div class="form-group row justify-content-center">
-            <label>Image</label>
-{#            <div class="input-group mb-3">#}
-{#          <div class="input-group-prepend">#}
+{#            <div class="form-group row justify-content-center">#}
+{#            <label>Image</label>#}
+{##}
+{#            <div class="custom-file" style="width:500px ; margin-left:55px">#}
+{#            <input type="file" class="form-control" name="img"  >#}
+{#                #}
+{#            <label class="custom-file-label" >Upload Image</label>#}
 {#          </div>#}
-            <div class="custom-file" style="width:500px ; margin-left:55px">
-            <input type="file" class="custom-file-input" name="img">
-            <label class="custom-file-label" >Upload Image</label>
-          </div>
-        </div>
+{#        </div>#}
         </div>
 
 

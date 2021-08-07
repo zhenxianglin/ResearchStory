@@ -20,7 +20,7 @@ class Story(models.Model):
                                          ),
                                 blank=False, null=True)
     views = models.PositiveIntegerField(verbose_name='views number', default=0, auto_created=True)
-    img= models.ImageField(verbose_name="front page", upload_to='img', null=True,default='img/black-hole-02.0.webp')
+    img= models.ImageField(verbose_name="front page", upload_to='img/', null=True)
     text = RichTextField()
 
     video = models.URLField(verbose_name="video", blank=True, null=True)
