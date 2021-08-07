@@ -279,6 +279,7 @@ def storyListCategorySortBy(request, category, sort_by):
     }
     return render(request, 'story.html', kwarg)
 
+
 def storyFind(request, category, sort_by, title):
     que = Q()
     if title != '_all':
@@ -298,6 +299,7 @@ def storyFind(request, category, sort_by, title):
         "story": story,
     }
     return render(request, 'story.html', kwarg)
+
 
 def time_in_mins(hr, min):
     return hr * 60 + min

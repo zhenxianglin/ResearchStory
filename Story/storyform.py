@@ -5,15 +5,19 @@ from django.db import models
 from ckeditor.widgets import CKEditorWidget
 from datetime import datetime
 
+Choices = (('ComputerScience', 'ComputerScience'),
+            ("Engineering", "Engineering"),
+            ("Law", "Law"),
+            ("Medicine", "Medicine"),
+            ("Science", "Science"),
+            ("Art", "Art"),
+            ("Business", "Business"))
 
 class StoryForm(forms.ModelForm):
     title = forms.CharField(label='title', max_length=128,
                             widget=forms.TextInput(attrs={'placeholder': 'Please enter your title'})
                             )
-    category = forms.ChoiceField(label='category', choices=(('ComputerScience', 'ComputerScience'),
-                                                            ('Physics', 'Physics'),
-                                                            ("ElectricalEngineering", "ElectricalEngineering"))
-                                 )
+    category = forms.ChoiceField(label='category', choices=Choices)
     # viewsNum=forms.IntegerField(label='viewsNum')
     # text=forms.CharField(widget=forms.Textarea)
     # text=RichTextUploadingField(default='xxx', verbose_name='text')
