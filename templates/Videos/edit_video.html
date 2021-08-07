@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <h3>
+    <a href="{% url "Videos:video_detail" video.id %}">{{ video.title }}</a>
+    </h3>
+{% endblock header %}
+{% block content %}
+    <h3>Edit Video</h3>
+
+    <form action="{% url "Videos:edit_video" video.id%}">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button name="submit" class="btn btn-primary">SUBMIT</button>
+
+    </form>
+
+
+{%  endblock content %}

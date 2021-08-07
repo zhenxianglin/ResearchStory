@@ -29,8 +29,90 @@
         -ms-background-size: cover;
 
     }
+
+    div.logo{
+        width : 750px;
+        height: 100px;
+        margin: 50px auto;
+        margin-top: 150px;
+        margin-bottom: 0px;
+        background: url("/static/assets/img/logo.png")  no-repeat center 0px;
+    }
+
+    div.search{
+            width: 750px;
+            margin: 50px auto;
+            margin-top: 0px;
+            display: flex;
+            /*border: 1px solid red;*/
+        }
+        div.search input{
+            float: left;//左浮动
+            flex: 4;
+            height: 55px;
+            outline: none;
+            border: 1px solid #909090;
+            width: 500px;
+            padding-left: 10px;
+            font-size: 20px;
+            border-radius: 10px 0px 0px 10px;
+        }
+        .button_s{
+            float: right;
+            flex: 1;
+            height: 55px;
+            background-color: #909090;
+            color: white;
+            border-style: none;
+            outline: none;
+            font-size: 20px;
+            width: 75px;
+            border-radius: 0px 10px 10px 0px;
+        }
+        .button_as{
+            float: right;
+            flex: 1;
+            height: 55px;
+            background-color: #909090;
+            color: white;
+            border-style: none;
+            outline: none;
+            font-size: 16px;
+            margin-left: 20px;
+            width: 140px;
+            border-radius: 10px;
+        }
+        div.search button:hover{
+            background-color: #4CAF50;
+            font-weight: 750;
+        }
     </style>
     <body>
+
+    <div class="logo">
+    </div>
+    <div class="search">
+        <input type="text" placeholder="Find stories..." name="keyword" id="input1" value="" oninput="change()"/>
+        <a id="search"><button class="button_s">Search</button></a>
+
+        <a href="{% url 'Story:advancedSearch'%}">
+            <button class="button_as">Advanced Search</button>
+        </a>
+    </div>
+    <script>
+                var c = "ALL";
+                var sort_by = "time";
+                var title = "_all";
+                document.getElementById("search").href = "/story/category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
+                function change() {
+                    title = document.getElementById("input1").value;
+                    if(title == ''){
+                        title = '_all';
+                    }
+                    document.getElementById("search").href = "/story/category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
+                }
+    </script>
+
 {#    <div class="container ">#}
 {#    <img src="/static/assets/img/homeimg1.jpeg" class="img-fluid" alt="Responsive image">#}
 {#    <div class="page-heading">#}

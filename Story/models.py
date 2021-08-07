@@ -10,6 +10,7 @@ from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from Users.models import User
 
+
 class Story(models.Model):
     title_name = models.CharField(verbose_name="title", max_length=100)
     created_time = models.DateTimeField(verbose_name='publish time', auto_now_add=True)
@@ -20,7 +21,7 @@ class Story(models.Model):
                                          ),
                                 blank=False, null=True)
     views = models.PositiveIntegerField(verbose_name='views number', default=0, auto_created=True)
-    img= models.ImageField(verbose_name="front page", upload_to='img', null=True,default='img/black-hole-02.0.webp')
+    img= models.ImageField(verbose_name="front page", upload_to='img/', null=True)
     text = RichTextField()
 
     video = models.URLField(verbose_name="video", blank=True, null=True)

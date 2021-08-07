@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, User as  User_view
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 
 class User(AbstractUser):
@@ -39,7 +41,9 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=128, verbose_name="first Name")
     # 头像
 
-    avatar = models.ImageField(upload_to='avatar/%Y%m%d/', blank=True)
+    # avatar = models.ImageField(upload_to='avatar/%Y%m%d/', blank=True)
+    avatar = ProcessedImageField(upload_to='avatar/%Y%m%d/', default='avatar/2.png',
+                                 processors=[ResizeToFill(100, 100)])
 
     # 个人简介
     bio = models.TextField(max_length=500, blank=True)

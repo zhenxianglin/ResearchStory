@@ -1,22 +1,39 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load account socialaccount %}
-
+{% block header %}
+  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{% endblock header %}
 {% block content %}
 
+<style type="text/css">
+        div.content {
+                margin: 0 auto;
+                padding-top:10px;
+                padding-bottom:20px;
+                padding-left:15px;
+                background-color:rgba(255,255,255,0.8);
+            }
 
+    </style>
+    <div class="content" >
     <div class="container">
         <div class="text-center">
             <form method="post" action="{% url "Users:register" %}">
             {% csrf_token %}
-            <div class="row form-group">
-                <div class="p" style="width:150px;height:40px;float:left;">Username:</div>
+                <br>
+                <br>
+                <br>
+            <div class="row justify-content-center form-group">
+                <div class="p" style="width:150px;height:40px;float:left;margin-right:30px">Username:</div>
                 <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
                                    name="username" placeholder="Username" required>
             </div>
 
-             <div class="row form-group">
-                <div class="p" style="width:150px;height:40px;float:left;">User Type:</div>
+             <div class="row justify-content-center form-group">
+                <div class="p" style="width:150px;height:40px;float:left;margin-right:30px">User Type:</div>
                 <select type="text" class="form-control" style="width:300px;height:30px;float:right;"
                         name="usertype" placeholder="usertype" required>
                     <option value="R">Researcher</option>
@@ -24,44 +41,54 @@
                 </select>
             </div>
 
-            <div class="row form-group">
-                    <div class="p" style="width:150px;height:40px;float:left;">Email Address:</div>
+            <div class="row justify-content-center form-group">
+                    <div class="p" style="width:150px;height:40px;float:left;margin-right:30px">Email Address:</div>
                     <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
                            name="email" placeholder="Required. Inform a valid email address." required>
             </div>
 
-            <div class="row form-group">
-                <div class="p" style="width:150px;height:40px;float:left;">Password:</div>
-                <input type="password" class="form-control" style="width:300px;height:30px;float:right;"
+            <div class="row justify-content-center form-group">
+                <div class="p" style="width:120px;height:40px;float:left;margin-left:30px">Password:</div>
+                <input type="password" class="form-control" style="width:300px;height:30px;float:right;margin-left: 50px"
                        name="password1" placeholder="Please enter the password." required>
-                <dt>Tips</dt>
-                <dd class="text-left">  - The password should be no less than 8 characters. <br/> - Your password can’t be too similar to your other personal information.<br/>  - Your password can’t be entirely numeric.</dd>
+{#                <dt>Tips</dt>#}
+                <a href="#" data-toggle="tooltip" title="- The password should be no less than 8 characters.  - Your password can’t be too similar to your other personal information.  - Your password can’t be entirely numeric.">Tips</a>
+{#                <dd class="text-center">  - The password should be no less than 8 characters. <br/> - Your password can’t be too similar to your other personal information.<br/>  - Your password can’t be entirely numeric.</dd>#}
             </div>
 
-            <div class="row form-group">
-                <div class="p" style="width:150px;height:40px;float:left;">Password Comfirmation:</div>
-                <input type="password" class="form-control" style="width:300px;height:30px;float:right;"
+            <div class="row justify-content-center form-group">
+                <div class="p" style="width:120px;height:40px;float:left;margin-left:30px">Comfirmation:</div>
+                <input type="password" class="form-control" style="width:300px;height:30px;float:right;margin-left: 50px"
                        name="password2" placeholder="password" required>
-                <dt>Tips</dt>
-                <dd>  - Enter the same password as above, for verification.</dd>
-
+{#                <dt>Tips</dt>#}
+                <a href="#" data-toggle="tooltip" title="- Enter the same password as above, for verification.">Tips</a>
+{#                <dd>  - Enter the same password as above, for verification.</dd>#}
             </div>
+{#            </div>#}
+{#                <div class="container">#}
+{#              <h3>提示框实例</h3><br>#}
+{#              <a href="#" data-toggle="tooltip" title="我是提示内容!">鼠标移动到我这</a>#}
+{#            </div>#}
+
+            <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip();
+            });
+            </script>
 
 
         <button class="btn-primary px-3" name="submit">Register</button>
         <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
 
     </form>
-        </div>
-    </div>
 
     {% get_providers as socialaccount_providers %}
     {% if socialaccount_providers %}
         <p>
             {% blocktrans with site.name as site_name %}{% endblocktrans %}
         </p>
-        <div class="socialaccount_ballot">
-            <h6 class="mb-2 mt-4"> sign in through a third party.：</h6>
+        <div class="row justify-content-center form-group">
+            <div class="p" style="width:150px;height:40px;float:left;">Third party:</div>
             <ul class="socialaccount_providers">
                 {% include "socialaccount/snippets/provider_list.html" with process="login" %}
             </ul>
@@ -69,6 +96,10 @@
         </div>
         {% include "socialaccount/snippets/login_extra.html" %}
     {% endif %}
+        </div>
+    </div>
+    </div>
+
 {% endblock content %}
 
 {##}

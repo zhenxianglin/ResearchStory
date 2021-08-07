@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <p>Add a new interview video</p>
+
+    <form action="{% url "Videos:new_video" %}" method="post">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+     <button name="submit">SUBMIT</button>
+    </form>
+
+{% endblock content %}
