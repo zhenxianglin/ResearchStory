@@ -6,15 +6,25 @@
     {#            <h3 class="mb-5">Videos</h3>#}
     {#        </div>#}
     <hr/>
+    <div class="text">
+      <h1 class="display-4" style="margin-left: 10px">Video</h1>
+      <p class="lead" >This is a video unit, — makes short story video sharing, discussion and uploading. In this page, you will enjoy the educational videos.</p>
+    </div>
     <div class="classification">
         <h3 class=" mb-2 mb-2">
-            <a class="ui red label" href="{% url "Videos:video_list" %}">ALL -</a>
+            <a class="ui red label" href="{% url "Videos:video_list" %}">
+                <button class="btn btn-secondary">ALL</button>
+            </a>
             {% for item in classification_list %}
-                <a class="ui label" href="?c={{ item.id }}">{{ item.title }} -</a>
+
+                <a class="ui label" href="?c={{ item.id }}" style="margin-left: 5px">
+                    <button class="btn btn-secondary">{{ item.title }} </button>
+                </a>
             {% endfor %}
         </h3>
         <hr/>
     </div>
+
     <span>
      <a href="{% url "Videos:new_video" %}"><button type="button" class="btn btn-dark">Upload A New Interview Video
                             Meeting</button></a>
