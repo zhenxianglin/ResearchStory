@@ -76,24 +76,25 @@ def post_video_comment(request, video_id):
 @login_required
 def new_video(request):
     """add a new interview video"""
+    classification = Classification.objects.all().values()
     if request.method != 'POST':
         form = NewVideoForm()
     else:
         form = NewVideoForm(data=request.POST)
         if form.is_valid():
             new_form = form.save(commit=False)
-            new_form.user = request.user
+            new_form.uploader = request.user
             new_form.save()
 
             return HttpResponseRedirect(reverse("Videos:video_list"))
-    context = {"form": form}
+    context = {"form": form,'classification':classification}
     return render(request, 'Videos/new_video.html', context)
 
 
 @login_required
 def edit_video(request, video_id):
     video = Video.objects.get(id=video_id)
-
+    classification = Classification.objects.all().values()
     #  保护页面
     if video.uploader != request.user:
         raise Http404
@@ -105,5 +106,5 @@ def edit_video(request, video_id):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('Videos:video_detail', args=[video.id]))
-    context = {'video': video, 'form': form}
+    context = {'video': video, 'form': form,'classification':classification}
     return render(request, "Videos/edit_video.html", context)
