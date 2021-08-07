@@ -32,7 +32,12 @@ def edit(request,story_id):
         story.text = request.POST.get('text')
         story.video = request.POST.get('videoUrl')
         story.paper_link = request.POST.get('paperLink')
-        story.img = request.POST.get('img')
+        f = request.FILES['img']
+        filepath = os.path.join(MEDIA_ROOT, 'img/' + f.name)
+        with open(filepath, 'wb') as fp:
+            for info in f.chunks():
+                fp.write(info)  # chunks是以文件流的方式来接受文件，分段写入
+        story.img = 'img/' + f.name
         story.author = request.POST.get('author')
         story.author_intro = request.POST.get('author_intro')
         story.background = request.POST.get('background')
