@@ -164,6 +164,7 @@ def advancedSearch(request):
         start_at = request.POST.get("start_at")
         end_at = request.POST.get("end_at")
         time_negate = request.POST.get("time_negate")
+        sort = request.POST.get("sort")
 
         que = Q()
         if keyword!='':
@@ -188,9 +189,12 @@ def advancedSearch(request):
             que = ~que
 
         story = Story.objects.filter(que)
+        if (sort == "hot"):
+            story = story.order_by("-views")
         kwargs = {
             "story": story,
         }
+
         return render(request, 'story.html', kwargs)
 
 
