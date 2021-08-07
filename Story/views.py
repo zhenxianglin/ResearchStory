@@ -166,10 +166,11 @@ def advancedSearch(request):
         time_negate = request.POST.get("time_negate")
 
         que = Q()
-        for word in keyword.split():
-            que &= Q(title_name__icontains=word)
-        if keyword_negate == "on":
-            que = ~que
+        if keyword!='':
+            for word in keyword.split():
+                que &= Q(title_name__icontains=word)
+            if keyword_negate == "on":
+                que = ~que
 
         if category != "ALL":
             if operator1 == "AND":
