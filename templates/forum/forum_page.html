@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again. </p>
+{% endif %}
+<style type="text/css">
+        div.content {
+                margin: 0 auto;
+                padding-top:10px;
+                padding-bottom:20px;
+                padding-left:15px;
+                background-color:rgba(255,255,255,0.8);
+            }
+
+
+
+
+
+
+
+
+
+</style>
+
+<div class="content">
+    <h2>hahahaha</h2>
+
+
+    <div class="all_content">
+        <!-- 显示评论 -->
+        {% load mptt_tags %}
+        <h4>Title: {{ forum.title }}</h4>
+        <div class="row">
+            {{ forum.text }}
+            {% csrf_token %}
+            {{ forum.reply_to }}
+            <!--            {{comment_form.as_p}}-->
+            {% if user.is_authenticated %}
+            <div>
+                <form action="{% url 'forum:post_forum' forum.id %}" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="normal">
+                            <p1>Post a Comment:</p1>
+                        </div>
+                        <textarea type="text" class="form-control" id="body" name="body" rows="4"
+                                  placeholder="Please enter a comment"></textarea>
+                    </div>
+                    <!-- 提交按钮 -->
+                    <button type="submit" class="btn btn-primary ">Post</button>
+                </form>
+            </div>
+
+            <br>
+            {% else %}
+            <br>
+            <h5 class="row justify-content-center">
+                Please <a href="{% url 'Users:login' %}"> login </a> to reply.
+            </h5>
+            <br>
+            {% endif %}
+
+
+            {% recursetree comments %}
+            {% with comment=node %}
+            <div class="{% if comment.reply_to %} offset-1 col-11 {% else %} col-12 {% endif %}">
+                <hr/>
+                <p>
+                    <strong style="color: pink">
+                        {{ comment.user }}
+                    </strong>
+                    <!-- 显示被回复人 -->
+                    {% if comment.reply_to %}
+                    <i class="far fa-arrow-alt-circle-right"
+                       style="color: cornflowerblue;"
+                    ></i>
+                    <strong style="color: pink">
+                        <span style="color: black" class="arrow-outer">  @</span> {{ comment.reply_to }}
+                    </strong>
+                    {% endif %}
+
+                </p>
+                <div>{{ comment.body|safe }}</div>
+
+                <div>
+                <span style="color: gray">
+                {{ comment.created|date:"Y-m-d H:i:s" }}
+                </span>
+
+
+                    <!-- 加载 modal 的按钮 -->
+                    {% if user.is_authenticated %}
+                    <button type="button"
+                            class="btn btn-light btn-sm text-muted"
+                            onclick="load_modal({{ forum.id }}, {{ comment.id }})">Reply
+                    </button>
+                    {% else %}
+                    <a class="btn btn-light btn-sm text-muted"
+                       href="{% url 'Users:login' %}">
+                        Reply
+                    </a>
+                    {% endif %}
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade"
+                     id="comment_{{ comment.id }}"
+                     tabindex="-1"
+                     role="dialog"
+                     aria-labelledby="CommentModalCenter"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content" style="height: 480px">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">Replying
+                                    to {{ comment.user }}：</h5>
+                            </div>
+                            <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
+                        </div>
+                    </div>
+                </div>
+                {% if not comment.is_leaf_node %}
+                <div class="children">
+                    {{ children }}
+                </div>
+                {% endif %}
+            </div>
+            {% endwith %}
+            {% endrecursetree %}
+            <!--，唤醒二级回复的 modal -->
+            <script>
+                // 加载 modal
+                function load_modal(forum_id, comment_id) {
+                    let modal_body = '#modal_body_' + comment_id;
+                    let modal_id = '#comment_' + comment_id;
+
+                    // 加载编辑器
+                    if ($(modal_body).children().length === 0) {
+                        let content = '<iframe src="/forum/post_forum/' + forum_id + '/' + comment_id + '" frameborder="0" style="width: 100%; height: 100%;"></iframe>';
+                        $(modal_body).append(content);
+                    }
+                    ;
+                    $(modal_id).modal('show');
+                }
+
+
+
+            </script>
+        </div>
+
+
+    </div>
+</div>
+{% endblock content %}
+

@@ -1,5 +1,5 @@
 from django import forms
-from forum.models import Forum
+from forum.models import Forum,ForumComment
 from ckeditor.fields import RichTextField
 
 
@@ -15,3 +15,10 @@ class ForumForm(forms.ModelForm):
             'text',
         )
         widgets = {'text': forms.Textarea(attrs={'cols': 70})}
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = ForumComment
+        fields = ['body']
+        widgets = {'body': forms.Textarea(attrs={'cols': 70})}
