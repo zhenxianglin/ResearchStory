@@ -1,0 +1,5 @@
+django_ckeditor==6.1.0
+django_embed_video==1.4.0
+Django==3.2.4
+django_imagekit==4.0.2
+django_mptt==0.12.0

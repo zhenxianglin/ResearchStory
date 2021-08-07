@@ -9,7 +9,6 @@ from comment.models import Comment
 from comment.forms import CommentForm
 from Story.models import Story
 
-
 from Users.models import User
 from django.views import View
 
@@ -36,7 +35,6 @@ def post_comment(request, story_id, parent_comment_id=None):
                 # 被回复人
                 new_comment.reply_to = parent_comment.user
                 new_comment.save()
-                return HttpResponse("200 OK")
 
                 # # 给其他用户发送通知
                 # if not parent_comment.user.is_superuser and not parent_comment.user == request.user:
@@ -44,13 +42,13 @@ def post_comment(request, story_id, parent_comment_id=None):
                 #         request.user,
                 #         recipient=parent_comment.user,
                 #         verb='Replying to you',
-                #         target=story_id,
+                #         target=story,
                 #         action_object=new_comment,
                 #     )
+                return HttpResponse("200 OK")
                 # return JsonResponse({"code": "200 OK", "new_comment_id": new_comment.id})
 
             new_comment.save()
-            return redirect(story)
 
             # # 给管理员发送通知
             # if not request.user.is_superuser:
@@ -61,7 +59,7 @@ def post_comment(request, story_id, parent_comment_id=None):
             #         target=story,
             #         action_object=new_comment,
             #     )
-            #
+            return redirect(story)
             # # 添加锚点
             # redirect_url = story.get_absolute_url() + '#comment_elem_' + str(new_comment.id)
             # return redirect(redirect_url)
