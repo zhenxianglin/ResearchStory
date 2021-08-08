@@ -289,7 +289,7 @@ def storyListCategorySortBy(request, category, sort_by):
     }
     return render(request, 'story.html', kwarg)
 
-
+#Search for stories by category and title keyword and order them by time of publication or popularity
 def storyFind(request, category, sort_by, title):
     que = Q()
     if title != '_all':
@@ -315,7 +315,7 @@ def time_in_mins(hr, min):
     """compute the time by mins"""
     return hr * 60 + min
 
-
+#Gets all the data for a story, where the text needs to be preprocessed to avoid display errors.
 def getStory(request, story_id):
     """get the details of each story and show it in the website"""
     story = Story.objects.get(id=story_id)

@@ -210,7 +210,7 @@
     <link rel="stylesheet" href="{% static 'prism/prism.css' %}">
 
     <div>
-
+        <!--The top information bar displays the category of the article-->
         <div class="normal">
             <div class="row">
                 <button class="button1">Category</button>
@@ -218,9 +218,9 @@
                 <button class="button2">Tags</button>
                 <p3h> {{ tags }}</p3h>
 
+                <!--If the user is the author, the story can be modified-->
                 {% if user.is_authenticated %}
                     {% if user.id == story.user.id %}
-
 
                         <a href="edit={{ story.id }}" style="margin-left: 900px">
                             <button class="btn btn-secondary btn-sm pull-right">Edit</button>
@@ -234,6 +234,8 @@
                 {% endif %}
             </div>
         </div>
+
+        <!--Show the title-->
         <div class="normal">
             <div class="title">
                 <h1>{{ title_name }}</h1>
@@ -245,7 +247,9 @@
             </div>
         </div>
 
+        <!--Display content, divided into left and right column-->
         <div class="row">
+            <!--The left side shows the picture, story text, video and comment area-->
             <div class="column left">
                 <div class="pic">
                     <img class="type1" src="./media/{{ img }}">
@@ -401,6 +405,7 @@
                 </div>
             </div>
 
+            <!--The introduction and meeting notice are displayed on the right-->
             <div class="column right">
                 <div class="intro">
                     <h2>Researcher Introduction</h2>
