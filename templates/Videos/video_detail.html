@@ -42,8 +42,8 @@
             {% endif %}
             <hr/>
         <div class="row">
-            <div class="col-md-2"><h5 class="text-center mt-2 mb-2">User: {{ video.title }}</h5> </div>
-            <div class="col-md-7"></div>
+            <div class="col-md-9 "><h5 class="mt-2 mb-2 text-left">Title: {{ video.title }}</h5> </div>
+            <div class="col-md-1"></div>
             <div class="col-md 4">
             <div class="row">
                 {% if video.uploader.id == user.id %}
@@ -54,11 +54,11 @@
 
             <div class="row">
                 <div class="col-lg-2 img">
-                     <img src="{{ video.uploader.profile.avatar.url }}" style="width: 50px; height: 50px;"
+                     <img src="{{ video.uploader.profile.avatar.url }} "  style="width: 50px; height:40px;"
                  class="col-md-4">
                 </div>
                 <div class="col-lg-10 text-left" >
-                    <p>{{ video.uploader }}</p>
+                    <p>Uploader: {{ video.uploader }}</p>
                     <p>Published on {{ video.uploader }} </p>
                     <p>Research Area: {{ video.classification }}</p>
                     <p>{{ video.desc }}</p>
