@@ -330,6 +330,7 @@ def getStory(request, story_id):
     text = re.sub(r'&#39;', '\'', text)
     text = re.sub(r'&mdash;', '-', text)
     text = re.sub(r'&quot;', '\"', text)
+    text = re.sub(r'&amp;', '&', text)
 
     video = story.video
     paper_link = story.paper_link

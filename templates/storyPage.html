@@ -81,12 +81,18 @@
             white-space: pre-wrap;
         }
 
-        p3 {
+        p3h {
             color: black;
             font-size: 14px;
             white-space: pre-wrap;
             padding: 5px;
             padding-right: 10px;
+        }
+
+        p3 {
+            color: black;
+            font-size: 14px;
+            white-space: pre-wrap;
         }
 
         p2 {
@@ -96,7 +102,7 @@
 
         p4 {
             color: black;
-            font-size: 12px;
+            font-size: 14px;
             white-space: pre-wrap;
         }
 
@@ -208,9 +214,9 @@
         <div class="normal">
             <div class="row">
             <button class="button1">Category</button>
-            <p3> {{ category }}</p3>
+            <p3h> {{ category }}</p3h>
             <button class="button2">Tags</button>
-            <p3> {{ tags }}</p3>
+            <p3h> {{ tags }}</p3h>
 
         {% if user.is_authenticated %}
             {% if user.id == story.user.id %}

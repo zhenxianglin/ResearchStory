@@ -21,21 +21,22 @@
 
         h1 {
             color: black;
-            font-size: 20px;
+            font-size: 18px;
         }
 
         h2 {
             color: black;
-            font-size: 16px;
+            font-size: 14px;
         }
 
         div.column {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             float: left;
-            width: 510px;
+            width: 540px;
             height: 200px;
-            margin-left: 30px;
-            margin-top: 10px;
+            margin-left: 10px;
+            margin-top: 0px;
+            margin-bottom: 10px;
             background: white;
         }
 
@@ -59,15 +60,15 @@
         }
 
         div.title {
-            height: 115px;
-            width: 270px;
+            height: 120px;
+            width: 300px;
             float: left;
             padding: 15px;
         }
 
         div.info {
-            height: 85px;
-            width: 270px;
+            height: 80px;
+            width: 300px;
             float: left;
             padding: 15px;
         }
@@ -76,10 +77,12 @@
 
         div.top {
             width: 100%;
-            height: 50px;
+            height: 55px;
             margin: 0px;
-            margin-bottom: 15px;
             margin-top:10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background-color:rgba(255,255,255,0.8);
         }
 
         div.top_item {
@@ -92,7 +95,7 @@
         }
 
         div.top_item_r {
-            width: 12%;
+            width: 11%;
             height: 45px;
             float: left;
             text-align: center;
@@ -100,7 +103,7 @@
         }
 
         div.top_item_b {
-            width: 4%;
+            width: 6%;
             height: 45px;
             float: left;
             text-align: center;
@@ -136,12 +139,17 @@
             width: 100%;
             height: 100%;
         }
-
+        div.search_b{
+            width:100%;
+            background-color:rgba(255,255,255,0.2);
+            padding:50px;
+        }
 
         div.search{
             width: 600px;
-            margin: 50px auto;
+            margin: 0px auto;
             display: flex;
+
             /*border: 1px solid red;*/
         }
         div.search input{
@@ -204,17 +212,24 @@
                 width:1200px;
             }
         }
+        @media screen and (max-width: 700px) {
+            div.search_b {
+                width:700px;
+            }
+        }
+        div.footer {
+            height: 120px;
+            width: 100%;
+            background: #e0e0e0;
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 10px;
+        }
 
     </style>
 
-    <div class="search">
-        <input type="text" placeholder="Find stories..." name="keyword" id="input1" value="" oninput="change()"/>
-        <a id="search"><button class="button_s">Search</button></a>
 
-        <a href="{% url 'Story:advancedSearch'%}">
-            <button class="button_as" id="a_search">Advanced Search</button>
-        </a>
-    </div>
+
     <div class="top">
         <div class="top_item">
             <a href="{% url 'Story:storyList' %}" id="a1">
@@ -270,6 +285,17 @@
             </a>
         </div>
     </div>
+
+<div class="search_b">
+    <div class="search">
+        <input type="text" placeholder="Find stories..." name="keyword" id="input1" value="" oninput="change()"/>
+        <a id="search"><button class="button_s">Search</button></a>
+
+        <a href="{% url 'Story:advancedSearch'%}">
+            <button class="button_as" id="a_search">Advanced Search</button>
+        </a>
+    </div>
+</div>
 
     <script>
                 function getQueryString(name) {
@@ -425,5 +451,8 @@
                 <li>No topics have been added yet.</li>
             {% endfor %}
         </div>
+    </div>
+
+    <div class="footer">
     </div>
 {% endblock content %}
