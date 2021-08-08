@@ -3,19 +3,34 @@
 {% load static %}
 
 {% block header %}
-    <span>
-     <a href="{% url "Videos:new_video" %}"><button type="button" class="btn btn-dark">Upload A New Interview Video
-                            Meeting</button></a>
-    </span>
-    <hr/>
+
 
 {% endblock header %}
 
 
 
 {% block content %}
-    <hr/>
+    <style type="text/css">
+        div.content {
+                margin: 0 auto;
+                padding-top:10px;
+                padding-bottom:20px;
+                padding-left:15px;
+                background-color:rgba(255,255,255,0.8);
+            }
 
+    </style>
+    <hr/>
+    <div class="content">
+
+    <span style="margin-left: 20px">
+     <a class="ui red label" href="{% url "Videos:video_list" %}">
+            <button class="btn btn-secondary">ALL</button>
+     </a>
+     <a href="{% url "Videos:new_video" %}"><button type="button" class="btn btn-dark" style="margin-left: 680px">Upload A New Interview Video
+                            Meeting</button></a>
+    </span>
+    <h3 class="text-left mt-2 mb-2" style="margin-left: 20px">{{ video.title }}</h3>
     <div style="text-align: center;">
         <div class="container">
             {% if video.file %}
@@ -26,18 +41,31 @@
                 {% video video.url '1000x600' %}
             {% endif %}
             <hr/>
-            <h3 class="text-center mt-2 mb-2">{{ video.title }}</h3>
-            {% if video.uploader.id == user.id %}
-                <h5><a href="{% url "Videos:edit_video" video.id %}">Edit</a></h5>
-                <h5><a href="{% url "Videos:video_delete" video.id %}">Delete</a></h5>
-            {% endif %}
-            <h4>{{ video.uploader }}</h4>
-            <img src="{{ video.uploader.profile.avatar.url }}" style="max-width: 10%; border-radius: 10%;"
-                 class="col-md-4 offset-md-4">
+        <div class="row">
+            <div class="col-md-2"><h5 class="text-center mt-2 mb-2">User: {{ video.title }}</h5> </div>
+            <div class="col-md-7"></div>
+            <div class="col-md 4">
+            <div class="row">
+                {% if video.uploader.id == user.id %}
+                <p style="margin-right: 20px"><a href="{% url "Videos:edit_video" video.id %}">Edit</a></p>
+                <p><a href="{% url "Videos:video_delete" video.id %}">Delete</a></p>
+            {% endif %}</div></div>
+        </div>
 
-            <h4>Published on {{ video.uploader }} </h4>
-            <h5>Research Area: {{ video.classification }}</h5>
-            <h4>{{ video.desc }}</h4>
+            <div class="row">
+                <div class="col-lg-2 img">
+                     <img src="{{ video.uploader.profile.avatar.url }}" style="width: 50px; height: 50px;"
+                 class="col-md-4">
+                </div>
+                <div class="col-lg-10 text-left" >
+                    <p>{{ video.uploader }}</p>
+                    <p>Published on {{ video.uploader }} </p>
+                    <p>Research Area: {{ video.classification }}</p>
+                    <p>{{ video.desc }}</p>
+                </div>
+
+            </div>
+
         </div>
     </div>
 
@@ -51,9 +79,9 @@
                 {% csrf_token %}
                 <div class="form-group">
                     <textarea type="text" class="form-control" id="content" name="content" rows="2"
-                              placeholder="Please enter a comment"></textarea>
+                              placeholder="Please enter a comment" style="width:990px;height: 100px;margin-left: 20px;margin-right: 20px"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary right ">SUBMIT</button>
+                <button type="submit" class="btn btn-primary right " style="margin-left: 900px">SUBMIT</button>
             </form>
         </div>
 
@@ -79,6 +107,7 @@
             </p>
             <pre style="font-family: inherit; font-size: 1em;">{{ comment.content }}</pre>
         {% endfor %}
+    </div>
     </div>
 
 {% endblock content %}

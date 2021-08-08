@@ -19,8 +19,8 @@ class Classification(models.Model):
 
 
 class Video(models.Model):
-    title = models.CharField(max_length=128)
-    desc = models.TextField(max_length=320, blank=True, null=True)
+    title = models.CharField(max_length=228)
+    desc = models.TextField(blank=True, null=True)
 
     url = EmbedVideoField(blank=True, null=True)
 
