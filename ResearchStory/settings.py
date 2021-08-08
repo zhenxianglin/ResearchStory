@@ -214,7 +214,6 @@ LOGIN_URL = 'Users/login/'
 
 # abc
 
-
 # SMTP服务器
 EMAIL_HOST = 'smtp.gmail.com'
 # 邮箱名
