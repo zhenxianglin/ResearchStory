@@ -19,9 +19,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-yr2d^+f(@&0^74&9f3)=n_(bd_%o49-#b7cu6yq=14u&75gce!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://researchstory.herokuapp.com','researchstory.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -154,7 +154,6 @@ DATABASES = {
 #     }
 # }
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 AUTH_USER_MODEL = 'Users.User'
@@ -198,7 +197,6 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
@@ -234,3 +232,38 @@ SITE_ID = 1
 
 # 登录成功后重定向地址
 LOGIN_REDIRECT_URL = '/'
+
+# Heroku 的设置
+
+cwd = os.getcwd()
+# Heroku settings
+if cwd == '/app' or cwd[:4] == '/tmp':
+    import dj_database_url
+
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'test1',
+            'USER': 'postgres',
+            'PASSWORD': '93239323',
+            'HOST': 'comp9323-postgres.c4ewkd5opwpk.us-east-2.rds.amazonaws.com',
+            'PORT': '5432',
+        }
+    }
+
+    # Honor the 'X-Forwarded-Proto' header for request.is_secure().
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    # Only allow heroku to host the project.
+    # ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['*']
+    DEBUG = False
+
+    # Static asset configuration
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    MEDIA_URL = "/media/"
+    MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'static'),
+    )
