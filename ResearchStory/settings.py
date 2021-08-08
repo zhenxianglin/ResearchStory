@@ -234,3 +234,5 @@ SITE_ID = 1
 
 # 登录成功后重定向地址
 LOGIN_REDIRECT_URL = '/'
+
+
