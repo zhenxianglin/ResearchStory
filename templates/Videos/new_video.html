@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load embed_video_tags %}
+
+
+{% block content %}
+    <div class="mt-5">
+    <p>Add a new interview video</p>
+
+    <form action="" method="post" enctype="multipart/form-data">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+     <button class="btn btn-success btn-lg">SUBMIT</button>
+    </form>
+
+
+    </div>
+    <p>Add a new interview video</p>
+
+
+
+{% endblock content %}

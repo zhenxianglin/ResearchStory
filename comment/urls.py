@@ -1,7 +1,6 @@
 from django.urls import path, include
 from django.conf.urls import url
 from comment import views
-
 app_name = 'comment'
 
 urlpatterns = [

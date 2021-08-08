@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <style type="text/css">
+        div.content {
+                margin: 0 auto;
+                padding-top:10px;
+                padding-bottom:20px;
+                padding-left:15px;
+                background-color:rgba(255,255,255,0.8);
+            }
+         div.comment {
+            border-style: solid;
+            background: white;
+            width: 100%;
+            padding: 15px;
+            border-color: #f1f1f1
+         }
+
+    </style>
+    <div class="content" >
+
+
+        <h2>Forum</h2>
+
+        <div class="row">
+            {% for f in forum %}
+                <div class="col-xl-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                    </svg>
+                {{ f.views }}
+                </div>
+                <div class="col-xl-11">
+
+                    <div class="title" >
+                            <a href="forum_id={{ f.id }}"><h4>{{ f.title }}</h4></a>
+                    </div>
+                    <div class="row">
+                        <div class="text" style="margin-left: 10px"> Author: {{ f.author }}</div>
+                        <div class="text" style="margin-left: 20px"> Create Time: {{ f.created_time }}</div>
+                    </div>
+                    <div class="text" style="margin-bottom: 20px">{{ f.text }}</div>
+
+
+                </div>
+                <hr style="filter: alpha(opacity=100,finishopacity=0,style=3)" width="95%" color="#6f5499" size="3" />
+
+
+            {% endfor %}
+        </div>
+        <div class="comment">
+                    <div class="normal">
+                        <h4>ADD A NEW TOPIC AREA</h4>
+                    </div>
+
+                    {% if user.is_authenticated %}
+                        <div>
+                            <form method="post" action="{% url "forum:forumList"  %}" >
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="normal">
+                                        <p1>Post a Topic:</p1>
+                                    </div>
+
+{#                                    {{ request.user.id }}#}
+                                    <input type="text" class="form-control" name="title" rows="4"
+                                              placeholder="Please enter a topic"></input>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="normal">
+                                        <p1>Add some content:</p1>
+                                    </div>
+                                    <textarea type="text" class="form-control" id="text" name="text" rows="4"
+                                              placeholder="Please enter the content"></textarea>
+                                </div>
+                                <!-- 提交按钮 -->
+                                <button type="submit" class="btn btn-primary ">Post</button>
+                            </form>
+                        </div>
+
+                        <br>
+                    {% else %}
+                        <br>
+                        <h5 class="row justify-content-center">
+                            Please <a href="{% url 'Users:login' %}"> login </a> to reply.
+                        </h5>
+                        <br>
+                    {% endif %}
+
+
+
+
+        </div>
+    </div>
+{% endblock content %}

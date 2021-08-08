@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,7 +30,15 @@ urlpatterns = [
     path(r'comment/', include(('comment.urls', 'comment'), namespace='comment')),
 
     path(r'password_reset/', include('password_reset.urls')),
-    # django-allauth
     path('accounts/', include('allauth.urls')),
+    path('meeting/', include(('meeting.urls', 'meeting'), namespace='meeting')),
+
+    path('', include(('interview.urls', 'interview'), namespace='interview')),
+    path(r'forum/', include(('forum.urls', 'forum'), namespace='forum')),
+
+    path(r'', include(('Videos.urls', 'Videos'), namespace='Videos')),
+
 
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

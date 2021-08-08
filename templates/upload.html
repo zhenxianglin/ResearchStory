@@ -1,26 +1,159 @@
 {% extends 'base.html' %}
-
-{#{% load bootstrap3 %}#}
+{% load static %}
 
 {% block header %}
-    <h2>Upload you story</h2>
+
+    <script type="text/javascript" src="{% static 'ckeditor/ckeditor.js' %}"></script>
+
 
 {% endblock header %}
 
 
 {% block content %}
+    <form method="post" action="{% url 'Story:upload' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+<!--        {#   <form method="post" action="{% url 'Story:upload' %}" class="form">#}-->
+<!--        {##}-->
+<!--        {#    {% csrf_token %}#}-->
+        <!-- 名字，类别-->
+        <style type="text/css">
+        div.content {
+                margin: 0 auto;
+                padding-top:10px;
+                padding-bottom:20px;
+                padding-left:15px;
+                background-color:rgba(255,255,255,0.8);
+            }
 
-<form method="post" action="{% url 'Story:upload' %}" class="form">
-    {% csrf_token %}
+    </style>
+    <style type="text/css">
+    label.xrequired:before {
+        content: '* ';
+        color: red;
+    }
+    </style>
 
-    {{ form.as_p }}
+{#<input type="text" value=""/>#}
+
+    <div class="content" >
+        <div class="container">
+            <br>
+            <br>
+            <br>
+            <div class="form-group row justify-content-center" >
+{#                <label class="xrequired">用户名 : </label>#}
+                <label class="xrequired">Category</label>
+
+                <div class="input-group-prepend " >
+{#                    <span class="input-group-text" id="basic-addon1">Category:</span>#}
+                    <select type="text" class="form-control" name="category" style="width:500px; margin-left:20px" required >
+                        <option value="ComputerScience">ComputerScience</option>
+                        <option value="Engineering">Engineering</option>
+                        <option value="Law">Law</option>
+                        <option value="Medicine">Medicine</option>
+                        <option value="Science">Science</option>
+                        <option value="Art">Art</option>
+                        <option value="Business">Business</option>
+                    </select>
+
+
+                </div>
+            </div>
+{#            <div class="p" style="width:150px;height:40px;float:left;">User Type:</div>#}
+            <div class="form-group row justify-content-center">
+{#                <span class="input-group-text" id="basic-addon1" style="width:100px;height:38px">Title:</span>#}
+{#                <label class="control-label"></label>#}
+                <label class="xrequired">Title</label>
+                <input style="width:500px ; margin-left:55px" class="form-control" name="title" type="text" placeholder="Please Enter Your Title"/>
+            </div>
+
+            <div class="form-group row justify-content-center">
+{#                <label class="control-label"></label>#}
+                <label >Tags</label>
+                <input style="width:500px ; margin-left:63px" class="form-control" name="tags" type="text" placeholder="Please Enter tags"/>
+            </div>
+
+
+            <div class="form-group row justify-content-center" >
+{#                <label class="control-label"></label>#}
+                <label>VideoUrl</label>
+
+                <input style="width:500px ; margin-left:35px" class="form-control" name="videoUrl" type="text" placeholder="Please Enter Your VideolUrl"/>
+            </div>
+            <div class="form-group row justify-content-center" >
+{#                <label class="control-label"></label>#}
+                <label>PaperLink</label>
+                <input style="width:500px ; margin-left:20px" class="form-control" name="paperLink" type="text" placeholder="Please Enter Your PaperLink"/>
+            </div>
+
+
+             <div class="form-group row justify-content-center" >
+{#                <label class="control-label"></label>#}
+                <label>Author</label>
+                <input style="width:500px ; margin-left:47px" class="form-control" name="author" type="text" placeholder="Please Enter author"/>
+            </div>
+
+            <div class="form-group row justify-content-center" >
+            <label>Author Intro</label>
+{#            <label class="control-label"></label>#}
+                <textarea style="max-width:500px;margin-left:10px" class="form-control" name="author_intro" aria-label="With textarea"  placeholder="Please Enter Your Author Intro"></textarea>
+            </div>
+
+
+
+            <div class="form-group row justify-content-center" >
+            <label class="xrequired">Background</label>
+{#            <label class="control-label"></label>#}
+                <textarea style="max-width:500px" class="form-control" name="background" aria-label="With textarea" rows="3" placeholder="Please Enter Your story background"></textarea>
+            </div>
+
+
+
+
+            <div class="form-group row justify-content-center" >
+                <label class="xrequired">TextContent</label>
+{#                <label class="control-label"></label>#}
+{#                <div class="input-group input-group-lg">#}
+                    <textarea class="form-control" id='text' name="text" aria-label="With textarea" rows="5"
+                              placeholder="Please Enter Your Text"></textarea>
+                    <script type="text/javascript">
+                        CKEDITOR.replace('text',{ toolbar:'Basic', height:370, width:500 });
+                    </script>
+
+{#                </div>#}
+            </div>
+
+
+            <div class="form-group row justify-content-center">
+            <label>Image</label>
+{##}
+            <div class="custom-file" style="width:500px ; margin-left:55px">
+                 {{ form.img }}
+{#            <input type="file" class="form-control" name="img"  >#}
+{##}
+{#            <label class="custom-file-label" >Upload Image</label>#}
+          </div>
+        </div>
+        </div>
+
+
+            <button name="submit" class="btn btn-primary btn-lg btn-block"  >Submit</button>
+
+
+            </div>
+    </div>
+    </form>
+{% endblock content %}
+
+
+
+
+{#    {{ form.as_p }}#}
 
 {#    {% buttons %}#}
-    <button name="submit" class="btn btn-primary">Upload</button>
+{#    <button name="submit" class="btn btn-primary">Upload</button>#}
 {#    {% endbuttons %}#}
 
-    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>
+{#    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>#}
 
 
-</form>
-{% endblock content %}

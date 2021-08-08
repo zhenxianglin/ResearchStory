@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+
+{#    <nav class="navbar navbar-light bg-light">#}
+{#        <a class="navbar-brand" href="/">#}
+            {#            <img src="https://github.com/blastxiaol/ResearchStory/blob/front-end/static/image/meeting.png?raw=true" width="200" height="100" alt="" loading="lazy">#}
+{#            <h2>Meeting To Discuss</h2>#}
+{#        </a>#}
+{#        <span>#}
+{#                    <a href="/"><button type="button" class="btn btn-info">xxxxx</button></a>#}
+{#            <a href="{% url "meeting:new_meeting" %}"><button type="button" class="btn btn-dark">Add A New#}
+{#                            Meeting</button></a>#}
+{#        </span>#}
+{#    </nav>#}
+
+
+{% endblock header %}
+
+
+{% block content %}
+    <style type="text/css">
+        div.content {
+                margin: 0 auto;
+                padding-top:10px;
+                padding-bottom:20px;
+                padding-left:15px;
+                background-color:rgba(255,255,255,0.8);
+            }
+
+    </style>
+    <div class="content">
+     <nav class="navbar navbar-light bg-transparent">
+        <a class="navbar-brand" href="/">
+            {#            <img src="https://github.com/blastxiaol/ResearchStory/blob/front-end/static/image/meeting.png?raw=true" width="200" height="100" alt="" loading="lazy">#}
+            <h2>Meeting To Discuss</h2>
+        </a>
+        <span>
+{#                    <a href="/"><button type="button" class="btn btn-info">xxxxx</button></a>#}
+            <a href="{% url "meeting:new_meeting" %}"><button type="button" class="btn btn-dark">Add A New
+                            Meeting</button></a>
+        </span>
+    </nav>
+
+
+    <div style="text-align: center;">
+        <h2>No Meetings Today :)</h2>
+        <h7>{{ date_and_time }}</h7>
+    </div>
+    <hr/>
+{#    <hr/>#}
+
+{#    <div class="jumbotron">#}
+        <div class="d-flex justify-content-center">
+            <a href="{% url "meeting:new_meeting" %}">
+                <button type="button" class="btn btn-dark">Welcome to create a meeting for online discussion.</button>
+            </a>
+        </div>
+{#    </div>#}
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+{% endblock content %}
+

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
-from Users.models import User
+from Users.models import User, Profile
 
 
 class LoginFom(forms.Form):
@@ -60,3 +60,17 @@ class RegisterForm(UserCreationForm):
             'password1',
             'password2',
         )
+
+
+class ProfileForm(forms.ModelForm):
+    # gender = forms.ChoiceField(choices=Profile.SEX_ITEMS, label='Gender')
+
+    class Meta:
+        model = Profile
+        fields = ('age',
+                  'gender',
+                  'last_name',
+                  'first_name',
+                  'avatar',
+                  'bio'
+                  )

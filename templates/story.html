@@ -4,34 +4,44 @@
     <style type="text/css">
 
         div.content {
-            background: #ffffff;
-            padding-left: 10px;
-            padding-right: 10px;
+            margin: 0 auto;
+            padding-top:10px;
+            padding-bottom:20px;
+            padding-left:15px;
+            background-color:rgba(255,255,255,0.8);
         }
 
         p1 {
             color: black;
-            font-size: 16px;
+            font-size: 12px;
             position: relative;
             bottom: 0px;
+            white-space: pre-wrap;
         }
 
         h1 {
             color: black;
-            font-size: 24px;
+            font-size: 18px;
         }
 
         h2 {
             color: black;
-            font-size: 20px;
+            font-size: 14px;
         }
 
         div.column {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             float: left;
-            width: 510px;
+            width: 540px;
             height: 200px;
-            margin-left: 30px;
-            margin-top: 10px;
+            margin-left: 10px;
+            margin-top: 0px;
+            margin-bottom: 10px;
+            background: white;
+        }
+
+        div.column:hover {
+            background: #e0e0e0;
         }
 
         /* 列后清除浮动 */
@@ -46,61 +56,65 @@
             height: 200px;
             width: 240px;
             float: left;
-
+            overflow:hidden;
         }
 
         div.title {
-            background-color: #f1f1f1;
-            height: 115px;
-            width: 270px;
+            height: 120px;
+            width: 300px;
             float: left;
             padding: 15px;
         }
 
         div.info {
-            background-color: #f1f1f1;
-            height: 85px;
-            width: 270px;
+            height: 80px;
+            width: 300px;
             float: left;
             padding: 15px;
         }
 
-        @media screen and (max-width: 700px) {
-            div.column {
-                width: 600px;
-                margin: 15px auto;
-            }
-        }
+
 
         div.top {
             width: 100%;
-            height: 50px;
-            margin: 10px;
+            height: 55px;
+            margin: 0px;
+            margin-top:10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background-color:rgba(255,255,255,0.8);
         }
 
         div.top_item {
-            width: 20%;
-            height: 50px;
+
+            width: 9%;
+            height: 45px;
             float: left;
-            background: white;
             text-align: center;
+            padding:3px;
         }
 
-        .button3 {
-            background-color: #4CAF50; /* Green */
-            border: none;
-            color: white;
+        div.top_item_r {
+            width: 11%;
+            height: 45px;
+            float: left;
             text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            width: 100%;
-            height: 100%;
+            padding:3px;
+        }
+
+        div.top_item_b {
+            width: 6%;
+            height: 45px;
+            float: left;
+            text-align: center;
+            padding:5px;
         }
 
         .button2 {
-            background-color: #008CBA;
-            border: none;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+            background: #909090;
+            border-color: #008CBA;
+            border: solid;
             color: white;
             padding: 0px;
             text-align: center;
@@ -112,52 +126,181 @@
         }
 
         .button1 {
-            background-color: #ff8800;
-            border: none;
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+            background: #909090;
+            border-color: #ff8800;
+            border: solid;
             color: white;
             padding: 0px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 16px;
+            font-size: 14px;
             width: 100%;
             height: 100%;
+        }
+        div.search_b{
+            width:100%;
+            background-color:rgba(255,255,255,0.2);
+            padding:50px;
+        }
+
+        div.search{
+            width: 600px;
+            margin: 0px auto;
+            display: flex;
+
+            /*border: 1px solid red;*/
+        }
+        div.search input{
+            float: left;//左浮动
+            flex: 4;
+            height: 50px;
+            outline: none;
+            border: 1px solid #909090;
+            width: 400px;
+            padding-left: 10px;
+            font-size: 17px;
+            border-radius: 10px 0px 0px 10px;
+        }
+        .button_s{
+            float: right;
+            flex: 1;
+            height: 50px;
+            background-color: #909090;
+            color: white;
+            border-style: none;
+            outline: none;
+            font-size: 17px;
+            width: 65px;
+            border-radius: 0px 10px 10px 0px;
+        }
+        .button_as{
+            float: right;
+            flex: 1;
+            height: 50px;
+            background-color: #909090;
+            color: white;
+            border-style: none;
+            outline: none;
+            font-size: 14px;
+            margin-left: 15px;
+            width: 125px;
+            border-radius: 10px;
+        }
+        div.search button:hover{
+            background-color: #4CAF50;
+            font-weight: 750;
+        }
+
+        .button1:hover{
+            border: 3px solid #ff8800;
+        }
+
+        .button2:hover{
+            border: 3px solid #008CBA;
+        }
+
+        @media screen and (max-width: 1200px) {
+            div.top {
+                width:1200px;
+            }
+            div.row {
+                width:1200px;
+            }
+            div.content {
+                width:1200px;
+            }
+        }
+        @media screen and (max-width: 700px) {
+            div.search_b {
+                width:700px;
+            }
+        }
+        div.footer {
+            height: 80px;
+            width: 100%;
+            background: #e0e0e0;
+            text-align: center;
+            padding-top: 30px;
+            margin-top: 10px;
         }
 
     </style>
 
+
+
     <div class="top">
         <div class="top_item">
-            <a href="{% url 'Story:storyListCategory' 'ComputerScience' %}">
-                <button class="button1">Computer Science</button>
+            <a href="{% url 'Story:storyList' %}" id="a1">
+                <button class="button1" id="1">All</button>
             </a>
         </div>
         <div class="top_item">
-            <a href="{% url 'Story:storyListCategory' 'Physics' %}">
-                <button class="button2">Physics</button>
+            <a href="{% url 'Story:storyListCategory' 'ComputerScience' %}" id="a2">
+                <button class="button1" id="2">Computer</button>
             </a>
         </div>
         <div class="top_item">
-            <a href="{% url 'Story:storyListCategory' 'ElectricalEngineering' %}">
-                <button class="button3">Electrical Engineering</button>
+            <a href="{% url 'Story:storyListCategory' 'Science' %}" id="a3">
+                <button class="button1" id="3">Science</button>
             </a>
         </div>
         <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'Engineering' %}" id="a4">
+                <button class="button1" id="4">Engineering</button>
+            </a>
+        </div>
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'Law' %}" id="a5">
+                <button class="button1" id="5">Law</button>
+            </a>
+        </div>
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'Medicine' %}" id="a6">
+                <button class="button1" id="6">Medicine</button>
+            </a>
+        </div>
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'Business' %}" id="a7">
+                <button class="button1" id="7">Business</button>
+            </a>
+        </div>
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'Art' %}" id="a8">
+                <button class="button1" id="8">Art</button>
+            </a>
+        </div>
+
+        <div class="top_item_b">
+        </div>
+        <div class="top_item_r">
             <a id="latest_stories" href="{% url 'Story:storyListSortBy' 'time' %}">
-                <button class="button1">Latest Stories</button>
+                <button class="button2" id="sb1">Latest Stories</button>
             </a>
         </div>
-        <div class="top_item">
+        <div class="top_item_r">
             <a id="most_viewed" href="{% url 'Story:storyListSortBy' 'hot' %}">
-                <button class="button2">Most Viewed</button>
+                <button class="button2" id="sb2">Most Viewed</button>
             </a>
         </div>
     </div>
 
+<div class="search_b">
+    <div class="search">
+        <input type="text" placeholder="Find stories..." name="keyword" id="input1" value="" oninput="change()"/>
+        <a id="search"><button class="button_s">Search</button></a>
+
+        <a href="{% url 'Story:advancedSearch'%}">
+            <button class="button_as" id="a_search">Advanced Search</button>
+        </a>
+    </div>
+</div>
+
     <script>
                 function getQueryString(name) {
                     var query = window.location.href;
-                    query = query.replace("_","/")
+                    query = query.replace(/_/g,"/")
                     var vars = query.split("/");
                     for (var i=0;i<vars.length;i++) {
                         var pair = vars[i].split("=");
@@ -165,19 +308,121 @@
                     }
                     return(false);
                 }
-                var c = getQueryString("category")
+
+
+                document.getElementById("1").style.background = "#ff8800";
+                document.getElementById("2").style.background = "#909090";
+                document.getElementById("3").style.background = "#909090";
+                document.getElementById("4").style.background = "#909090";
+                document.getElementById("5").style.background = "#909090";
+                document.getElementById("6").style.background = "#909090";
+                document.getElementById("7").style.background = "#909090";
+                document.getElementById("8").style.background = "#909090";
+                document.getElementById("sb1").style.background = "#008CBA";
+                document.getElementById("sb2").style.background = "#909090";
+
+                var a = getQueryString("advancedSearch");
+                if (a == 'T') {
+                    document.getElementById("1").style.background = "#909090";
+                    document.getElementById("sb1").style.background = "#909090";
+                    document.getElementById("a_search").style.background = "#4CAF50";
+                }
+
+                var c = getQueryString("category");
+                var title = '';
+                if(getQueryString("title")){
+                    title = getQueryString("title");
+                }
+                else{
+                    title = '_all';
+                }
+                if(title == ''){
+                    title = '_all';
+                }
+                var t = title;
+                if(title == '_all'){
+                    t = '';
+                }
+                document.getElementById("input1").value = t;
+
+                var d = getQueryString("by");
+                var sort_by = 'time';
+
+                if(d == 'time') {
+                    document.getElementById("sb1").style.background = "#008CBA";
+                }
+                if(d == 'hot') {
+                    document.getElementById("sb1").style.background = "#909090";
+                    document.getElementById("sb2").style.background = "#008CBA";
+                    sort_by = 'hot'
+                }
+
+
                 if(c == 'ComputerScience') {
-                    document.getElementById("latest_stories").href = "{% url 'Story:storyListCategorySortBy' 'ComputerScience' 'time' %}";
-                    document.getElementById("most_viewed").href = "{% url 'Story:storyListCategorySortBy' 'ComputerScience' 'hot' %}";
+                    document.getElementById("2").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
                 }
-                if(c == 'Physics') {
-                    document.getElementById("latest_stories").href = "{% url 'Story:storyListCategorySortBy' 'Physics' 'time' %}";
-                    document.getElementById("most_viewed").href = "{% url 'Story:storyListCategorySortBy' 'Physics' 'hot' %}";
+                if(c == 'Science') {
+                    document.getElementById("3").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
                 }
-                if(c == 'ElectricalEngineering') {
-                    document.getElementById("latest_stories").href = "{% url 'Story:storyListCategorySortBy' 'ElectricalEngineering' 'time' %}";
-                    document.getElementById("most_viewed").href = "{% url 'Story:storyListCategorySortBy' 'ElectricalEngineering' 'hot' %}";
+                if(c == 'Engineering') {
+                    document.getElementById("4").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
                 }
+                if(c == 'Law') {
+                    document.getElementById("5").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
+                }
+                if(c == 'Medicine') {
+                    document.getElementById("6").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
+                }
+                if(c == 'Business') {
+                    document.getElementById("7").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
+                }
+                if(c == 'Art') {
+                    document.getElementById("8").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
+                }
+
+
+                document.getElementById("a1").href = "category=".concat("ALL" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a2").href = "category=".concat("ComputerScience" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a3").href = "category=".concat("Science" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a4").href = "category=".concat("Engineering" ,"_sort_by=", sort_by ,"_title=", title);
+
+                document.getElementById("a5").href = "category=".concat("Law" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a6").href = "category=".concat("Medicine" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a7").href = "category=".concat("Business" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a8").href = "category=".concat("Art" ,"_sort_by=", sort_by ,"_title=", title);
+
+                document.getElementById("latest_stories").href = "category=".concat(c ,"_sort_by=", "time" ,"_title=", title);
+                document.getElementById("most_viewed").href = "category=".concat(c ,"_sort_by=", "hot" ,"_title=", title);
+                document.getElementById("search").href = "category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
+
+                function change() {
+                    title = document.getElementById("input1").value;
+                    if(title == ''){
+                        title = '_all';
+                    }
+                    document.getElementById("input1").placeholder = '';
+                    document.getElementById("a1").href = "category=".concat("ALL" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a2").href = "category=".concat("ComputerScience" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a3").href = "category=".concat("Science" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a4").href = "category=".concat("Engineering" ,"_sort_by=", sort_by ,"_title=", title);
+
+                    document.getElementById("a5").href = "category=".concat("Law" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a6").href = "category=".concat("Medicine" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a7").href = "category=".concat("Business" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a8").href = "category=".concat("Art" ,"_sort_by=", sort_by ,"_title=", title);
+
+                    document.getElementById("latest_stories").href = "category=".concat(c ,"_sort_by=", "time" ,"_title=", title);
+                    document.getElementById("most_viewed").href = "category=".concat(c ,"_sort_by=", "hot" ,"_title=", title);
+                    document.getElementById("search").href = "category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
+                }
+
         </script>
 
     <div class="content">
@@ -198,13 +443,16 @@
                         <a href="story_id={{ st.id }}"><h1>{{ st }}</h1></a>
                     </div>
                     <div class="info">
-                        <h2>Researcher:</h2>
-                        <p1>Heat:</p1>
+                        <h2>{{st.author}}</h2>
+                        <p1>{{st.created_time}}</p1><p1>  |  Views: {{st.views}}</p1>
                     </div>
                 </div>
             {% empty %}
                 <li>No topics have been added yet.</li>
             {% endfor %}
         </div>
+    </div>
+
+    <div class="footer">
     </div>
 {% endblock content %}

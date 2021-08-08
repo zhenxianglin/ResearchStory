@@ -1,4 +1,5 @@
 from django.db import models
+from Users.models import User
 
 
 class Link(models.Model):
@@ -15,6 +16,12 @@ class Link(models.Model):
     friday = models.BooleanField(default=False)
     saturday = models.BooleanField(default=False)
     sunday = models.BooleanField(default=False)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    data_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-data_added',)
 
     def __str__(self):
         return self.meeting_name

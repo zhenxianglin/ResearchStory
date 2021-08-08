@@ -1,0 +1,214 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    div.container{
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    div.body{
+        margin: 0 auto;
+        margin-top: 50px;
+        width: 1000px;
+    }
+
+    div.lg-3{
+        width: 600px;
+        background: rgba(255,255,255,0.8);
+        margin: 0 auto;
+        padding: 10px;
+        padding-bottom: 50px;
+    }
+
+    div.group{
+        padding-top: 20px;
+        width: 100%;
+        text-align:center;
+    }
+
+    div.input-group{
+        padding-top: 20px;
+        width: 100%;
+        text-align:center;
+    }
+
+
+</style>
+
+<form method="post" action="{% url 'Story:advancedSearch' %}" class="form">
+    {% csrf_token %}
+    <div class="container">
+        <div class="body">
+            <div class="lg-3">
+                <div class="group">
+                    <h4 id="h">Advanced Search</h4>
+                </div>
+
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Title</span>
+                  </div>
+                  <input type="text" class="form-control" name="keyword"  aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+
+                <div class="input-group">
+
+                    <select type="text" class="form-control"
+                        name="operator1" placeholder="usertype" required>
+                    <option value="AND">AND</option>
+                    <option value="OR">OR</option>
+                </select>
+
+                </div>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Category:</span>
+                  </div>
+                    <select type="text" class="form-control"
+                        name="category" placeholder="usertype" required>
+                    <option value="ALL">ALL</option>
+                    <option value="ComputerScience">Computer Science</option>
+                    <option value="Science">Science</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Law">Law</option>
+                    <option value="Medicine">Medicine</option>
+                    <option value="Business">Business</option>
+                    <option value="Art">Art</option>
+                </select>
+                </div>
+
+                <div class="input-group">
+                    <select type="text" class="form-control"
+                        name="operator2" placeholder="usertype" required>
+                    <option value="AND">AND</option>
+                    <option value="OR">OR</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Start Time:</span>
+                  </div>
+                    <select id="select1" type="text" class="form-control"
+                        name="start_at" placeholder="usertype" required onchange="change_s()">
+                    <option id="s0" value="0">all</option>
+                    <option id="s1" value="1">1 day ago</option>
+                    <option id="s2" value="2">1 week ago</option>
+                    <option id="s3" value="3">4 weeks ago</option>
+                    <option id="s4" value="4">6 months ago</option>
+                    </select>
+
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">End Time:</span>
+                  </div>
+                    <select id="select2" type="text" class="form-control"
+                        name="end_at" placeholder="usertype" required onchange="change_e()">
+                    <option id="e0" value="0">all</option>
+                    <option id="e1" value="1">1 day ago</option>
+                    <option id="e2" value="2">1 week ago</option>
+                    <option id="e3" value="3">4 weeks ago</option>
+                    <option id="e4" value="4">6 months ago</option>
+                    </select>
+                </div>
+
+                <script>
+                function formatDate(date) {
+                    var date = new Date(date);
+                    var YY = date.getFullYear() + '-';
+                    var MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                    var DD = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+                    var hh = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+                    var mm = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+                    var ss = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+                    return YY + MM + DD +" "+hh + mm + ss;
+                }
+
+                document.getElementById("s0").value = formatDate(0);
+                var mDate = new Date();
+                document.getElementById("e0").value = formatDate(mDate.getTime());
+
+                function countTime(t1, gap) {
+                    t2 = t1 - 86400000*gap;
+                    return t2;
+                }
+
+                function change_s() {
+                    var myDate = new Date();
+                    t = myDate.getTime();
+
+                    s = document.getElementById("select1").value;
+                    if(s == 0){
+                        document.getElementById("s0").value = formatDate(countTime(t, 3000));
+                    }
+                    if(s == 1){
+                        document.getElementById("s1").value = formatDate(countTime(t, 1));
+                    }
+                    if(s == 2){
+                        document.getElementById("s2").value = formatDate(countTime(t, 7));
+                    }
+                    if(s == 3){
+                        document.getElementById("s3").value = formatDate(countTime(t, 28));
+                    }
+                    if(s == 4){
+                        document.getElementById("s4").value = formatDate(countTime(t, 180));
+                    }
+                }
+
+                function change_e() {
+                    var myDate = new Date();
+                    t = myDate.getTime();
+                    s = document.getElementById("select2").value;
+                    if(s == 0){
+                        document.getElementById("e0").value = formatDate(countTime(t, 0));
+                    }
+                    if(s == 1){
+                        document.getElementById("e1").value = formatDate(countTime(t, 1));
+                    }
+                    if(s == 2){
+                        document.getElementById("e2").value = formatDate(countTime(t, 7));
+                    }
+                    if(s == 3){
+                        document.getElementById("e3").value = formatDate(countTime(t, 28));
+                    }
+                    if(s == 4){
+                        document.getElementById("e4").value = formatDate(countTime(t, 180));
+                    }
+                }
+
+
+                </script>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Sort by:</span>
+                  </div>
+                    <select type="text" class="form-control"
+                        name="sort" placeholder="usertype" required>
+                    <option value="time">time</option>
+                    <option value="hot">hot</option>
+                </select>
+                </div>
+
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Researcher</span>
+                  </div>
+                  <input type="text" class="form-control" name="author_name"  aria-label="Username" aria-describedby="basic-addon1">
+                </div>
+
+                <div class="group">
+                    <button name="submit" class="btn btn-primary">search</button>
+                </div>
+
+            </div>
+    </div>
+
+    </div>
+
+{#    <input type="hidden" name="next" value="{% url 'MainPage:index' %}"/>#}
+</form>
+
+{% endblock content %}

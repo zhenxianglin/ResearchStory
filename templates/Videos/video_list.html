@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% load embed_video_tags %}
+{% block header %}
+
+    <hr/>
+    <div class="text">
+      <h1 class="display-4" style="margin-left: 10px">Video</h1>
+      <p class="lead" >This is a video unit, — makes short story video sharing, discussion and uploading. In this page, you will enjoy the educational videos.</p>
+    </div>
+    <div class="classification">
+        <h3 class=" mb-2 mb-2">
+            <a class="ui red label" href="{% url "Videos:video_list" %}">
+                <button class="btn btn-secondary">ALL</button>
+            </a>
+            {% for item in classification_list %}
+
+                <a class="ui label" href="?c={{ item.id }}" style="margin-left: 5px">
+                    <button class="btn btn-secondary">{{ item.title }} </button>
+                </a>
+            {% endfor %}
+        </h3>
+        <hr/>
+    </div>
+
+    <span>
+     <a href="{% url "Videos:new_video" %}"><button type="button" class="btn btn-dark">Upload A New Interview Video
+                            Meeting</button></a>
+    </span>
+    <hr/>
+
+
+{% endblock header %}
+
+
+{% block content %}
+    <style type="text/css">
+
+        div.content {
+            display: grid;
+            grid-template-columns: 33.33% 33.33% 33.33%;
+            grid-template-rows: 300px 300px 300px;
+            grid-row-gap: 20px;
+            grid-column-gap: 20px;
+        }
+
+        div.product-buyer-name {
+            max-width: 400px;
+            max-height: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+
+    </style>
+    <div class="container">
+
+        <div class="content">
+            {% for item in videos %}
+                <div class="card ">
+                    {% if item.file %}
+                        <div class="card-header product-buyer-name" style="height: 60px"><a
+                                href="{% url "Videos:video_detail" item.id %}">{{ item.title }}</a></div>
+                        <div class="card-body">
+                            <video class="embed-responsive embed-responsive-16by9" autoplay loop muted
+                                   controls="controls">
+                                <source src="{{ item.file.url }}" type="video/mp4"/>
+                            </video>
+                        </div>
+                        <div class="card-footer">
+                            <h7>Post on {{ item.created_time|date:"Y-m-d H:i" }} by {{ item.uploader }}</h7>
+                        </div>
+                    {% else %}
+                        <div class="card-header product-buyer-name" style="height: 60px"><a
+                                href="{% url "Videos:video_detail" item.id %}">{{ item.title }}</a></div>
+                        <div class="card-body">
+                                {% video item.url '300x180' %}
+{#                                {% endvideo %}#}
+                        </div>
+                        <div class="card-footer">
+                            <h7>Post on {{ item.created_time|date:"Y-m-d H:i" }} by {{ item.uploader }}</h7>
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
+

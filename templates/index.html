@@ -13,236 +13,130 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <div class="jumbotron">
-        <h2>Follow your passion for research.</h2>
-        <h3>
-            <a href="{% url "Users:register" %}">Register an account</a> to immerse
-            yourself in the innovative and interesting research stories.
-        </h3>
-        <h3>
-            Extensive video resources and freely developed discussion environment.
-        </h3>
+    <style type="text/css">
+    body{
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background: url("/static/assets/img/homepage2.jpeg")  no-repeat center 0px;
+        background-size: cover;
+        background-position: center 0;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        -webkit-background-size: cover;
+        -o-background-size: cover;
+        -moz-background-size: cover;
+        -ms-background-size: cover;
 
+    }
 
+    div.logo{
+        width : 750px;
+        height: 100px;
+        margin: 50px auto;
+        margin-top: 150px;
+        margin-bottom: 0px;
+        background: url("/static/assets/img/logo.png")  no-repeat center 0px;
+    }
+
+    div.search{
+            width: 750px;
+            margin: 50px auto;
+            margin-top: 0px;
+            display: flex;
+            /*border: 1px solid red;*/
+        }
+        div.search input{
+            float: left;//左浮动
+            flex: 4;
+            height: 55px;
+            outline: none;
+            border: 1px solid #909090;
+            width: 500px;
+            padding-left: 10px;
+            font-size: 20px;
+            border-radius: 10px 0px 0px 10px;
+        }
+        .button_s{
+            float: right;
+            flex: 1;
+            height: 55px;
+            background-color: #909090;
+            color: white;
+            border-style: none;
+            outline: none;
+            font-size: 20px;
+            width: 75px;
+            border-radius: 0px 10px 10px 0px;
+        }
+        .button_as{
+            float: right;
+            flex: 1;
+            height: 55px;
+            background-color: #909090;
+            color: white;
+            border-style: none;
+            outline: none;
+            font-size: 16px;
+            margin-left: 20px;
+            width: 140px;
+            border-radius: 10px;
+        }
+        div.search button:hover{
+            background-color: #4CAF50;
+            font-weight: 750;
+        }
+    </style>
+    <body>
+
+    <div class="logo">
     </div>
+    <div class="search">
+        <input type="text" placeholder="Find stories..." name="keyword" id="input1" value="" oninput="change()"/>
+        <a id="search"><button class="button_s">Search</button></a>
+
+        <a href="{% url 'Story:advancedSearch'%}">
+            <button class="button_as">Advanced Search</button>
+        </a>
+    </div>
+    <script>
+                var c = "ALL";
+                var sort_by = "time";
+                var title = "_all";
+                document.getElementById("search").href = "/story/category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
+                function change() {
+                    title = document.getElementById("input1").value;
+                    if(title == ''){
+                        title = '_all';
+                    }
+                    document.getElementById("search").href = "/story/category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
+                }
+    </script>
+
+{#    <div class="container ">#}
+{#    <img src="/static/assets/img/homeimg1.jpeg" class="img-fluid" alt="Responsive image">#}
+{#    <div class="page-heading">#}
+{#    <h1>Power of Research</h1>#}
+{#    <span class="subheading">This is what I do.</span>#}
+{#    </div>#}
+{#</div>#}
+{#    <div class="container">#}
+{#    <div class="jumbotron">#}
+{#        <h2>Follow your passion for research.</h2>#}
+{#        <h3>#}
+{#            <a href="{% url "Users:register" %}">Register an account</a> to immerse#}
+{#            yourself in the innovative and interesting research stories.#}
+{#        </h3>#}
+{#        <h3>#}
+{#            Extensive video resources and freely developed discussion environment.#}
+{#        </h3>#}
+{##}
+{##}
+{#    </div>#}
+{#    </div>#}
 {% endblock header %}
 
 {% block content %}
 
-    <h2>最热</h2>
-    <div class="card">
-        <!--卡片1热度-->
-        <div class="bg-light">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="img-thumbnail">
-
-                        <img src="static/image/mantis.jpeg" style="width: 280px;height: 360px;">
-
-
-                        <h3>母螳螂吃公螳螂的秘密</h3>
-                        <p>来看看昆虫学家周杰伦是怎样研究的</p>
-                        <button class="btn btn-info ">
-                            <span class="fa fa-heart"></span> Like
-                        </button>
-                        <button class="btn btn-info">
-                            <span class="fa fa-pencil"></span> Comment
-                        </button>
-
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="img-thumbnail">
-                        <img src="static/image/iceberg.jpeg" style="width: 280px;height: 360px;">
-                        <h3>海平面为什么会升高</h3>
-                        <p>来看看地理学家林俊杰是怎样研究的</p>
-                        <button class="btn btn-info ">
-                            <span class="fa fa-heart"></span> Like
-                        </button>
-                        <button class="btn btn-info">
-                            <span class="fa fa-pencil"></span> Comment
-                        </button>
-
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="img-thumbnail">
-                        <img src="static/image/star.png" style="width: 280px;height: 360px;">
-                        <h3>星星为什么是亮的</h3>
-                        <p>来看看天文学家王力宏是怎样研究的</p>
-                        <button class="btn btn-info ">
-                            <span class="fa fa-heart"></span> Like
-                        </button>
-                        <button class="btn btn-info">
-                            <span class="fa fa-pencil"></span> Comment
-                        </button>
-
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="img-thumbnail">
-                        <img src="static/image/iceberg.jpeg" style="width: 280px;height: 360px;">
-                        <h3>海平面为什么会升高</h3>
-                        <p>来看看地理学家林俊杰是怎样研究的</p>
-                        <button class="btn btn-info ">
-                            <span class="fa fa-heart"></span> Like
-                        </button>
-                        <button class="btn btn-info">
-                            <span class="fa fa-pencil"></span> Comment
-                        </button>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <!--    卡片2生物-->
-    <div class="bg-light">
-        <h2>生物学</h2>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="img-thumbnail">
-                    <img src="static/image/mantis.jpeg" style="width: 280px;height: 360px;">
-                    <h3>母螳螂吃公螳螂的秘密</h3>
-                    <p>来看看昆虫学家周杰伦是怎样研究的</p>
-                    <button class="btn btn-info ">
-                        <span class="fa fa-heart"></span> Like
-                    </button>
-                    <button class="btn btn-info">
-                        <span class="fa fa-pencil"></span> Comment
-                    </button>
-
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="img-thumbnail">
-                    <img src="static/image/iceberg.jpeg" style="width: 280px;height: 360px;">
-                    <h3>海平面为什么会升高</h3>
-                    <p>来看看地理学家林俊杰是怎样研究的</p>
-                    <button class="btn btn-info ">
-                        <span class="fa fa-heart"></span> Like
-                    </button>
-                    <button class="btn btn-info">
-                        <span class="fa fa-pencil"></span> Comment
-                    </button>
-
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="img-thumbnail">
-                    <img src="static/image/star.png" style="width: 280px;height: 360px;">
-                    <h3>星星为什么是亮的</h3>
-                    <p>来看看天文学家王力宏是怎样研究的</p>
-                    <button class="btn btn-info ">
-                        <span class="fa fa-heart"></span> Like
-                    </button>
-                    <button class="btn btn-info">
-                        <span class="fa fa-pencil"></span> Comment
-                    </button>
-
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="img-thumbnail">
-                    <img src="static/image/iceberg.jpeg" style="width: 280px;height: 360px;">
-                    <h3>海平面为什么会升高</h3>
-                    <p>来看看地理学家林俊杰是怎样研究的</p>
-                    <button class="btn btn-info ">
-                        <span class="fa fa-heart"></span> Like
-                    </button>
-                    <button class="btn btn-info">
-                        <span class="fa fa-pencil"></span> Comment
-                    </button>
-
-                </div>
-            </div>
-        </div>
-        <!--卡片3天文-->
-        <div class="bg-light">
-            <h2>天文学</h2>
-            <div class="row margin-left: -15px;margin-right: -15px;">
-                <div class="card col-3" style="width: 18rem;">
-                    <img src="static/image/iceberg.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Why does the sea level rise</h5>
-                        <p class="card-text">The Reef is in grave danger due to climate change. Read more and get
-                            involved...</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Researcher: Yi Liu</li>
-                    </ul>
-                    <div class="card-body">
-                        <button class="btn btn-info">
-                            <span class="fa fa-pencil"></span> Card link
-                        </button>
-                        <button class="btn btn-info ">
-                            <span class="fa fa-heart"></span> Like
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card col-3" style="width: 18rem;">
-                    <img src="static/image/iceberg.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Why does the sea level rise</h5>
-                        <p class="card-text">The Reef is in grave danger due to climate change. Read more and get
-                            involved...</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Researcher: Yi Liu</li>
-                    </ul>
-                    <div class="card-body">
-                        <button class="btn btn-info">
-                            <span class="fa fa-pencil"></span> Card link
-                        </button>
-                        <button class="btn btn-info ">
-                            <span class="fa fa-heart"></span> Like
-                        </button>
-                    </div>
-                </div>
-                <div class="card col-3" style="width: 18rem;">
-                    <img src="static/image/iceberg.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Why does the sea level rise</h5>
-                        <p class="card-text">The Reef is in grave danger due to climate change. Read more and get
-                            involved...</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Researcher: Yi Liu</li>
-                    </ul>
-                    <div class="card-body">
-                        <button class="btn btn-info">
-                            <span class="fa fa-pencil"></span> Card link
-                        </button>
-                        <button class="btn btn-info ">
-                            <span class="fa fa-heart"></span> Like
-                        </button>
-                    </div>
-                </div>
-                <div class="card col-3" style="width: 18rem;">
-                    <img src="static/image/iceberg.jpeg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Why does the sea level rise</h5>
-                        <p class="card-text">The Reef is in grave danger due to climate change. Read more and get
-                            involved...</p>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Researcher: Yi Liu</li>
-                    </ul>
-                    <div class="card-body">
-                        <button class="btn btn-info">
-                            <span class="fa fa-pencil"></span> Card link
-                        </button>
-                        <button class="btn btn-info ">
-                            <span class="fa fa-heart"></span> Like
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
 {% endblock content %}
 
