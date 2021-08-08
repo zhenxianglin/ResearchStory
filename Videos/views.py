@@ -4,7 +4,6 @@ from django.views import generic
 from django.shortcuts import get_object_or_404, redirect
 from Videos.forms import VideoCommentForm, NewVideoForm
 from django.http import HttpResponse, HttpResponseRedirect, Http404
-
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -28,17 +27,6 @@ class VideoIndexView(generic.ListView):
             return classification.video_set.all().order_by("-created_time")
         else:
             return Video.objects.filter().order_by('-created_time')
-
-
-# class VideoDetail(generic.DetailView):
-#     model = Video
-#     template_name = 'Videos/video_detail.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(VideoDetail, self).get_context_data(**kwargs)
-#         video_comments = VideoComment.objects.filter()
-#         context['video_comments'] = video_comments
-#         return context
 
 
 def video_detail(request, video_id):
@@ -95,7 +83,7 @@ def new_video(request):
 def edit_video(request, video_id):
     video = Video.objects.get(id=video_id)
     classification = Classification.objects.all().values()
-    #  保护页面
+    #  Protect page
     if video.uploader != request.user:
         raise Http404
     if request.method == "POST":
@@ -115,8 +103,9 @@ def edit_video(request, video_id):
             return HttpResponse("<h1>The content of the form is incorrect, please fill in again.</h1>")
     else:
         form = NewVideoForm(instance=video)
-        context = {'video':video, 'classification':classification, 'form':form}
+        context = {'video': video, 'classification': classification, 'form': form}
         return render(request, "Videos/edit_video.html", context)
+
 
 @login_required
 def video_delete(request, video_id):

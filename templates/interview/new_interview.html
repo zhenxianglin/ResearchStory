@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <link rel="stylesheet" href="/static/bootstrap-4.6.0-dist/css/timepicker.css" />
+    <link rel="stylesheet" href="/static/bootstrap-4.6.0-dist/css/timepicker.css"/>
     <script src="./static/bootstrap-4.6.0-dist/js/timepicker.js"></script>
-     <div style="text-align: center;">
+    <div style="text-align: center;">
         <a class="navbar-brand" href="{% url 'Story:getStory' story.id %}">
             <h4>{{ story.title_name }} </h4>
         </a>
-     </div>
+    </div>
 
 {% endblock header %}
 
@@ -15,123 +15,123 @@
 {% block content %}
     <style type="text/css">
         div.content {
-                margin: 0 auto;
-                padding-top:10px;
-                padding-bottom:20px;
-                padding-left:15px;
-                background-color:rgba(255,255,255,0.8);
-            }
+            margin: 0 auto;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            padding-left: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
 
 
     </style>
     <div class="content">
-    <div style="text-align: center;">
-        <h3>Book a new interview about the research story： </h3>
-        <h7>{{ date_and_time }}</h7>
-    </div>
-    <hr/>
-    <div style="text-align: center;">
-        <form action="{% url "interview:new_interview" story.id %}" method="post" class="form">
-            {% csrf_token %}
-            <div class="container">
-            <div class="row">
-                <div class="col-xl-6">
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">Interview name:</div>
-                        <input type="text" class="form-control" style="width:340px;height:30px;float:right;"
-                                           name="interview_name" placeholder="put your name in" required>
-                    </div>
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">Interview link:</div>
-                        <input type="text" class="form-control" style="width:340px;height:30px;float:right;"
-                                           name="interview_link" placeholder="http://" required>
-                    </div>
+        <div style="text-align: center;">
+            <h3>Book a new interview about the research story： </h3>
+            <h7>{{ date_and_time }}</h7>
+        </div>
+        <hr/>
+        <div style="text-align: center;">
+            <form action="{% url "interview:new_interview" story.id %}" method="post" class="form">
+                {% csrf_token %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="row form-group">
+                                <div class="p" style="width:150px;height:40px;float:left;">Interview name:</div>
+                                <input type="text" class="form-control" style="width:340px;height:30px;float:right;"
+                                       name="interview_name" placeholder="put your name in" required>
+                            </div>
+                            <div class="row form-group">
+                                <div class="p" style="width:150px;height:40px;float:left;">Interview link:</div>
+                                <input type="text" class="form-control" style="width:340px;height:30px;float:right;"
+                                       name="interview_link" placeholder="http://" required>
+                            </div>
 
 
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">Start at:</div>
-{#                        {{form.start_time}}#}
-                        <input class="form-control" name="start_time" style="width:310px;height:30px;float:right;" value="00:30:59">
-{#                        <input type="text" class="form-control" style="width:310px;height:30px;float:right;"#}
-{#                                           name="start_time" placeholder="12:00:00" required>#}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
-                              <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
-                              <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                            </svg>
-                    </div>
+                            <div class="row form-group">
+                                <div class="p" style="width:150px;height:40px;float:left;">Start at:</div>
 
-                    <div class="row form-group">
-                        <div class="p" style="width:150px;height:40px;float:left;">End at:</div>
-{#                        {{form.end_time}}#}
-                        <input class="form-control" name="end_time" style="width:310px;height:30px;float:right;" value="00:30:59">
-{#                        <input type="text" class="form-control" style="width:310px;height:30px;float:right;"#}
-{#                                           name="end_time" placeholder="12:00:00" required>#}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
-                              <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
-                              <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
-                            </svg>
-                    </div>
+                                <input class="form-control" name="start_time"
+                                       style="width:310px;height:30px;float:right;" value="00:30:59">
 
-{#                    {{ form.monday }}#}
-{#                    {{ form.tuesday }}#}
-{#                    {{ form.wednesday }}#}
-{#                    {{ form.thursday }}#}
-{#                    {{ form.friday }}#}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                     class="bi bi-calendar-date" viewBox="0 0 16 16">
+                                    <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                                </svg>
+                            </div>
 
-                        <div class="form-inline row">
-{#                            <input type="radio" class="btn-check form-control" name="monday" id="btn-check-1" autocomplete="off" checked>#}
-                            {{ form.monday }}
-                            <label class="btn" for="btn-check-1">Monday</label>
+                            <div class="row form-group">
+                                <div class="p" style="width:150px;height:40px;float:left;">End at:</div>
 
-{#                            <input type="radio" class="btn-check form-control" name="tuesday" id="btn-check-2" autocomplete="off">#}
-                            {{ form.tuesday }}
-                            <label class="btn" for="btn-check-2">Tuesday</label>
+                                <input class="form-control" name="end_time" style="width:310px;height:30px;float:right;"
+                                       value="00:30:59">
 
-{#                            <input type="radio" class="btn-check form-control" name="wednesday" id="btn-check-3" autocomplete="off" disabled>#}
-                           {{ form.wednesday }}
-                            <label class="btn " for="btn-check-3">Wednesday</label>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                     class="bi bi-calendar-date" viewBox="0 0 16 16">
+                                    <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                                </svg>
+                            </div>
 
-{#                            <input type="radio" class="btn-check form-control" name="thursday" id="btn-check-4" autocomplete="off">#}
-                            {{ form.thursday }}
-                            <label class="btn" for="btn-check-4">Thursday</label>
 
-{#                            <input type="radio" class="btn-check form-control" name="friday" id="option4" autocomplete="off">#}
-                            {{ form.friday }}
-                            <label class="btn" for="option4">Friday</label>
+                            <div class="form-inline row">
+
+                                {{ form.monday }}
+                                <label class="btn" for="btn-check-1">Monday</label>
+
+
+                                {{ form.tuesday }}
+                                <label class="btn" for="btn-check-2">Tuesday</label>
+
+
+                                {{ form.wednesday }}
+                                <label class="btn " for="btn-check-3">Wednesday</label>
+
+
+                                {{ form.thursday }}
+                                <label class="btn" for="btn-check-4">Thursday</label>
+
+
+                                {{ form.friday }}
+                                <label class="btn" for="option4">Friday</label>
+                            </div>
+                            <div class="row"></div>
+
+                            <div class="row form-group " style="margin-top: 20px">
+                                <div class="p" style="width:150px;height:40px;float:left;margin-top: 20px">Provide more
+                                    details:
+                                </div>
+                                <input type="text" class="form-control" style="width:340px;height:90px;float:right;"
+                                       name="more_details" placeholder="" required>
+                            </div>
+
+
                         </div>
-                        <div class="row"> </div>
-
-                        <div class="row form-group " style="margin-top: 20px">
-                            <div class="p" style="width:150px;height:40px;float:left;margin-top: 20px">Provide more details:</div>
-                            <input type="text" class="form-control" style="width:340px;height:90px;float:right;"
-                                           name="more_details" placeholder="" required>
+                        <div class="col-xl-6">
+                            <div class="img-rounded">
+                                <img src="/static/image/interview.jpg" class="img-rounded " alt="interview image"
+                                     style="width: 480px;height: 350px">
+                            </div>
                         </div>
 
-
-                        </div>
-                <div class="col-xl-6">
-                    <div class="img-rounded">
-                        <img src="/static/image/interview.jpg" class="img-rounded " alt="interview image" style="width: 480px;height: 350px">
                     </div>
+
                 </div>
 
-                </div>
-
-            </div>
-
-            <button name="submit" class="btn btn-primary">Send</button>
+                <button name="submit" class="btn btn-primary">Send</button>
 
 
-        </form>
+            </form>
 
-    </div>
+        </div>
     </div>
 
 
 {% endblock content %}
 {% block js %}
     <script>
-		$('input').timePicker();
-</script>
+        $('input').timePicker();
+    </script>
 {% endblock %}
 

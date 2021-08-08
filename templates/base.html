@@ -4,7 +4,7 @@
         margin: 0;
         padding: 0;
         font-family: sans-serif;
-        background: url("/static/assets/img/homepage1.jpeg") no-repeat center 0px;
+        background: url("/static/assets/img/homehome.jpg") no-repeat center 0px;
         background-size: cover;
     <!-- width: 100 %;
     --> <!-- height: 40 %;
@@ -24,7 +24,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Research stories</title>
-    <!--    <meta name="viewport" content="width=device-width,initial-scale=1">-->
+
     <link rel="stylesheet" href="{% static 'bootstrap-4.6.0-dist/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -32,14 +32,9 @@
 
 
 <body>
-<!--{#<style type="text/css">#}-->
-<!--{#    div.bg {#}-->
-<!--{#           background:url("/static/assets/img/homeimg1.jpeg") ;#}-->
-<!--{#           background-size:auto;}#}-->
-<!--{##}-->
-<!--{#</style>#}-->
+
 <div class="container " style="background-color: transparent">
-    {#<div class="row bg">#}
+
     <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
         <a class="navbar-brand mb-md-0" href="#">Research</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -70,7 +65,8 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'Story:storyListCategory' 'ComputerScience' %}">ComputerScience</a>
                         <a class="dropdown-item" href="{% url 'Story:storyListCategory' 'Science' %}">Science</a>
-                        <a class="dropdown-item" href="{% url 'Story:storyListCategory' 'Engineering' %}">Engineering</a>
+                        <a class="dropdown-item"
+                           href="{% url 'Story:storyListCategory' 'Engineering' %}">Engineering</a>
                         <a class="dropdown-item" href="{% url 'Story:storyListCategory' 'Law' %}">Law</a>
                         <a class="dropdown-item" href="{% url 'Story:storyListCategory' 'Medicine' %}">Medicine</a>
                         <a class="dropdown-item" href="{% url 'Story:storyListCategory' 'Business' %}">Business</a>
@@ -108,23 +104,6 @@
 
             <form class="form-inline my-2 my-lg-0">
 
-                <!--                {#                    <ul class="btn btn-outline-success">#}-->
-                <!--                {#                    {% if user.is_authenticated %}#}-->
-                <!--                {#                        <a>Hello, {{ user.username }}.</a>#}-->
-                <!--                {#                        <a href="{% url 'Users:logout' %}">Logout</a>#}-->
-                <!--                {#                    {% else %}#}-->
-                <!--                {##}-->
-                <!--                {#                        <a href="{% url 'Users:register' %}">Register</a>#}-->
-                <!--                {#                        <a href="{% url 'Users:login' %}">Login</a>#}-->
-                <!--                {#                    {% endif %}#}-->
-                <!--                {#                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"#}-->
-                <!--                {#                         class="bi bi-person-circle" viewBox="0 0 16 16">#}-->
-                <!--                {#                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>#}-->
-                <!--                {#                        <path fill-rule="evenodd"#}-->
-                <!--                {#                              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>#}-->
-                <!--                {#                    </svg>#}-->
-                <!--                {##}-->
-                <!--                {#                </ul>#}-->
 
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle"
@@ -207,12 +186,10 @@
             </form>
         </div>
     </nav>
-    {#    <img src="/static/assets/img/homeimg1.jpeg" class="img-fluid" alt="Responsive image">#}
+
 </div>
 </div>
-{#<div class="container">#}
-{#<img src="/static/assets/img/homeimg1.jpeg" class="img-fluid" alt="Responsive image">#}
-{#</div>#}
+
 <div class="container">
 
     <div class="page-header">
