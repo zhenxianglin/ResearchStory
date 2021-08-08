@@ -42,7 +42,9 @@ $ python manage.py runserver 8000
 ```
 <br></br>
 ## **Feature Instruction**
-Input url: [https://researchstory-19.herokuapp.com/](https://researchstory-19.herokuapp.com/) can open the website. Here is the front-page of the website.
+We also deploy the website. Its url is [https://researchstory-19.herokuapp.com/](https://researchstory-19.herokuapp.com/)
+<br></br>
+Input url can open the website. Here is the front-page of the website.
 <br></br>
 ![](https://github.com/blastxiaol/ResearchStory/blob/front-end/readme_img/1.png)
 <br></br>
