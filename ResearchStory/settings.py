@@ -43,38 +43,24 @@ INSTALLED_APPS = [
     'Videos',
     'embed_video',
 
-    # 第三方应用程序
-    'ckeditor',  # 富文本编辑器
-    'ckeditor_uploader',  # 富文本编辑器上传图片模块
+    'ckeditor',
+    'ckeditor_uploader',
     'mptt',
     'password_reset',
 
-    # allauth 启动必须项
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
 
-    # 可添加需要的第三方登录
     'allauth.socialaccount.providers.github',
-
 ]
-# 媒体文件配置
+
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-CKEDITOR_UPLOAD_PATH = "img"  # 上传图片保存路径，如果没有图片存储或者使用自定义存储位置，那么则直接写  ' ' ,如果是使用django本身的存储方式，那么你就指名一个目录用来存储即可。
-# CKEDITOR_IMAGE_BACKEND = 'pillow'
-# 富文本编辑器ckeditor配置
+CKEDITOR_UPLOAD_PATH = "img"
 CKEDITOR_CONFIGS = {
-    # （1）默认配置
-    # 'default': {
-    #     'toolbar': 'full',  # 工具条功能
-    #     'height': 300,  # 编辑器高度
-    #     'width': 800,  # 编辑器宽
-    # },
-
-    # （3）自定义配置带代码块显示
     'default': {
         'toolbar': (
             ['div', 'Source', '-', 'Save', 'NewPage', 'Preview', '-', 'Templates'],
@@ -92,12 +78,11 @@ CKEDITOR_CONFIGS = {
             ['Blockquote', 'CodeSnippet'],
         ),
         'width': 'auto',
-        # 添加按钮在这里
+
         'toolbar_Custom': [
             ['NumberedList', 'BulletedList'],
             ['Blockquote', 'CodeSnippet'],
         ],
-        # 插件
         'extraPlugins': ','.join(['codesnippet', 'widget', 'lineutils', ]),
     },
 }
@@ -160,9 +145,7 @@ DATABASES = {
 AUTH_USER_MODEL = 'Users.User'
 
 AUTHENTICATION_BACKENDS = [
-    # Django 后台可独立于 allauth 登录
     'django.contrib.auth.backends.ModelBackend',
-    # 配置 allauth 独有的认证方法，如 email 登录
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
@@ -212,26 +195,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # user login required
 LOGIN_URL = 'Users/login/'
 
-# abc
-
-# SMTP服务器
 EMAIL_HOST = 'smtp.gmail.com'
-# 邮箱名
+
 EMAIL_HOST_USER = 'your email'
-# 邮箱密码
+
 EMAIL_HOST_PASSWORD = 'your password'
-# 发送邮件的端口
+
 EMAIL_PORT = 587
-# 是否使用 TLS
+
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = True
-# 默认的发件人
+
 DEFAULT_FROM_EMAIL = 'tracyguoji@gmail.com'
 
-# 设置站点
 SITE_ID = 1
 
-# 登录成功后重定向地址
 LOGIN_REDIRECT_URL = '/'
-
-

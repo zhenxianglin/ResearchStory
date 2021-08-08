@@ -3,12 +3,11 @@ from Users.models import User
 
 
 class Link(models.Model):
+    """create a meeting related table to save the info"""
     meeting_name = models.CharField(max_length=500)
     meeting_link = models.URLField(max_length=2000)
-
     start_time = models.TimeField(default='12:00:00')
     end_time = models.TimeField(default='12:00:00')
-
     monday = models.BooleanField(default=False)
     tuesday = models.BooleanField(default=False)
     wednesday = models.BooleanField(default=False)
