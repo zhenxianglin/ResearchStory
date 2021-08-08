@@ -5,8 +5,9 @@
 
     <hr/>
     <div class="text">
-      <h1 class="display-4" style="margin-left: 10px">Video</h1>
-      <p class="lead" >This is a video unit, — makes short story video sharing, discussion and uploading. In this page, you will enjoy the educational videos.</p>
+        <h1 class="display-4" style="margin-left: 10px">Video</h1>
+        <p class="lead">This is a video unit, — makes short story video sharing, discussion and uploading. In this page,
+            you will enjoy the educational videos.</p>
     </div>
     <div class="classification">
         <h3 class=" mb-2 mb-2">
@@ -52,7 +53,6 @@
             white-space: nowrap;
         }
 
-
     </style>
     <div class="container">
 
@@ -75,8 +75,8 @@
                         <div class="card-header product-buyer-name" style="height: 60px"><a
                                 href="{% url "Videos:video_detail" item.id %}">{{ item.title }}</a></div>
                         <div class="card-body">
-                                {% video item.url '300x180' %}
-{#                                {% endvideo %}#}
+                            {% video item.url '300x180' %}
+
                         </div>
                         <div class="card-footer">
                             <h7>Post on {{ item.created_time|date:"Y-m-d H:i" }} by {{ item.uploader }}</h7>
