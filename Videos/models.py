@@ -7,6 +7,7 @@ from .validators import file_size
 
 
 class Classification(models.Model):
+    """ create a table about classification of Videos"""
     list_display = ('title')
     title = models.CharField(max_length=100, blank=True, null=True)
     status = models.BooleanField(default=True)
@@ -19,17 +20,13 @@ class Classification(models.Model):
 
 
 class Video(models.Model):
-    title = models.CharField(max_length=128)
-    desc = models.TextField(max_length=320, blank=True, null=True)
-
+    """create a table of video information and its format"""
+    title = models.CharField(max_length=228)
+    desc = models.TextField(blank=True, null=True)
     url = EmbedVideoField(blank=True, null=True)
-
     file = models.FileField(upload_to='video/%y', validators=[file_size], blank=True, null=True)
-
     classification = models.ForeignKey(Classification, on_delete=models.CASCADE, null=True)
-
     uploader = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-
     created_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -43,12 +40,10 @@ class Video(models.Model):
 
 
 class VideoComment(models.Model):
+    """A table is to save the information of video related comments"""
     video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name="video_comments")
-
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="video_comments")
-
     content = models.TextField()
-
     created_time = models.DateTimeField(auto_now_add=True)
 
     class Meta:

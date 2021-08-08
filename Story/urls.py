@@ -1,8 +1,12 @@
+<<<<<<< HEAD
 from django.conf.urls import url
+=======
+>>>>>>> front-end
 from django.urls import path, re_path, include
 
 from .views import *
 from django.conf.urls.static import static
+from django.views.static import serve
 from django.conf import settings
 from django.views.static import serve
 from django.conf import settings
@@ -23,5 +27,8 @@ urlpatterns = [
                   path(r'delete=<int:story_id>', delete, name="delete"),
                   re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}, name='static'),
                   re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
+<<<<<<< HEAD
 
+=======
+>>>>>>> front-end
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

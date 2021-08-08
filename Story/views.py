@@ -1,32 +1,29 @@
+import os
+import re
+from datetime import datetime
 from django.shortcuts import render
-from .models import Story
-from .storyform import StoryForm, AdvancedSearchForm
-
 from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.db.models import Q
-
 from comment.models import Comment
 from comment.forms import CommentForm
-import re
 from interview.models import Interview
-from datetime import datetime
-import os
-from django.contrib import messages
-
+from .models import Story
+from .storyform import StoryForm, AdvancedSearchForm
 from ResearchStory.settings import MEDIA_ROOT
 
-def edit(request,story_id):
-    story=Story.objects.get(id=story_id)
+
+def edit(request, story_id):
+    """
+    :param story_id: id in Story database
+    This function is used to edit existed story
+    """
+    story = Story.objects.get(id=story_id)
     if request.method == "GET":
-         form = StoryForm(instance=story)
-         '''kwargs={"form":form,
-                 # "story":story,
-         }
-         return render(request, 'edit.html', kwargs)'''
+        form = StoryForm(instance=story)
+        return render(request, 'edit.html', locals())
     elif request.method == "POST":
-        form = StoryForm(instance=story,data=request.POST)
-        #if form.is_valid():
+        form = StoryForm(instance=story, data=request.POST)
         story.title_name = request.POST.get('title')
         story.category = request.POST.get('category')
         story.text = request.POST.get('text')
@@ -36,23 +33,21 @@ def edit(request,story_id):
         filepath = os.path.join(MEDIA_ROOT, 'img/' + f.name)
         with open(filepath, 'wb') as fp:
             for info in f.chunks():
-                fp.write(info)  # chunks是以文件流的方式来接受文件，分段写入
-        story.img = 'img/' + f.name
+                fp.write(info)
+        story.img = 'img/' + f.name     # rename the image
         story.author = request.POST.get('author')
         story.author_intro = request.POST.get('author_intro')
         story.background = request.POST.get('background')
         story.tags = request.POST.get('tags')
         story.user = request.user
         story.save()
-        return HttpResponseRedirect(reverse("Story:getStory",args=[story_id]))
-
-        # if form.is_valid():
-        #     return HttpResponseRedirect(reverse("Story:getStory"))
-
-    return render(request, 'edit.html', locals())
+        return HttpResponseRedirect(reverse("Story:getStory", args=[story_id]))
 
 
 def upload(request):
+    """
+    This function is used to upload a new story
+    """
     if request.method == "GET":
         form = StoryForm()
         return render(request, 'upload.html', locals())
@@ -63,73 +58,54 @@ def upload(request):
         mistake = False
 
         if request.POST.get('title'):
-            print("title: ", request.POST.get('title'))
             story.title_name = request.POST.get('title')
         else:
             kwargs["title"] = "You must write title name."
             mistake = True
 
         if request.POST.get('category'):
-            print("category: ", request.POST.get('category'))
             story.category = request.POST.get('category')
         else:
             kwargs["category"] = "You must choose a category."
             mistake = True
 
         if request.POST.get('text'):
-            print("text: ", request.POST.get('text'))
             story.text = request.POST.get('text')
         else:
             kwargs["text"] = "You must write something in text form."
             mistake = True
 
         if request.POST.get('background'):
-            print("background: ", request.POST.get('background'))
             story.background = request.POST.get('background')
         else:
             kwargs["background"] = "You must provide a reseach background."
             mistake = True
 
         if request.POST.get('author'):
-            print("Author: ", request.POST.get('author'))
             story.author = request.POST.get('author')
         else:
-            user = request.POST.get('user')
+            user = request.user
             story.author = user.username
-            print("Author: ", user.username)
 
         if request.POST.get("author_intro"):
-            print("author_intro: ", request.POST.get("author_intro"))
             story.author_intro = request.POST.get('author_intro')
         else:
             story.author_intro = "This author does not introduce himself/herself."
-            print("Author_intro: ", story.author_intro )
 
         if request.FILES.get('img'):
             f = request.FILES['img']
             filepath = os.path.join(MEDIA_ROOT, 'img/' + f.name)
             with open(filepath, 'wb') as fp:
                 for info in f.chunks():
-                    fp.write(info)  # chunks是以文件流的方式来接受文件，分段写入
-            print('filepath:', filepath)
-            print("img: ", request.FILES.get('img'))
+                    fp.write(info)
             story.img = 'img/' + f.name
         else:
-            story.img = "default.png"
-            print(story.img)
+            story.img = "img/default.png"
 
-        print("tag: ", request.POST.get('tags'))
         story.tags = request.POST.get('tags')
-
-        print("video: ", request.POST.get("videoUrl"))
         story.video = request.POST.get('videoUrl')
-
-        print("paper_link: ", request.POST.get("paper_link"))
         story.paper_link = request.POST.get('paperLink')
-
         story.user = request.user
-        # story.img = 'img/'+request.POST.get('img')
-        # print(request.FILES['file'])
 
         if not mistake:
             story.save()
@@ -139,6 +115,10 @@ def upload(request):
 
 
 def delete(request, story_id):
+    """
+        :param story_id: id in Story database
+        This function is used to delete existed story
+    """
     story = Story.objects.filter(id=story_id)
     if story:
         story.delete()
@@ -146,6 +126,9 @@ def delete(request, story_id):
 
 
 def search(request):
+    """
+        This function is used to search story by title name
+    """
     if request.method == "POST":
         keyword = request.POST.get("keyword")
 
@@ -161,6 +144,10 @@ def search(request):
 
 
 def advancedSearch(request):
+    """
+        This function is used to search a story by
+        title name, category, time and author name.
+    """
     if request.method == "GET":
         form = AdvancedSearchForm()
         return render(request, 'advancedSearchPage.html', locals())
@@ -183,12 +170,12 @@ def advancedSearch(request):
         author_name = request.POST.get("author_name")
 
         que = Q()
-        if author_name!='':
-            for word in author_name.split( ):
+        if author_name != '':
+            for word in author_name.split():
                 que &= Q(author__icontains=word)
 
-        if keyword!='':
-            for word in keyword.split( ):
+        if keyword != '':
+            for word in keyword.split():
                 que &= Q(title_name__icontains=word)
             if keyword_negate == "on":
                 que = ~que
@@ -219,6 +206,10 @@ def advancedSearch(request):
 
 
 def storyList(request):
+    """
+        This function is used to search a story by
+        title name, category, time and author name.
+    """
     if request.method == "GET":
         story = Story.objects.filter().order_by('-created_time')
         kwarg = {
@@ -239,6 +230,10 @@ def storyList(request):
 
 
 def storyListSortBy(request, sort_by):
+    """
+    :param sort_by: "time" or "hot"
+    This function can sort the story by time or views
+    """
     story = Story.objects.filter()
     if sort_by == "time":
         story = story.order_by("-created_time")
@@ -252,8 +247,10 @@ def storyListSortBy(request, sort_by):
 
 
 def storyListCategory(request, category):
-    print("storyListCategory")
-    print("method =", request.method)
+    """
+    :param category: different category
+    This function can sort the story by category
+    """
     if request.method == "GET":
         story = Story.objects.filter(category=category).order_by('-created_time')
         kwarg = {
@@ -274,12 +271,16 @@ def storyListCategory(request, category):
 
 
 def storyListCategorySortBy(request, category, sort_by):
+    """
+    :param category:  different category
+    :param sort_by: "time" or "hot"
+    This function sort the story by category and time or views
+    """
     story = Story.objects.filter(category=category)
     if sort_by == "time":
         story = story.order_by("-created_time")
     elif sort_by == "hot":
         story = story.order_by("-views")
-    print(story)
     kwarg = {
         "story": story,
     }
@@ -287,6 +288,12 @@ def storyListCategorySortBy(request, category, sort_by):
 
 
 def storyFind(request, category, sort_by, title):
+    """
+        :param category: different category
+        :param sort_by: "time" or "hot"
+        :param title: story title name
+        This function sort the story by category and time or views and title
+    """
     que = Q()
     if title != '_all':
         for word in title.split():
@@ -308,10 +315,17 @@ def storyFind(request, category, sort_by, title):
 
 
 def time_in_mins(hr, min):
+    """
+    This function transfer hour and minutes to minutes
+    """
     return hr * 60 + min
 
 
 def getStory(request, story_id):
+    """
+    :param story_id: id of story in the database
+    The function is used to enter the page of a story
+    """
     story = Story.objects.get(id=story_id)
     title_name = story.title_name
     created_time = story.created_time
@@ -343,22 +357,18 @@ def getStory(request, story_id):
     author_intro = story.author_intro
     background = story.background
 
-
     try:
         video = f"https://www.youtube.com/embed/{video.split('/')[-1]}"
     except AttributeError:
         pass
 
-    interview_list = Interview.objects.filter(related_story_name = story_id)
+    interview_list = Interview.objects.filter(related_story_name=story_id)
     current_time = datetime.now()
     date_and_time = current_time.strftime("%Y-%m-%d, %A,  %H:%M:%S")
     current_hour = current_time.hour  # 3:00 pm -> 15
     current_min = current_time.minute  # 3:00 pm -> 0
-    # interview_list = list(Interview.objects.filter(related_story_name=story_id))
     current_interview = None
     for interview in interview_list:
-        start_time_hour = interview.start_time.hour
-        start_time_min = interview.start_time.minute
         end_time_hour = interview.end_time.hour
         end_time_min = interview.end_time.minute
         day_list = []
@@ -377,7 +387,6 @@ def getStory(request, story_id):
             continue
         current_interview = interview
 
-
     kwarg = {
         "img": img,
         "title_name": title_name,
@@ -387,14 +396,11 @@ def getStory(request, story_id):
         "text": text,
         "video": video,
         "paper_link": paper_link,
-
         'comments': comments,
         'comment_form': comment_form,
         'story': story,
-
-        'data_and_time':date_and_time,
-        'current_intervew':current_interview,
-
+        'data_and_time': date_and_time,
+        'current_intervew': current_interview,
         'tags': tags,
         'author': author,
         'author_intro': author_intro,

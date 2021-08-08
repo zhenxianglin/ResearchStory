@@ -1,4 +1,3 @@
-<!-- 载入静态文件 -->
 {% load static %}
 
 <!DOCTYPE html>
@@ -12,34 +11,23 @@
 <form action="." method="POST" id="reply_form">
     {% csrf_token %}
     <textarea input type="text" class="form-control" id="test" name="body" rows="3"></textarea>
-{#    <div class="form-group">#}
-{#        <div id="test">#}
-{#            {{ comment_form.media }}#}
-{#            {{ comment_form.body }}#}
-{#           #}
-{#        </div>#}
-{#    </div>#}
+
 </form>
-<!-- 提交按钮 -->
+
 <button onclick="confirm_submit({{ story_id }}, {{ parent_comment_id }})" class="btn btn-primary">Post</button>
 
 <script src="{% static 'jquery/jquery-3.3.1.js' %}"></script>
 <script src="{% static 'popper/popper-1.14.4.js' %}"></script>
 <script src="{% static 'bootstrap-4.6.0-dist/css/bootstrap.min.css' %}"></script>
 
-<!-- csrf token -->
+
 <script src="{% static 'csrf.js' %}"></script>
 
 <script>
-    {#$(function () {#}
-    {#    $(".django-ckeditor-widget").removeAttr('style');#}
 
-    {#;#}
 
     function confirm_submit(story_id, comment_id) {
-        {#let content = CKEDITOR.instances['id_body'].getData();#}
-        {#var textareaContents = $('#textareaContents').val();#}
-        // 调用 ajax 与后端交换数据
+
         $.ajax({
             url: '/comment/post_comment/' + story_id + '/' + comment_id,
             type: 'POST',
@@ -47,7 +35,7 @@
                 body: $('#test').val()
             },
 
-            // 成功回调
+
             success: function (e) {
                 if (e === '200 OK') {
                     parent.location.reload();

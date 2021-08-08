@@ -3,12 +3,14 @@ from Videos.models import VideoComment, Video, Classification
 
 
 class VideoCommentForm(forms.ModelForm):
+    """create a form for the comment of video"""
     class Meta:
         model = VideoComment
         fields = ['content']
 
 
 class NewVideoForm(forms.ModelForm):
+    """generate a form for uploading a new interview (meeting) video"""
     class Meta:
         model = Video
         fields = [
