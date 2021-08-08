@@ -180,9 +180,15 @@ def advancedSearch(request):
         time_negate = request.POST.get("time_negate")
         sort = request.POST.get("sort")
 
+        author_name = request.POST.get("author_name")
+
         que = Q()
+        if author_name!='':
+            for word in author_name.split( ):
+                que &= Q(author__icontains=word)
+
         if keyword!='':
-            for word in keyword.split():
+            for word in keyword.split( ):
                 que &= Q(title_name__icontains=word)
             if keyword_negate == "on":
                 que = ~que

@@ -84,16 +84,24 @@
 
         div.top_item {
 
-            width: 15%;
-            height: 50px;
+            width: 9%;
+            height: 45px;
+            float: left;
+            text-align: center;
+            padding:3px;
+        }
+
+        div.top_item_r {
+            width: 12%;
+            height: 45px;
             float: left;
             text-align: center;
             padding:3px;
         }
 
         div.top_item_b {
-            width: 10%;
-            height: 50px;
+            width: 4%;
+            height: 45px;
             float: left;
             text-align: center;
             padding:5px;
@@ -204,41 +212,61 @@
         <a id="search"><button class="button_s">Search</button></a>
 
         <a href="{% url 'Story:advancedSearch'%}">
-            <button class="button_as">Advanced Search</button>
+            <button class="button_as" id="a_search">Advanced Search</button>
         </a>
     </div>
     <div class="top">
         <div class="top_item">
             <a href="{% url 'Story:storyList' %}" id="a1">
-                <button class="button1" id="1">All Stories</button>
+                <button class="button1" id="1">All</button>
             </a>
         </div>
         <div class="top_item">
             <a href="{% url 'Story:storyListCategory' 'ComputerScience' %}" id="a2">
-                <button class="button1" id="2">Computer Science</button>
+                <button class="button1" id="2">Computer</button>
             </a>
         </div>
         <div class="top_item">
-            <a href="{% url 'Story:storyListCategory' 'Physics' %}" id="a3">
-                <button class="button1" id="3">Physics</button>
+            <a href="{% url 'Story:storyListCategory' 'Science' %}" id="a3">
+                <button class="button1" id="3">Science</button>
             </a>
         </div>
         <div class="top_item">
-            <a href="{% url 'Story:storyListCategory' 'ElectricalEngineering' %}" id="a4">
-                <button class="button1" id="4">Electrical Engineering</button>
+            <a href="{% url 'Story:storyListCategory' 'Engineering' %}" id="a4">
+                <button class="button1" id="4">Engineering</button>
+            </a>
+        </div>
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'Law' %}" id="a5">
+                <button class="button1" id="5">Law</button>
+            </a>
+        </div>
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'Medicine' %}" id="a6">
+                <button class="button1" id="6">Medicine</button>
+            </a>
+        </div>
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'Business' %}" id="a7">
+                <button class="button1" id="7">Business</button>
+            </a>
+        </div>
+        <div class="top_item">
+            <a href="{% url 'Story:storyListCategory' 'Art' %}" id="a8">
+                <button class="button1" id="8">Art</button>
             </a>
         </div>
 
         <div class="top_item_b">
         </div>
-        <div class="top_item">
+        <div class="top_item_r">
             <a id="latest_stories" href="{% url 'Story:storyListSortBy' 'time' %}">
-                <button class="button2" id="5">Latest Stories</button>
+                <button class="button2" id="sb1">Latest Stories</button>
             </a>
         </div>
-        <div class="top_item">
+        <div class="top_item_r">
             <a id="most_viewed" href="{% url 'Story:storyListSortBy' 'hot' %}">
-                <button class="button2" id="6">Most Viewed</button>
+                <button class="button2" id="sb2">Most Viewed</button>
             </a>
         </div>
     </div>
@@ -260,8 +288,19 @@
                 document.getElementById("2").style.background = "#909090";
                 document.getElementById("3").style.background = "#909090";
                 document.getElementById("4").style.background = "#909090";
-                document.getElementById("5").style.background = "#008CBA";
+                document.getElementById("5").style.background = "#909090";
                 document.getElementById("6").style.background = "#909090";
+                document.getElementById("7").style.background = "#909090";
+                document.getElementById("8").style.background = "#909090";
+                document.getElementById("sb1").style.background = "#008CBA";
+                document.getElementById("sb2").style.background = "#909090";
+
+                var a = getQueryString("advancedSearch");
+                if (a == 'T') {
+                    document.getElementById("1").style.background = "#909090";
+                    document.getElementById("sb1").style.background = "#909090";
+                    document.getElementById("a_search").style.background = "#4CAF50";
+                }
 
                 var c = getQueryString("category");
                 var title = '';
@@ -284,11 +323,11 @@
                 var sort_by = 'time';
 
                 if(d == 'time') {
-                    document.getElementById("5").style.background = "#008CBA";
+                    document.getElementById("sb1").style.background = "#008CBA";
                 }
                 if(d == 'hot') {
-                    document.getElementById("5").style.background = "#909090";
-                    document.getElementById("6").style.background = "#008CBA";
+                    document.getElementById("sb1").style.background = "#909090";
+                    document.getElementById("sb2").style.background = "#008CBA";
                     sort_by = 'hot'
                 }
 
@@ -297,20 +336,42 @@
                     document.getElementById("2").style.background = "#ff8800";
                     document.getElementById("1").style.background = "#909090";
                 }
-                if(c == 'Physics') {
+                if(c == 'Science') {
                     document.getElementById("3").style.background = "#ff8800";
                     document.getElementById("1").style.background = "#909090";
                 }
-                if(c == 'ElectricalEngineering') {
+                if(c == 'Engineering') {
                     document.getElementById("4").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
+                }
+                if(c == 'Law') {
+                    document.getElementById("5").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
+                }
+                if(c == 'Medicine') {
+                    document.getElementById("6").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
+                }
+                if(c == 'Business') {
+                    document.getElementById("7").style.background = "#ff8800";
+                    document.getElementById("1").style.background = "#909090";
+                }
+                if(c == 'Art') {
+                    document.getElementById("8").style.background = "#ff8800";
                     document.getElementById("1").style.background = "#909090";
                 }
 
 
                 document.getElementById("a1").href = "category=".concat("ALL" ,"_sort_by=", sort_by ,"_title=", title);
                 document.getElementById("a2").href = "category=".concat("ComputerScience" ,"_sort_by=", sort_by ,"_title=", title);
-                document.getElementById("a3").href = "category=".concat("Physics" ,"_sort_by=", sort_by ,"_title=", title);
-                document.getElementById("a4").href = "category=".concat("ElectricalEngineering" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a3").href = "category=".concat("Science" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a4").href = "category=".concat("Engineering" ,"_sort_by=", sort_by ,"_title=", title);
+
+                document.getElementById("a5").href = "category=".concat("Law" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a6").href = "category=".concat("Medicine" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a7").href = "category=".concat("Business" ,"_sort_by=", sort_by ,"_title=", title);
+                document.getElementById("a8").href = "category=".concat("Art" ,"_sort_by=", sort_by ,"_title=", title);
+
                 document.getElementById("latest_stories").href = "category=".concat(c ,"_sort_by=", "time" ,"_title=", title);
                 document.getElementById("most_viewed").href = "category=".concat(c ,"_sort_by=", "hot" ,"_title=", title);
                 document.getElementById("search").href = "category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
@@ -323,8 +384,14 @@
                     document.getElementById("input1").placeholder = '';
                     document.getElementById("a1").href = "category=".concat("ALL" ,"_sort_by=", sort_by ,"_title=", title);
                     document.getElementById("a2").href = "category=".concat("ComputerScience" ,"_sort_by=", sort_by ,"_title=", title);
-                    document.getElementById("a3").href = "category=".concat("Physics" ,"_sort_by=", sort_by ,"_title=", title);
-                    document.getElementById("a4").href = "category=".concat("ElectricalEngineering" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a3").href = "category=".concat("Science" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a4").href = "category=".concat("Engineering" ,"_sort_by=", sort_by ,"_title=", title);
+
+                    document.getElementById("a5").href = "category=".concat("Law" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a6").href = "category=".concat("Medicine" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a7").href = "category=".concat("Business" ,"_sort_by=", sort_by ,"_title=", title);
+                    document.getElementById("a8").href = "category=".concat("Art" ,"_sort_by=", sort_by ,"_title=", title);
+
                     document.getElementById("latest_stories").href = "category=".concat(c ,"_sort_by=", "time" ,"_title=", title);
                     document.getElementById("most_viewed").href = "category=".concat(c ,"_sort_by=", "hot" ,"_title=", title);
                     document.getElementById("search").href = "category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
