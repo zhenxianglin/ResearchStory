@@ -248,7 +248,7 @@ if cwd == '/app' or cwd[:4] == '/tmp':
 
     # Only allow heroku to host the project.
     # ALLOWED_HOSTS = ['*']
-    ALLOWED_HOSTS = ['https://sheltered-tor-17969.herokuapp.com', '127.0.0.1']
+    ALLOWED_HOSTS = ['sheltered-tor-17969.herokuapp.com', '127.0.0.1']
     DEBUG = False
 
     # Static asset configuration
