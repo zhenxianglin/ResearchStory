@@ -43,6 +43,9 @@ class Story(models.Model):
         return self.title_name
 
     def viewed(self):
+        """
+        views add one each use
+        """
         self.views += 1
         self.save(update_fields=['views'])
 

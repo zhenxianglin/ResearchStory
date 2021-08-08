@@ -2,7 +2,6 @@ from .models import Story
 from django import forms
 from ckeditor.fields import RichTextField
 from django.db import models
-from ckeditor.widgets import CKEditorWidget
 from datetime import datetime
 
 Choices = (('ComputerScience', 'ComputerScience'),
@@ -14,15 +13,14 @@ Choices = (('ComputerScience', 'ComputerScience'),
             ("Business", "Business"))
 
 class StoryForm(forms.ModelForm):
+    """
+    This form is used for upload
+    """
     title = forms.CharField(label='title', max_length=128,
                             widget=forms.TextInput(attrs={'placeholder': 'Please enter your title'})
                             )
     category = forms.ChoiceField(label='category', choices=Choices)
-    # viewsNum=forms.IntegerField(label='viewsNum')
-    # text=forms.CharField(widget=forms.Textarea)
-    # text=RichTextUploadingField(default='xxx', verbose_name='text')
     text = RichTextField()
-
     img = models.ImageField(upload_to='img/', null=False)
     videoUrl = forms.URLField(label='videoUrl', max_length=512,
                               widget=forms.URLInput(attrs={'placeholder': 'Please enter your content'})
@@ -46,7 +44,6 @@ class StoryForm(forms.ModelForm):
         fields = (
             'title',
             'category',
-            #'viewsNum',
             'paperLink',
             'text',
             'img',
@@ -55,7 +52,6 @@ class StoryForm(forms.ModelForm):
             'author_intro',
             'background',
             'tags',
-
         )
 
 
