@@ -14,19 +14,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.urls import path
+from django.urls import path, re_path
 from forum import views
 from .views import *
 from django.conf.urls.static import static
+from django.conf import settings
+from django.views.static import serve
 from django.conf import settings
 
 app_name = 'forum'
 
 urlpatterns = [
     path(r'', forumList, name='forumList'),
-    path(r'forum_id=<int:forum_id>',get_forum,name='get_forum'),
+    path(r'forum_id=<int:forum_id>', get_forum, name='get_forum'),
     path(r'post_forum/<int:forum_id>', post_forum, name='post_forum'),
     path(r'post_forum/<int:forum_id>/<int:parent_forumcomment_id>', post_forum, name='forum_reply'),
+    re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}, name='static'),
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}, name='media'),
 
 ]
 
