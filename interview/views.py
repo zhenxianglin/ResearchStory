@@ -24,6 +24,8 @@ def new_interview(request, story_id):
             new_interview.organizer = request.user
             new_interview.save()
             return HttpResponseRedirect(reverse('Story:getStory', args=[story_id]))
+        else:
+            return render(request, 'Fail/comments_fail.html')
 
     context = {'story': story,
                'form': form,

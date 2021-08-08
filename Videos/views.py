@@ -54,7 +54,8 @@ def post_video_comment(request, video_id):
             new_comment.save()
             return redirect(video)
         else:
-            return HttpResponse("The content of the form is incorrect, please fill in again. ")
+            return render(request, 'Fail/comments_fail.html')
+            # return HttpResponse("The content of the form is incorrect, please fill in again. ")
     else:
         return HttpResponse("Only POST requests are accepted for comments.")
 
@@ -99,7 +100,8 @@ def edit_video(request, video_id):
             # return HttpResponse("edit successful")
             return HttpResponseRedirect(reverse("Videos:video_detail", args=[video_id]))
         else:
-            return HttpResponse("<h1>The content of the form is incorrect, please fill in again.</h1>")
+            return render(request, 'Fail/comments_fail.html')
+            # return HttpResponse("<h1>The content of the form is incorrect, please fill in again.</h1>")
     else:
         form = NewVideoForm(instance=video)
         context = {'video': video, 'classification': classification, 'form': form}

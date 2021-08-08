@@ -34,7 +34,9 @@ def post_comment(request, story_id, parent_comment_id=None):
             new_comment.save()
             return redirect(story)
         else:
-            return HttpResponse('There is something wrong with this form. Please fill it out again. ')
+            return render(request,'Fail/comments_fail.html')
+
+            # return HttpResponse('There is something wrong with this form. Please fill it out again. ')
     # GET request
     else:
         comment_form = CommentForm()

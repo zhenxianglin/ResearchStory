@@ -75,7 +75,8 @@ def profile_edit(request, user_id):
             return HttpResponseRedirect(reverse("Users:edit", args=[user_id]))
             # return redirect("Users:edit", id=user_id)
         else:
-            return HttpResponse("The registration form is entered incorrectly. Please re-enter~")
+            return render(request, "Fail/profile_fail.html")
+            # return HttpResponse("The registration form is entered incorrectly. Please re-enter~")
 
     elif request.method == 'GET':
         profile_form = ProfileForm()
@@ -84,5 +85,5 @@ def profile_edit(request, user_id):
                    'user': user}
         return render(request, 'Users/edit.html', context)
     else:
-        return HttpResponse("Please use GET or POST to request data.")
-
+        return render(request, "Fail/post_get_fail.html")
+        # return HttpResponse("Please use GET or POST to request data.")
