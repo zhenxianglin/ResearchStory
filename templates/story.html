@@ -5,10 +5,10 @@
 
         div.content {
             margin: 0 auto;
-            padding-top:10px;
-            padding-bottom:20px;
-            padding-left:15px;
-            background-color:rgba(255,255,255,0.8);
+            padding-top: 10px;
+            padding-bottom: 20px;
+            padding-left: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
         }
 
         p1 {
@@ -56,7 +56,7 @@
             height: 200px;
             width: 240px;
             float: left;
-            overflow:hidden;
+            overflow: hidden;
         }
 
         div.title {
@@ -74,15 +74,14 @@
         }
 
 
-
         div.top {
             width: 100%;
             height: 55px;
             margin: 0px;
-            margin-top:10px;
+            margin-top: 10px;
             padding-top: 5px;
             padding-bottom: 5px;
-            background-color:rgba(255,255,255,0.8);
+            background-color: rgba(255, 255, 255, 0.8);
         }
 
         div.top_item {
@@ -91,7 +90,7 @@
             height: 45px;
             float: left;
             text-align: center;
-            padding:3px;
+            padding: 3px;
         }
 
         div.top_item_r {
@@ -99,7 +98,7 @@
             height: 45px;
             float: left;
             text-align: center;
-            padding:3px;
+            padding: 3px;
         }
 
         div.top_item_b {
@@ -107,7 +106,7 @@
             height: 45px;
             float: left;
             text-align: center;
-            padding:5px;
+            padding: 5px;
         }
 
         .button2 {
@@ -139,22 +138,24 @@
             width: 100%;
             height: 100%;
         }
-        div.search_b{
-            width:100%;
-            background-color:rgba(255,255,255,0.2);
-            padding:50px;
+
+        div.search_b {
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 50px;
         }
 
-        div.search{
+        div.search {
             width: 600px;
             margin: 0px auto;
             display: flex;
 
             /*border: 1px solid red;*/
         }
-        div.search input{
-            float: left;//左浮动
-            flex: 4;
+
+        div.search input {
+            float: left;
+        / / 左浮动 flex: 4;
             height: 50px;
             outline: none;
             border: 1px solid #909090;
@@ -163,7 +164,8 @@
             font-size: 17px;
             border-radius: 10px 0px 0px 10px;
         }
-        .button_s{
+
+        .button_s {
             float: right;
             flex: 1;
             height: 50px;
@@ -175,7 +177,8 @@
             width: 65px;
             border-radius: 0px 10px 10px 0px;
         }
-        .button_as{
+
+        .button_as {
             float: right;
             flex: 1;
             height: 50px;
@@ -188,35 +191,40 @@
             width: 125px;
             border-radius: 10px;
         }
-        div.search button:hover{
+
+        div.search button:hover {
             background-color: #4CAF50;
             font-weight: 750;
         }
 
-        .button1:hover{
+        .button1:hover {
             border: 3px solid #ff8800;
         }
 
-        .button2:hover{
+        .button2:hover {
             border: 3px solid #008CBA;
         }
 
         @media screen and (max-width: 1200px) {
             div.top {
-                width:1200px;
+                width: 1200px;
             }
+
             div.row {
-                width:1200px;
+                width: 1200px;
             }
+
             div.content {
-                width:1200px;
+                width: 1200px;
             }
         }
+
         @media screen and (max-width: 700px) {
             div.search_b {
-                width:700px;
+                width: 700px;
             }
         }
+
         div.footer {
             height: 80px;
             width: 100%;
@@ -286,144 +294,148 @@
         </div>
     </div>
 
-<div class="search_b">
-    <div class="search">
-        <input type="text" placeholder="Find stories..." name="keyword" id="input1" value="" oninput="change()"/>
-        <a id="search"><button class="button_s">Search</button></a>
+    <div class="search_b">
+        <div class="search">
+            <input type="text" placeholder="Find stories..." name="keyword" id="input1" value="" oninput="change()"/>
+            <a id="search">
+                <button class="button_s">Search</button>
+            </a>
 
-        <a href="{% url 'Story:advancedSearch'%}">
-            <button class="button_as" id="a_search">Advanced Search</button>
-        </a>
+            <a href="{% url 'Story:advancedSearch' %}">
+                <button class="button_as" id="a_search">Advanced Search</button>
+            </a>
+        </div>
     </div>
-</div>
 
     <script>
-                function getQueryString(name) {
-                    var query = window.location.href;
-                    query = query.replace(/_/g,"/")
-                    var vars = query.split("/");
-                    for (var i=0;i<vars.length;i++) {
-                        var pair = vars[i].split("=");
-                        if(pair.length > 1 && pair[0] == name){return pair[1];}
-                    }
-                    if(name == 'category') {
-                        return('ALL');
-                    }
-                    return false;
+        function getQueryString(name) {
+            var query = window.location.href;
+            query = query.replace(/_/g, "/")
+            var vars = query.split("/");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair.length > 1 && pair[0] == name) {
+                    return pair[1];
+                }
+            }
+            if (name == 'category') {
+                return ('ALL');
+            }
+            return false;
 
-                document.getElementById("1").style.background = "#ff8800";
-                document.getElementById("2").style.background = "#909090";
-                document.getElementById("3").style.background = "#909090";
-                document.getElementById("4").style.background = "#909090";
-                document.getElementById("5").style.background = "#909090";
-                document.getElementById("6").style.background = "#909090";
-                document.getElementById("7").style.background = "#909090";
-                document.getElementById("8").style.background = "#909090";
+            document.getElementById("1").style.background = "#ff8800";
+            document.getElementById("2").style.background = "#909090";
+            document.getElementById("3").style.background = "#909090";
+            document.getElementById("4").style.background = "#909090";
+            document.getElementById("5").style.background = "#909090";
+            document.getElementById("6").style.background = "#909090";
+            document.getElementById("7").style.background = "#909090";
+            document.getElementById("8").style.background = "#909090";
+            document.getElementById("sb1").style.background = "#008CBA";
+            document.getElementById("sb2").style.background = "#909090";
+
+            var a = getQueryString("advancedSearch");
+            if (a == 'T') {
+                document.getElementById("1").style.background = "#909090";
+                document.getElementById("sb1").style.background = "#909090";
+                document.getElementById("a_search").style.background = "#4CAF50";
+            }
+
+            var c = getQueryString("category");
+            var title = '';
+            if (getQueryString("title")) {
+                title = getQueryString("title");
+            }
+
+
+            if (title == '') {
+                title = '_all';
+            }
+            var t = title;
+            if (title == '_all') {
+                t = '';
+            }
+            document.getElementById("input1").value = t;
+
+            var d = getQueryString("by");
+            var sort_by = 'time';
+
+            if (d == 'time') {
                 document.getElementById("sb1").style.background = "#008CBA";
-                document.getElementById("sb2").style.background = "#909090";
-
-                var a = getQueryString("advancedSearch");
-                if (a == 'T') {
-                    document.getElementById("1").style.background = "#909090";
-                    document.getElementById("sb1").style.background = "#909090";
-                    document.getElementById("a_search").style.background = "#4CAF50";
-                }
-
-                var c = getQueryString("category");
-                var title = '';
-                if(getQueryString("title")){
-                    title = getQueryString("title");
-                }
+            }
+            if (d == 'hot') {
+                document.getElementById("sb1").style.background = "#909090";
+                document.getElementById("sb2").style.background = "#008CBA";
+                sort_by = 'hot'
+            }
 
 
-                if(title == ''){
+            if (c == 'ComputerScience') {
+                document.getElementById("2").style.background = "#ff8800";
+                document.getElementById("1").style.background = "#909090";
+            }
+            if (c == 'Science') {
+                document.getElementById("3").style.background = "#ff8800";
+                document.getElementById("1").style.background = "#909090";
+            }
+            if (c == 'Engineering') {
+                document.getElementById("4").style.background = "#ff8800";
+                document.getElementById("1").style.background = "#909090";
+            }
+            if (c == 'Law') {
+                document.getElementById("5").style.background = "#ff8800";
+                document.getElementById("1").style.background = "#909090";
+            }
+            if (c == 'Medicine') {
+                document.getElementById("6").style.background = "#ff8800";
+                document.getElementById("1").style.background = "#909090";
+            }
+            if (c == 'Business') {
+                document.getElementById("7").style.background = "#ff8800";
+                document.getElementById("1").style.background = "#909090";
+            }
+            if (c == 'Art') {
+                document.getElementById("8").style.background = "#ff8800";
+                document.getElementById("1").style.background = "#909090";
+            }
+
+
+            document.getElementById("a1").href = "category=".concat("ALL", "_sort_by=", sort_by, "_title=", title);
+            document.getElementById("a2").href = "category=".concat("ComputerScience", "_sort_by=", sort_by, "_title=", title);
+            document.getElementById("a3").href = "category=".concat("Science", "_sort_by=", sort_by, "_title=", title);
+            document.getElementById("a4").href = "category=".concat("Engineering", "_sort_by=", sort_by, "_title=", title);
+
+            document.getElementById("a5").href = "category=".concat("Law", "_sort_by=", sort_by, "_title=", title);
+            document.getElementById("a6").href = "category=".concat("Medicine", "_sort_by=", sort_by, "_title=", title);
+            document.getElementById("a7").href = "category=".concat("Business", "_sort_by=", sort_by, "_title=", title);
+            document.getElementById("a8").href = "category=".concat("Art", "_sort_by=", sort_by, "_title=", title);
+
+            document.getElementById("latest_stories").href = "category=".concat(c, "_sort_by=", "time", "_title=", title);
+            document.getElementById("most_viewed").href = "category=".concat(c, "_sort_by=", "hot", "_title=", title);
+            document.getElementById("search").href = "category=".concat(c, "_sort_by=", sort_by, "_title=", title);
+
+            function change() {
+                title = document.getElementById("input1").value;
+                if (title == '') {
                     title = '_all';
                 }
-                var t = title;
-                if(title == '_all'){
-                    t = '';
-                }
-                document.getElementById("input1").value = t;
+                document.getElementById("input1").placeholder = '';
+                document.getElementById("a1").href = "category=".concat("ALL", "_sort_by=", sort_by, "_title=", title);
+                document.getElementById("a2").href = "category=".concat("ComputerScience", "_sort_by=", sort_by, "_title=", title);
+                document.getElementById("a3").href = "category=".concat("Science", "_sort_by=", sort_by, "_title=", title);
+                document.getElementById("a4").href = "category=".concat("Engineering", "_sort_by=", sort_by, "_title=", title);
 
-                var d = getQueryString("by");
-                var sort_by = 'time';
+                document.getElementById("a5").href = "category=".concat("Law", "_sort_by=", sort_by, "_title=", title);
+                document.getElementById("a6").href = "category=".concat("Medicine", "_sort_by=", sort_by, "_title=", title);
+                document.getElementById("a7").href = "category=".concat("Business", "_sort_by=", sort_by, "_title=", title);
+                document.getElementById("a8").href = "category=".concat("Art", "_sort_by=", sort_by, "_title=", title);
 
-                if(d == 'time') {
-                    document.getElementById("sb1").style.background = "#008CBA";
-                }
-                if(d == 'hot') {
-                    document.getElementById("sb1").style.background = "#909090";
-                    document.getElementById("sb2").style.background = "#008CBA";
-                    sort_by = 'hot'
-                }
+                document.getElementById("latest_stories").href = "category=".concat(c, "_sort_by=", "time", "_title=", title);
+                document.getElementById("most_viewed").href = "category=".concat(c, "_sort_by=", "hot", "_title=", title);
+                document.getElementById("search").href = "category=".concat(c, "_sort_by=", sort_by, "_title=", title);
+            }
 
-
-                if(c == 'ComputerScience') {
-                    document.getElementById("2").style.background = "#ff8800";
-                    document.getElementById("1").style.background = "#909090";
-                }
-                if(c == 'Science') {
-                    document.getElementById("3").style.background = "#ff8800";
-                    document.getElementById("1").style.background = "#909090";
-                }
-                if(c == 'Engineering') {
-                    document.getElementById("4").style.background = "#ff8800";
-                    document.getElementById("1").style.background = "#909090";
-                }
-                if(c == 'Law') {
-                    document.getElementById("5").style.background = "#ff8800";
-                    document.getElementById("1").style.background = "#909090";
-                }
-                if(c == 'Medicine') {
-                    document.getElementById("6").style.background = "#ff8800";
-                    document.getElementById("1").style.background = "#909090";
-                }
-                if(c == 'Business') {
-                    document.getElementById("7").style.background = "#ff8800";
-                    document.getElementById("1").style.background = "#909090";
-                }
-                if(c == 'Art') {
-                    document.getElementById("8").style.background = "#ff8800";
-                    document.getElementById("1").style.background = "#909090";
-                }
-
-
-                document.getElementById("a1").href = "category=".concat("ALL" ,"_sort_by=", sort_by ,"_title=", title);
-                document.getElementById("a2").href = "category=".concat("ComputerScience" ,"_sort_by=", sort_by ,"_title=", title);
-                document.getElementById("a3").href = "category=".concat("Science" ,"_sort_by=", sort_by ,"_title=", title);
-                document.getElementById("a4").href = "category=".concat("Engineering" ,"_sort_by=", sort_by ,"_title=", title);
-
-                document.getElementById("a5").href = "category=".concat("Law" ,"_sort_by=", sort_by ,"_title=", title);
-                document.getElementById("a6").href = "category=".concat("Medicine" ,"_sort_by=", sort_by ,"_title=", title);
-                document.getElementById("a7").href = "category=".concat("Business" ,"_sort_by=", sort_by ,"_title=", title);
-                document.getElementById("a8").href = "category=".concat("Art" ,"_sort_by=", sort_by ,"_title=", title);
-
-                document.getElementById("latest_stories").href = "category=".concat(c ,"_sort_by=", "time" ,"_title=", title);
-                document.getElementById("most_viewed").href = "category=".concat(c ,"_sort_by=", "hot" ,"_title=", title);
-                document.getElementById("search").href = "category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
-
-                function change() {
-                    title = document.getElementById("input1").value;
-                    if(title == ''){
-                        title = '_all';
-                    }
-                    document.getElementById("input1").placeholder = '';
-                    document.getElementById("a1").href = "category=".concat("ALL" ,"_sort_by=", sort_by ,"_title=", title);
-                    document.getElementById("a2").href = "category=".concat("ComputerScience" ,"_sort_by=", sort_by ,"_title=", title);
-                    document.getElementById("a3").href = "category=".concat("Science" ,"_sort_by=", sort_by ,"_title=", title);
-                    document.getElementById("a4").href = "category=".concat("Engineering" ,"_sort_by=", sort_by ,"_title=", title);
-
-                    document.getElementById("a5").href = "category=".concat("Law" ,"_sort_by=", sort_by ,"_title=", title);
-                    document.getElementById("a6").href = "category=".concat("Medicine" ,"_sort_by=", sort_by ,"_title=", title);
-                    document.getElementById("a7").href = "category=".concat("Business" ,"_sort_by=", sort_by ,"_title=", title);
-                    document.getElementById("a8").href = "category=".concat("Art" ,"_sort_by=", sort_by ,"_title=", title);
-
-                    document.getElementById("latest_stories").href = "category=".concat(c ,"_sort_by=", "time" ,"_title=", title);
-                    document.getElementById("most_viewed").href = "category=".concat(c ,"_sort_by=", "hot" ,"_title=", title);
-                    document.getElementById("search").href = "category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
-                }
-
-        </script>
+    </script>
 
     <div class="content">
         <div class="row">
@@ -431,11 +443,9 @@
                 <div class="column">
                     <a href="story_id={{ st.id }}">
                         <div class="pic">
-<!--                            <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Fef8f4e259600dc03b34dafa0b48affdf633c620f19b15-BzqyIl_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1629285821&t=70e7df799515c6e871156fa0ad68369a"-->
-<!--                                 width="300" height="200"/>-->
 
-                            <img src="./media/{{st.img}}"
-                             width="300" height="200">
+                            <img src="./media/{{ st.img }}"
+                                 width="300" height="200">
 
                         </div>
                     </a>
@@ -443,8 +453,9 @@
                         <a href="story_id={{ st.id }}"><h1>{{ st }}</h1></a>
                     </div>
                     <div class="info">
-                        <h2>{{st.author}}</h2>
-                        <p1>{{st.created_time}}</p1><p1>  |  Views: {{st.views}}</p1>
+                        <h2>{{ st.author }}</h2>
+                        <p1>{{ st.created_time }}</p1>
+                        <p1> | Views: {{ st.views }}</p1>
                     </div>
                 </div>
             {% empty %}

@@ -4,11 +4,11 @@
 {% block header %}
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="/">
-            {#            <img src="https://github.com/blastxiaol/ResearchStory/blob/front-end/static/image/meeting.png?raw=true" width="200" height="100" alt="" loading="lazy">#}
+
             <h2>Meeting To Discuss</h2>
         </a>
         <span>
-{#                    <a href="/"><button type="button" class="btn btn-info">xxxxx</button></a>#}
+
             <a href="{% url "meeting:new_meeting" %}"><button type="button" class="btn btn-dark">Add A New
                             Meeting</button></a>
         </span>

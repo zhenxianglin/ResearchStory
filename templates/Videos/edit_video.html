@@ -32,7 +32,7 @@
 
         <form action="{% url "Videos:edit_video" video.id %}" method="post" class="form">
             {% csrf_token %}
-            {#     {{ form.as_p }}#}
+
             <div class="row justify-content-center form-group">
                 <div class="p" style="width:70px;height:40px;float:left">Tittle:</div>
                 <input type="text" class="form-control" style="width:340px;height:30px;float:right;margin-left: 10px"
