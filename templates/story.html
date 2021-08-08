@@ -306,9 +306,10 @@
                         var pair = vars[i].split("=");
                         if(pair.length > 1 && pair[0] == name){return pair[1];}
                     }
-                    return('ALL');
-                }
-
+                    if(name == 'category') {
+                        return('ALL');
+                    }
+                    return false;
 
                 document.getElementById("1").style.background = "#ff8800";
                 document.getElementById("2").style.background = "#909090";
@@ -333,9 +334,7 @@
                 if(getQueryString("title")){
                     title = getQueryString("title");
                 }
-                else{
-                    title = '_all';
-                }
+
 
                 if(title == ''){
                     title = '_all';
