@@ -6,14 +6,16 @@ from ckeditor.widgets import CKEditorWidget
 from datetime import datetime
 
 Choices = (('ComputerScience', 'ComputerScience'),
-            ("Engineering", "Engineering"),
-            ("Law", "Law"),
-            ("Medicine", "Medicine"),
-            ("Science", "Science"),
-            ("Art", "Art"),
-            ("Business", "Business"))
+           ("Engineering", "Engineering"),
+           ("Law", "Law"),
+           ("Medicine", "Medicine"),
+           ("Science", "Science"),
+           ("Art", "Art"),
+           ("Business", "Business"))
+
 
 class StoryForm(forms.ModelForm):
+    """try to upload a research story by creating a story form """
     title = forms.CharField(label='title', max_length=128,
                             widget=forms.TextInput(attrs={'placeholder': 'Please enter your title'})
                             )
@@ -41,12 +43,13 @@ class StoryForm(forms.ModelForm):
     tags = forms.CharField(label='tags', max_length=100,
                            widget=forms.TextInput(attrs={'placeholder': 'Please enter tags'})
                            )
+
     class Meta:
         model = Story
         fields = (
             'title',
             'category',
-            #'viewsNum',
+            # 'viewsNum',
             'paperLink',
             'text',
             'img',
@@ -60,6 +63,7 @@ class StoryForm(forms.ModelForm):
 
 
 class AdvancedSearchForm(forms.Form):
+    """Create a form for search function"""
     keyword = forms.CharField(label='title', max_length=9000,
                               widget=forms.TextInput(attrs={'placeholder': 'Contents you want to search'}),
                               required=False

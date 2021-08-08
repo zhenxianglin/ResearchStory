@@ -46,6 +46,7 @@ def register(request):
 
 @login_required
 def profile_edit(request, user_id):
+    """personal info editing"""
     user = User.objects.get(id=user_id)
 
     if Profile.objects.filter(user_id=user_id).exists():

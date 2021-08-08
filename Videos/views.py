@@ -16,7 +16,6 @@ class VideoIndexView(generic.ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super(VideoIndexView, self).get_context_data(**kwargs)
         classification_list = Classification.objects.filter(status=True).values()
-
         context['classification_list'] = classification_list
         return context
 
@@ -30,7 +29,7 @@ class VideoIndexView(generic.ListView):
 
 
 def video_detail(request, video_id):
-    """showing a video deatail on a single page"""
+    """showing a video detail on a single page"""
     video = get_object_or_404(Video, id=video_id)
     video_comments = VideoComment.objects.filter(video=video_id)
     video_comment_form = VideoCommentForm()
@@ -44,6 +43,7 @@ def video_detail(request, video_id):
 
 @login_required
 def post_video_comment(request, video_id):
+    """post a comment under a certain video """
     video = get_object_or_404(Video, id=video_id)
     if request.method == 'POST':
         video_comment_form = VideoCommentForm(data=request.POST)
@@ -52,7 +52,6 @@ def post_video_comment(request, video_id):
             new_comment.video = video
             new_comment.user = request.user
             new_comment.save()
-
             return redirect(video)
         else:
             return HttpResponse("The content of the form is incorrect, please fill in again. ")
@@ -62,7 +61,7 @@ def post_video_comment(request, video_id):
 
 @login_required
 def new_video(request):
-    """add a new interview video"""
+    """add a new interview video (or an open meeting video)"""
     classification = Classification.objects.all().values()
     if request.method != 'POST':
         form = NewVideoForm()
@@ -81,6 +80,7 @@ def new_video(request):
 
 @login_required
 def edit_video(request, video_id):
+    """editing the current video by the video's uploader"""
     video = Video.objects.get(id=video_id)
     classification = Classification.objects.all().values()
     #  Protect page
@@ -92,7 +92,6 @@ def edit_video(request, video_id):
             video.title = request.POST['title']
             video.desc = request.POST['desc']
             video.url = request.POST['url']
-
             if 'file' in request.FILES:
                 video.file = request.POST['files']
 
@@ -109,6 +108,7 @@ def edit_video(request, video_id):
 
 @login_required
 def video_delete(request, video_id):
+    """delete the video"""
     video = Video.objects.filter(id=video_id)
     if video:
         video.delete()

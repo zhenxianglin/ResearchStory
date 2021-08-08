@@ -15,6 +15,7 @@ from django.views import View
 
 @login_required
 def post_comment(request, story_id, parent_comment_id=None):
+    """ publish a new comment and reply a comment. """
     story = get_object_or_404(Story, id=story_id)
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)

@@ -16,17 +16,18 @@ from django.contrib import messages
 
 from ResearchStory.settings import MEDIA_ROOT
 
-def edit(request,story_id):
-    story=Story.objects.get(id=story_id)
+
+def edit(request, story_id):
+    story = Story.objects.get(id=story_id)
     if request.method == "GET":
-         form = StoryForm(instance=story)
-         '''kwargs={"form":form,
-                 # "story":story,
-         }
-         return render(request, 'edit.html', kwargs)'''
+        form = StoryForm(instance=story)
+        '''kwargs={"form":form,
+                # "story":story,
+        }
+        return render(request, 'edit.html', kwargs)'''
     elif request.method == "POST":
-        form = StoryForm(instance=story,data=request.POST)
-        #if form.is_valid():
+        form = StoryForm(instance=story, data=request.POST)
+        # if form.is_valid():
         story.title_name = request.POST.get('title')
         story.category = request.POST.get('category')
         story.text = request.POST.get('text')
@@ -44,7 +45,7 @@ def edit(request,story_id):
         story.tags = request.POST.get('tags')
         story.user = request.user
         story.save()
-        return HttpResponseRedirect(reverse("Story:getStory",args=[story_id]))
+        return HttpResponseRedirect(reverse("Story:getStory", args=[story_id]))
 
         # if form.is_valid():
         #     return HttpResponseRedirect(reverse("Story:getStory"))
@@ -103,7 +104,7 @@ def upload(request):
             story.author_intro = request.POST.get('author_intro')
         else:
             story.author_intro = "This author does not introduce himself/herself."
-            print("Author_intro: ", story.author_intro )
+            print("Author_intro: ", story.author_intro)
 
         if request.FILES.get('img'):
             f = request.FILES['img']
@@ -183,12 +184,12 @@ def advancedSearch(request):
         author_name = request.POST.get("author_name")
 
         que = Q()
-        if author_name!='':
-            for word in author_name.split( ):
+        if author_name != '':
+            for word in author_name.split():
                 que &= Q(author__icontains=word)
 
-        if keyword!='':
-            for word in keyword.split( ):
+        if keyword != '':
+            for word in keyword.split():
                 que &= Q(title_name__icontains=word)
             if keyword_negate == "on":
                 que = ~que
@@ -219,6 +220,7 @@ def advancedSearch(request):
 
 
 def storyList(request):
+    """ get the list of research story and put it to the front-end (template - html files)"""
     if request.method == "GET":
         story = Story.objects.filter().order_by('-created_time')
         kwarg = {
@@ -239,6 +241,7 @@ def storyList(request):
 
 
 def storyListSortBy(request, sort_by):
+    """query the stories based on the attributes of hot(views) and time"""
     story = Story.objects.filter()
     if sort_by == "time":
         story = story.order_by("-created_time")
@@ -252,6 +255,7 @@ def storyListSortBy(request, sort_by):
 
 
 def storyListCategory(request, category):
+    """query the stories in terms of categories"""
     print("storyListCategory")
     print("method =", request.method)
     if request.method == "GET":
@@ -308,10 +312,12 @@ def storyFind(request, category, sort_by, title):
 
 
 def time_in_mins(hr, min):
+    """compute the time by mins"""
     return hr * 60 + min
 
 
 def getStory(request, story_id):
+    """get the details of each story and show it in the website"""
     story = Story.objects.get(id=story_id)
     title_name = story.title_name
     created_time = story.created_time
@@ -343,13 +349,12 @@ def getStory(request, story_id):
     author_intro = story.author_intro
     background = story.background
 
-
     try:
         video = f"https://www.youtube.com/embed/{video.split('/')[-1]}"
     except AttributeError:
         pass
 
-    interview_list = Interview.objects.filter(related_story_name = story_id)
+    interview_list = Interview.objects.filter(related_story_name=story_id)
     current_time = datetime.now()
     date_and_time = current_time.strftime("%Y-%m-%d, %A,  %H:%M:%S")
     current_hour = current_time.hour  # 3:00 pm -> 15
@@ -377,7 +382,6 @@ def getStory(request, story_id):
             continue
         current_interview = interview
 
-
     kwarg = {
         "img": img,
         "title_name": title_name,
@@ -392,8 +396,8 @@ def getStory(request, story_id):
         'comment_form': comment_form,
         'story': story,
 
-        'data_and_time':date_and_time,
-        'current_intervew':current_interview,
+        'data_and_time': date_and_time,
+        'current_intervew': current_interview,
 
         'tags': tags,
         'author': author,
