@@ -38,11 +38,11 @@
                             <div class="form-row">
                                 <div class="form-group col-md-4 offset-md-2">
                                     <label>First Name</label>
-                                    <input name="first_name" type="text" class="form-control" placeholder="First Name">
+                                    <input id="first_name" name="first_name" type="text" class="form-control" placeholder="First Name">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Last Name</label>
-                                    <input name="last_name" type="text" class="form-control" placeholder="Last Name">
+                                    <input id="last_name" name="last_name" type="text" class="form-control" placeholder="Last Name">
                                 </div>
                             </div>
 
@@ -51,40 +51,37 @@
                                     <label>Gender</label>
                                     <div class="input-group-prepend ">
                                         <select type="text" class="form-control" name="gender" required>
-                                            <option value="ComputerScience">Male</option>
-                                            <option value="Physics">Female</option>
-                                            <option value="ElectricalEngineering">Secret</option>
+                                            <option value="M">Male</option>
+                                            <option value="F">Female</option>
+                                            <option value="S">Secret</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Age</label>
-                                    <input name="age" type="number" class="form-control" placeholder="Age">
+                                    <input id="age" name="age" value="{{ profile.age }}" class="form-control" placeholder="Age">
                                 </div>
                             </div>
                             <div class="form-group col-md-8 offset-md-2">
                                 <label>Bio</label>
-                                <textarea class="form-control" name="bio" aria-label="With textarea" rows="3"
-                                          placeholder="Please Enter Your bio"></textarea>
+                                <textarea class="form-control" id="bio" name="bio" aria-label="With textarea" rows="4"
+                                          placeholder="Please Enter Your bio">{{ profile.bio }}</textarea>
                             </div>
 
                             <div class="form-group col-md-8 offset-md-2">
-
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                     </div>
                                     <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="avatar">
-                                        <label class="custom-file-label" for="inputGroupFile01">Upload Avatar</label>
+                                        <input type="file" class="form-control-file" name="avatar" id="avatar">
+                                        <label class="custom-file-label" for="avatar">Upload Avatar</label>
                                     </div>
                                 </div>
                             </div>
 
-
                             <button name="submit" type="submit" class="btn btn-primary btn-block"
                                     style="width: 680px; margin-left: 190px">Submit
                             </button>
-
 
                         </form>
 

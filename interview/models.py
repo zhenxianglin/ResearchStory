@@ -6,6 +6,7 @@ from Users.models import User
 # Create your models here.
 
 class Interview(models.Model):
+    """  create a table for interview schduel information sechdule """
     interview_name = models.CharField(max_length=500)
     related_story_name = models.ForeignKey(Story, on_delete=models.CASCADE)
     interview_link = models.URLField(max_length=2000)

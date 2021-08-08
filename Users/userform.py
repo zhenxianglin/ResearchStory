@@ -4,6 +4,7 @@ from Users.models import User, Profile
 
 
 class LoginFom(forms.Form):
+    """Create a Login form set to front-end through views function"""
     username = forms.CharField(label='Username', max_length=128,
                                widget=forms.TextInput(attrs={'placeholder': 'Please enter your username'})
                                )
@@ -20,6 +21,7 @@ class LoginFom(forms.Form):
 
 
 class RegisterForm(UserCreationForm):
+    """generate a sign up form """
     username = forms.CharField(label='Username', max_length=128,
                                error_messages={
                                    'required': 'Username can not be empty.',
@@ -61,7 +63,7 @@ class RegisterForm(UserCreationForm):
         )
 
 class ProfileForm(forms.ModelForm):
-
+    """create a personal info editing form"""
     class Meta:
         model = Profile
         fields = ('age',

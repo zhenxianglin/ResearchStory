@@ -20,10 +20,14 @@
 
 
         <div class="text">
-            <h3 class="display-4" style="margin-left: 10px">Edit a new interview video</h3>
-            <h4>
-                <a href="{% url "Videos:video_detail" video.id %}" style="margin-left: 10px">{{ video.title }}</a>
-            </h4>
+            <div style="text-align: center;">
+                <h3 class="display-4" style="margin-left: 10px">Edit video</h3>
+                <h4>
+                    <a href="{% url "Videos:video_detail" video.id %}" style="margin-left: 10px">{{ video.title }}</a>
+                </h4>
+            </div>
+
+
             <p class="lead">This is a video edit page, — makes short story video edit. In this page, you will enjoy the
                 educational videos.</p>
             <hr class="my-4">
@@ -41,31 +45,37 @@
             </div>
             <div class="row justify-content-center form-group">
                 <div class="p" style="width:70px;height:40px;float:left">Describe:</div>
-                <input type="text" class="form-control" style="width:340px;height:90px;float:right;margin-left: 10px"
-                       name='desc' placeholder="Add some describe of video" required value="{{ video.desc }}">
+                <textarea style="max-width:340px" class="form-control" name="desc" aria-label="With textarea"
+                          rows="15" placeholder="Please Enter Your desc, adding relevant content about the research story interview or meeting here. ">
+                    {{ video.desc }}</textarea>
+                {#                <input type="text" class="form-control" style="width:340px;height:90px;float:right;margin-left: 10px"#}
+                {#                       name='desc' placeholder="Add some describe of video" required value="{{ video.desc }}">#}
 
             </div>
-            <div class="row justify-content-center form-group">
-                <div class="p" style="width:70px;height:40px;float:left">Urls:</div>
-                <input type="text" class="form-control" style="width:340px;height:30px;float:right;margin-left: 10px"
-                       name='url' placeholder="url" value="{{ video.url }}">
+                  <div class="row justify-content-center form-group">
+                    <div class="p" style="width:70px;height:40px;float:left">Urls:</div>
+                    <input type="text" class="form-control"
+                           style="width:340px;height:30px;float:right;margin-left: 10px"
+                           name='url' placeholder="url" value="{{ video.url }}">
+                </div>
+
+                     <div class="row justify-content-center">
+                <p style="margin-left: 30px">( Tips: You must choose either a video url link or a file to upload. )</p>
             </div>
 
-            <div class="row justify-content-center form-group">
-                <div class="p" style="width:70px;height:40px;float:left;margin-right: 10px">File:</div>
-                {{ form.file }}{{ video.file }}
+                <div class="row justify-content-center form-group">
+                    <div class="p" style="width:70px;height:40px;float:left;margin-right: 10px"></div>
+                    {{ form.file }}{{ video.file }}
+                </div>
 
-            </div>
-            <div class="row justify-content-center">
-                <p style="margin-left: 30px">Tips: You can choose one in upload url or file</p>
-            </div>
+            <br>
 
             <div class="row form-group justify-content-center">
                 <div class="p" style="width:110px;height:40px;float:left;margin-right: 30px">Classification:</div>
                 {{ form.classification }}
             </div>
             <div style="text-align:center">
-                <button name="submit">SUBMIT</button>
+                <button class="btn btn-primary " name="submit">SUBMIT</button>
 
             </div>
 
