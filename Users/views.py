@@ -72,7 +72,8 @@ def profile_edit(request, user_id):
                 profile.avatar = profile_cd["avatar"]
 
             profile.save()
-            return redirect("Users:edit", id=user_id)
+            return HttpResponseRedirect(reverse("Users:edit", args=[user_id]))
+            # return redirect("Users:edit", id=user_id)
         else:
             return HttpResponse("The registration form is entered incorrectly. Please re-enter~")
 
