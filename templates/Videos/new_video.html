@@ -35,13 +35,8 @@
         <div class="row justify-content-center form-group">
                 <div class="p" style="width:150px;height:40px;float:left">Url:</div>
                 <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
-                                   name="url" placeholder="url" required>
+                                   name="url" placeholder="url" >
             </div>
-
-        <div class="row justify-content-center form-group">
-            <div class="p" style="width:150px;height:40px;float:left">Desc:</div>
-             <textarea style="max-width:300px" class="form-control" name="desc" aria-label="With textarea" rows="3" placeholder="Please Enter Your desc"></textarea>
-                    </div>
 
         <div class="row  form-group">
             <div class="col-md-4 offset-md-3">
@@ -49,6 +44,13 @@
                 {{ form.classification }}
         </div>
             </div>
+
+        <div class="row justify-content-center form-group">
+{#            <div class="p" style="width:150px;height:40px;float:left">Desc:</div>#}
+             <textarea style="max-width:500px" class="form-control" name="desc" aria-label="With textarea" rows="20" placeholder="Please Enter Your desc"></textarea>
+                    </div>
+
+
 
         <div class="row  form-group">
             <div class="col-md-4 offset-md-5">
