@@ -5,76 +5,62 @@
 {% block content %}
     <style type="text/css">
         div.content {
-                margin: 0 auto;
-                padding-top:10px;
-                padding-bottom:20px;
-                padding-left:15px;
-                background-color:rgba(255,255,255,0.8);
-            }
+            margin: 0 auto;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            padding-left: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
 
     </style>
-    <div class="content" >
-    <div style="text-align: center;">
-        <div class="container">
-{#    <div class="mt-5">#}
-{#    <p>Add a new interview video</p>#}
+    <div class="content">
+        <div style="text-align: center;">
+            <div class="container">
 
-    <form action="" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
 
-    {% csrf_token %}
-        <br>
-        <br>
-        <br>
+                    {% csrf_token %}
+                    <br>
+                    <br>
+                    <br>
 
-        <div class="row justify-content-center form-group">
-                <div class="p" style="width:150px;height:40px;float:left">Title:</div>
-                <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
-                                   name="title" placeholder="title" required>
-            </div>
-
-        <div class="row justify-content-center form-group">
-                <div class="p" style="width:150px;height:40px;float:left">Url:</div>
-                <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
-                                   name="url" placeholder="url" >
-            </div>
-
-        <div class="row  form-group">
-            <div class="col-md-4 offset-md-3">
-                <div class="p" style="width:150px;height:40px;float:left;margin-left:10px">Classification:</div>
-                {{ form.classification }}
-        </div>
-            </div>
-
-        <div class="row justify-content-center form-group">
-{#            <div class="p" style="width:150px;height:40px;float:left">Desc:</div>#}
-             <textarea style="max-width:500px" class="form-control" name="desc" aria-label="With textarea" rows="20" placeholder="Please Enter Your desc"></textarea>
+                    <div class="row justify-content-center form-group">
+                        <div class="p" style="width:150px;height:40px;float:left">Title:</div>
+                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
+                               name="title" placeholder="title" required>
                     </div>
 
+                    <div class="row justify-content-center form-group">
+                        <div class="p" style="width:150px;height:40px;float:left">Url:</div>
+                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
+                               name="url" placeholder="url">
+                    </div>
 
+                    <div class="row  form-group">
+                        <div class="col-md-4 offset-md-3">
+                            <div class="p" style="width:150px;height:40px;float:left;margin-left:10px">Classification:
+                            </div>
+                            {{ form.classification }}
+                        </div>
+                    </div>
 
-        <div class="row  form-group">
-            <div class="col-md-4 offset-md-5">
-                 {{ form.file }}
-                </div>
-        </div>
+                    <div class="row justify-content-center form-group">
+                        <textarea style="max-width:500px" class="form-control" name="desc" aria-label="With textarea"
+                                  rows="20" placeholder="Please Enter Your desc"></textarea>
+                    </div>
 
-{#        <div class="row  form-group">#}
-{#            <div class="col-md-4 offset-md-3">#}
-{#                <div class="p" style="width:150px;height:40px;float:left;margin-left:10px">Classification:</div>#}
-{#                {{ form.file }}#}
-{#        </div>#}
-{#            </div>#}
+                    <div class="row  form-group">
+                        <div class="col-md-4 offset-md-5">
+                            {{ form.file }}
+                        </div>
+                    </div>
 
-{#    {{ form.as_p }}#}
-        <hr/>
-     <button class="btn btn-primary " style="margin-right:50px ">SUBMIT</button>
-    </form>
+                    <hr/>
+                    <button class="btn btn-primary " style="margin-right:50px ">SUBMIT</button>
+                </form>
 
             </div>
         </div>
     </div>
-{#    <p>Add a new interview video</p>#}
-
-
 
 {% endblock content %}
