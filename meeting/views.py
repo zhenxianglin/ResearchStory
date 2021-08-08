@@ -51,12 +51,8 @@ def current_meeting(request):
         context = {
             'current_meetings': current_meetings,
             'date_and_time': date_and_time,
-                   }
+        }
         return render(request, 'meeting/linktoclick.html', context)
-
-    # current_meetings = Link.objects.all().order_by('-data_added')
-    # # context = {"current_meetings":current_meetings}
-    # # return render(request, 'meeting/linktoclick.html', context)
 
 
 @login_required
@@ -76,6 +72,6 @@ def new_meeting(request):
             return HttpResponseRedirect(reverse('meeting:current_meeting'))
     context = {
         'form': form,
-        'date_and_time':date_and_time,
+        'date_and_time': date_and_time,
     }
     return render(request, 'meeting/new_meeting.html', context)

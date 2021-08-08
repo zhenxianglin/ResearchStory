@@ -50,7 +50,6 @@ class RegisterForm(UserCreationForm):
                                 widget=forms.PasswordInput(attrs={'placeholder': 'Please confirm password.'}),
                                 help_text=(" - Enter the same password as above, for verification.\n"),
                                 )
-
     class Meta:
         model = User
         fields = (
@@ -61,9 +60,7 @@ class RegisterForm(UserCreationForm):
             'password2',
         )
 
-
 class ProfileForm(forms.ModelForm):
-    # gender = forms.ChoiceField(choices=Profile.SEX_ITEMS, label='Gender')
 
     class Meta:
         model = Profile
