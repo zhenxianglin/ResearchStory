@@ -21,7 +21,7 @@ SECRET_KEY = 'django-insecure-yr2d^+f(@&0^74&9f3)=n_(bd_%o49-#b7cu6yq=14u&75gce!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://sheltered-tor-17969.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -137,22 +137,22 @@ WSGI_APPLICATION = 'ResearchStory.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'test1',
-#         'USER': 'postgres',
-#         'PASSWORD': '93239323',
-#         'HOST': 'comp9323-postgres.c4ewkd5opwpk.us-east-2.rds.amazonaws.com',
-#         'PORT': '5432',
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'test1',
+        'USER': 'postgres',
+        'PASSWORD': '93239323',
+        'HOST': 'comp9323-postgres.c4ewkd5opwpk.us-east-2.rds.amazonaws.com',
+        'PORT': '5432',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 # Password validation
@@ -198,6 +198,7 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
@@ -233,29 +234,3 @@ SITE_ID = 1
 
 # 登录成功后重定向地址
 LOGIN_REDIRECT_URL = '/'
-
-cwd = os.getcwd()
-# Heroku settings
-if cwd == '/app' or cwd[:4] == '/tmp':
-    import dj_database_url
-
-    DATABASES = {
-        'default': dj_database_url.config(default='postgres://localhost')
-    }
-
-    # Honor the 'X-Forwarded-Proto' header for request.is_secure().
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-    # Only allow heroku to host the project.
-    # ALLOWED_HOSTS = ['*']
-    ALLOWED_HOSTS = ['sheltered-tor-17969.herokuapp.com', '127.0.0.1']
-    DEBUG = False
-
-    # Static asset configuration
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATIC_URL = '/static/'
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'static'),
-    )
-
