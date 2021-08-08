@@ -14,8 +14,18 @@
 
 
 {% block content %}
-    <hr/>
+    <style type="text/css">
+        div.content {
+                margin: 0 auto;
+                padding-top:10px;
+                padding-bottom:20px;
+                padding-left:15px;
+                background-color:rgba(255,255,255,0.8);
+            }
 
+    </style>
+    <hr/>
+    <div class="content">
     <div style="text-align: center;">
         <div class="container">
             {% if video.file %}
@@ -79,6 +89,7 @@
             </p>
             <pre style="font-family: inherit; font-size: 1em;">{{ comment.content }}</pre>
         {% endfor %}
+    </div>
     </div>
 
 {% endblock content %}
