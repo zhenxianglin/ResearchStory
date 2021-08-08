@@ -82,7 +82,7 @@ def profile_edit(request, user_id):
 
             profile.save()
             # 带参数的 redirect()
-            return HttpResponseRedirect(reverse("Users:edit", args=[user_id))
+            return HttpResponseRedirect(reverse("Users:edit", args=[user_id]))
         else:
             return HttpResponse("The registration form is entered incorrectly. Please re-enter~")
 
