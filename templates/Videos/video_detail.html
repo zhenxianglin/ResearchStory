@@ -23,15 +23,17 @@
     <hr/>
     <div class="content">
 
-    <span style="margin-left: 20px">
+    <span style="margin-left: 25px">
      <a class="ui red label" href="{% url "Videos:video_list" %}">
             <button class="btn btn-secondary">ALL</button>
      </a>
-     <a href="{% url "Videos:new_video" %}"><button type="button" class="btn btn-dark" style="margin-left: 680px">Add A New Interview Video
+     <a href="{% url "Videos:new_video" %}"><button type="button" class="btn btn-dark" style="margin-left: 780px">Add A New Interview Video
                             </button></a>
     </span>
     <hr/>
+    <br>
         <h3 class="text-center mt-2 mb-2" style="margin-left: 20px">{{ video.title }}</h3>
+    <br>
         <div style="text-align: center;">
             <div class="container">
                 {% if video.file %}
@@ -71,11 +73,8 @@
 
             </div>
         </div>
-
-
             </div>
         </div>
-
 
         <hr/>
         <h5>{{ video_comments.count }} Comments</h5>
@@ -86,7 +85,7 @@
                     <div class="form-group">
                     <textarea type="text" class="form-control" id="content" name="content" rows="2"
                               placeholder="Please enter a comment"
-                              style="width:990px;height: 100px;margin-left: 20px;margin-right: 20px"></textarea>
+                              style="width:1050px;height: 100px;margin-left: 20px;margin-right: 20px"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary right " style="margin-left: 900px">SUBMIT</button>
                 </form>

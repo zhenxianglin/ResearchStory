@@ -5,13 +5,14 @@
 
     <hr/>
     <div class="text">
-        <h1 class="display-4" style="margin-left: 10px">Video</h1>
-        <p class="lead">This is a video unit, — makes short story video sharing, discussion and uploading. In this page,
-            you will enjoy the educational videos.</p>
+        <h1 class="display-4" style="margin-left: 25px">Video</h1>
+        <p class="lead" style="margin-left: 20px">This is a video unit, — makes short research story video sharing, discussion and uploading. In this page,
+            you will enjoy the research and educational videos.</p>
     </div>
+    <br>
     <div class="classification">
         <h3 class=" mb-2 mb-2">
-            <a class="ui red label" href="{% url "Videos:video_list" %}">
+            <a class="ui red label" style="margin-left: 20px"href="{% url "Videos:video_list" %}">
                 <button class="btn btn-secondary">ALL</button>
             </a>
             {% for item in classification_list %}
@@ -25,7 +26,7 @@
     </div>
 
     <span>
-     <a href="{% url "Videos:new_video" %}"><button type="button" class="btn btn-dark">Add A New Interview Video</button></a>
+     <a href="{% url "Videos:new_video" %}"><button type="button" class="btn btn-dark" style="margin-left: 880px">Add A New Interview Video</button></a>
     </span>
     <hr/>
 
