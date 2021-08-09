@@ -23,25 +23,58 @@ def edit(request, story_id):
         form = StoryForm(instance=story)
         return render(request, 'edit.html', locals())
     elif request.method == "POST":
+        kwargs = {}
         form = StoryForm(instance=story, data=request.POST)
-        story.title_name = request.POST.get('title')
+        mistake = False
+
+        if request.POST.get('title'):
+            story.title_name = request.POST.get('title')
+        else:
+            kwargs["title"] = "You must write title name."
+            mistake = True
+
         story.category = request.POST.get('category')
-        story.text = request.POST.get('text')
+
+        if request.POST.get('text'):
+            story.text = request.POST.get('text')
+        else:
+            kwargs["text"] = "You must write something in text form."
+            mistake = True
+
         story.video = request.POST.get('videoUrl')
         story.paper_link = request.POST.get('paperLink')
-        f = request.FILES['img']
-        filepath = os.path.join(MEDIA_ROOT, 'img/' + f.name)
-        with open(filepath, 'wb') as fp:
-            for info in f.chunks():
-                fp.write(info)
-        story.img = 'img/' + f.name     # rename the image
-        story.author = request.POST.get('author')
+
+        if request.FILES.get('img'):
+            f = request.FILES['img']
+            filepath = os.path.join(MEDIA_ROOT, 'img/' + f.name)
+            with open(filepath, 'wb') as fp:
+                for info in f.chunks():
+                    fp.write(info)
+            story.img = 'img/' + f.name
+        else:
+            story.img = story.img
+
+        if request.POST.get('author'):
+            story.author = request.POST.get('author')
+        else:
+            user = request.user
+            story.author = user.username
+
         story.author_intro = request.POST.get('author_intro')
-        story.background = request.POST.get('background')
+
+        if request.POST.get('background'):
+            story.background = request.POST.get('background')
+        else:
+            kwargs["background"] = "You must provide a reseach background."
+            mistake = True
         story.tags = request.POST.get('tags')
         story.user = request.user
-        story.save()
-        return HttpResponseRedirect(reverse("Story:getStory", args=[story_id]))
+        if not mistake:
+            story.save()
+            return HttpResponseRedirect(reverse("Story:getStory", args=[story_id]))
+        else:
+            return render(request, "Fail/upload_fail.html", kwargs)
+
 
 
 def upload(request):
