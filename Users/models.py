@@ -8,6 +8,7 @@ class User(AbstractUser):
     """a table contains the information of registering users"""
     ROLES = (
         ('R', 'Researcher'),
+
         ('C', 'Common User'),
     )
     username = models.CharField(max_length=128, unique=True, verbose_name='username')

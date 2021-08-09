@@ -44,14 +44,16 @@ def current_meeting(request):
             # continue
             current_meetings.append(meeting)
     date_and_time = current_time.strftime("%Y-%m-%d, %A,  %H:%M:%S")
+    USER = request.user
 
     if len(current_meetings) == 0:
-        context = {'date_and_time': date_and_time}
+        context = {'date_and_time': date_and_time, 'USER': USER, }
         return render(request, 'meeting/nomeetings.html', context)
     else:
         context = {
             'current_meetings': current_meetings,
             'date_and_time': date_and_time,
+            'USER': USER,
         }
         return render(request, 'meeting/linktoclick.html', context)
 
@@ -71,8 +73,10 @@ def new_meeting(request):
             new_meeting.user = request.user
             new_meeting.save()
             return HttpResponseRedirect(reverse('meeting:current_meeting'))
+    USER = request.user
     context = {
         'form': form,
         'date_and_time': date_and_time,
+        'USER': USER,
     }
     return render(request, 'meeting/new_meeting.html', context)

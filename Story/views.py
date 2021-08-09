@@ -11,6 +11,7 @@ from interview.models import Interview
 from .models import Story
 from .storyform import StoryForm, AdvancedSearchForm
 from ResearchStory.settings import MEDIA_ROOT
+from Users.models import User
 
 
 def edit(request, story_id):
@@ -419,6 +420,10 @@ def getStory(request, story_id):
             continue
         current_interview = interview
 
+    # USER = User.objects.get(id=request.user.id)
+
+    USER = request.user
+
     kwarg = {
         "img": img,
         "title_name": title_name,
@@ -437,6 +442,7 @@ def getStory(request, story_id):
         'author': author,
         'author_intro': author_intro,
         'background': background,
+        'USER': USER,
     }
 
     story.viewed()
