@@ -39,8 +39,8 @@ def post_comment(request, story_id, parent_comment_id=None):
                         target=story,
                         action_object=new_comment,
                     )
-                # return HttpResponse("200 OK")
-                return JsonResponse({"code":"200 OK", "new_comment_id": new_comment.id})
+                return HttpResponse("200 OK")
+                # return JsonResponse({"code":"200 OK", "new_comment_id": new_comment.id})
             new_comment.save()
             if not request.user.is_superuser:
                 notify.send(
