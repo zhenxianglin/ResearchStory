@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+
+{% block header %}
+
+
+
+
+{% endblock header %}
+
+
+{% block content %}
+    <style type="text/css">
+        div.content {
+            margin: 0 auto;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            padding-left: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+    </style>
+    <div class="content">
+        <nav class="navbar navbar-light bg-transparent">
+            <a class="navbar-brand" href="/">
+
+                <h2>Meeting To Discuss</h2>
+            </a>
+            <span>
+
+            <a href="{% url "meeting:new_meeting" %}"><button type="button" class="btn btn-dark">Add A New
+                            Meeting</button></a>
+        </span>
+        </nav>
+
+
+        <div style="text-align: center;">
+            <h2>No Meetings Today :)</h2>
+            <h7>{{ date_and_time }}</h7>
+        </div>
+        <hr/>
+
+
+        <div class="d-flex justify-content-center">
+            <a href="{% url "meeting:new_meeting" %}">
+                <button type="button" class="btn btn-dark">Welcome to create a meeting for online discussion.</button>
+            </a>
+        </div>
+
+
+    </div>
+
+
+{% endblock content %}
+

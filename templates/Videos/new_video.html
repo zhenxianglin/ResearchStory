@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load embed_video_tags %}
+
+
+{% block content %}
+    <style type="text/css">
+        div.content {
+            margin: 0 auto;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            padding-left: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+    </style>
+    <div class="content">
+        <div style="text-align: center;">
+            <div class="container">
+
+                <form action="" method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    <br>
+                    <br>
+                    <br>
+
+                    <div class="row justify-content-center form-group">
+                        <div class="p" style="width:40px;height:40px;float:left">Title:</div>
+                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
+                               name="title" placeholder="title" required>
+{#                        <textarea style="max-width:300px" class="form-control" name="desc" aria-label="With textarea"#}
+{#                                  rows="2" placeholder="Please Enter a title" required></textarea>#}
+                    </div>
+
+                    <div class="row justify-content-center form-group">
+                        <div class="p" style="width:40px;height:40px;float:left">Url:</div>
+                        <input type="text" class="form-control" style="width:300px;height:30px;float:right;"
+                               name="url" placeholder="url">
+                    </div>
+
+
+                    <div class="row justify-content-center">
+                        <p style="margin-left: 30px">( Tips: You must choose either a video url link or a file to
+                            upload. )</p>
+                    </div>
+
+                              <div class="row  form-group">
+                        <div class="col-md-4 offset-md-5">
+                            {{ form.file }}
+                        </div>
+                    </div>
+                    <br>
+
+
+
+                    <div class="row  form-group">
+                        <div class="col-md-4 offset-md-3">
+                            <div class="p" style="width:150px;height:40px;float:left;margin-left:10px">Classification:
+                            </div>
+                            {{ form.classification }}
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center form-group">
+                        <textarea style="max-width:420px" class="form-control" name="desc" aria-label="With textarea"
+                                  rows="20" placeholder="Please enter the description about this video, and adding more relevant content about the research story interview or meeting here."></textarea>
+                    </div>
+
+
+
+                    <hr/>
+                    <button class="btn btn-primary " style="margin-right:50px ">SUBMIT</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

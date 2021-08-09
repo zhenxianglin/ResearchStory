@@ -1,0 +1,475 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+    <style type="text/css">
+
+        div.title {
+            width: 100%;
+            background: white;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 40px;
+        }
+
+
+        div.info {
+            height: 40px;
+            width: 100%;
+            background: white;
+            text-align: center;
+            margin: 0 auto;
+            margin-bottom: 40px;
+        }
+
+        div.article {
+            width: 100%;
+            background: #f1f1f1;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        div.link {
+            width: 100%;
+            background: white;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        div.video {
+            height: 315px;
+            width: 560px;
+            background: #f1f1f1;
+            margin: 20px auto;
+        }
+
+
+        div.intro {
+            background: #fedcbd;
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        div.normal {
+            width: 100%;
+            padding: 20px;
+            background: white;
+        }
+
+        h1 {
+            color: black;
+            font-size: 32px;
+        }
+
+        h2 {
+            color: black;
+            font-size: 24px;
+        }
+
+        p1 {
+            color: black;
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+
+        p1b {
+            background: #f1f1f1;
+            color: black;
+            font-size: 16px;
+            white-space: pre-wrap;
+        }
+
+        p3h {
+            color: black;
+            font-size: 14px;
+            white-space: pre-wrap;
+            padding: 5px;
+            padding-right: 10px;
+        }
+
+        p3 {
+            color: black;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+
+        p2 {
+            color: black;
+            font-size: 20px;
+        }
+
+        p4 {
+            color: black;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+
+        .row {
+            background: white;
+            margin: 0px;
+        }
+
+        .column.left {
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 60%;
+            box-sizing: border-box;
+            background: white;
+        }
+
+        .column.right {
+            background: white;
+            padding-left: 10px;
+            padding-right: 10px;
+            width: 40%;
+            box-sizing: border-box;
+            height: 800px;
+            overflow: visible;
+        }
+
+        @media screen and (max-width: 1000px) {
+            .column.left, .column.right {
+                width: 100%;
+                margin: 0 auto;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            .column.left, .column.right {
+                width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        @media screen and (max-width: 600px) {
+            div.row {
+                width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        div.footer {
+            height: 160px;
+            width: 100%;
+            background: #f1f1f1;
+            text-align: center;
+            padding-top: 80px;
+            margin-top: 10px;
+        }
+
+        div.pic {
+            width: 600px;
+            margin: 0px auto;
+            margin-bottom: 20px;
+            height: 360px;
+            overflow: hidden;
+        }
+
+        img.type1 {
+            width: 100%;
+        }
+
+        div.comment {
+            border-style: solid;
+            background: white;
+            width: 100%;
+            padding: 15px;
+            border-color: #f1f1f1;
+        }
+
+        div.all_comment {
+            width: 100%;
+        }
+
+        .button1 {
+            background-color: #ff8800;
+            border: none;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .button2 {
+            background-color: #008CBA;
+            border: none;
+            color: white;
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+    </style>
+
+    <script src="{% static 'ckeditor/ckeditor/plugins/prism/lib/prism/prism_patched.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'prism/prism.css' %}">
+
+    <div>
+        <!--The top information bar displays the category of the article-->
+        <div class="normal">
+            <div class="row">
+                <button class="button1">Category</button>
+                <p3h> {{ category }}</p3h>
+                <button class="button2">Tags</button>
+                <p3h> {{ tags }}</p3h>
+
+                <!--If the user is the author, the story can be modified-->
+                {% if user.is_authenticated %}
+                    {% if user.id == story.user.id %}
+
+                        <a href="edit={{ story.id }}" style="margin-left: 900px">
+                            <button class="btn btn-secondary btn-sm pull-right">Edit</button>
+                        </a>
+
+                        <a href="delete={{ story.id }}" style="margin-left: 20px">
+                            <button class="btn btn-secondary btn-sm pull-right">Delete</button>
+                        </a>
+
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+
+        <!--Show the title-->
+        <div class="normal">
+            <div class="title">
+                <h1>{{ title_name }}</h1>
+            </div>
+
+            <div class="info">
+                <p1>By {{ author }}</p1>
+                <p1> | {{ created_time }}</p1>
+            </div>
+        </div>
+
+        <!--Display content, divided into left and right column-->
+        <div class="row">
+            <!--The left side shows the picture, story text, video and comment area-->
+            <div class="column left">
+                <div class="pic">
+                    <img class="type1" src="./media/{{ img }}">
+
+                </div>
+
+                <div class="article">
+                    <p1>{{ text }}</p1>
+                </div>
+
+                <div class="video">
+                    {% if video %}
+                        <iframe width="560" height="315"
+                                src={{ video }}
+                                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    {% else %}
+                        <li>No video.</li>
+                    {% endif %}
+                </div>
+
+                <div class="link">
+                    <p1>Paper Link：</p1>
+                    <a href="{{ paper_link }}">
+                        <p1> {{ paper_link }} </p1>
+                    </a>
+                </div>
+
+
+                <hr/>
+                <div class="comment">
+                    <div class="normal">
+                        <h4>COMMENT AREA</h4>
+                    </div>
+
+                    {% if user.is_authenticated %}
+                        <div>
+                            <form action="{% url "comment:post_comment" story.id %}" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <div class="normal">
+                                        <p1>Post a Comment:</p1>
+                                    </div>
+                                    <textarea type="text" class="form-control" id="body" name="body" rows="4"
+                                              placeholder="Please enter a comment"></textarea>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary ">Post</button>
+                            </form>
+                        </div>
+
+                        <br>
+                    {% else %}
+                        <br>
+                        <h5 class="row justify-content-center">
+                            Please <a href="{% url 'Users:login' %}"> login </a> to reply.
+                        </h5>
+                        <br>
+                    {% endif %}
+
+                    <div class="all_comment">
+
+                        {% load mptt_tags %}
+                        <h4>Total comments: {{ comments.count }}</h4>
+                        <div class="row">
+                            {% recursetree comments %}
+                                {% with comment=node %}
+                                    <div class="{% if comment.reply_to %} offset-1 col-11 {% else %} col-12 {% endif %}">
+                                        <hr/>
+                                        <p>
+                                            <strong style="color: pink">
+                                                {{ comment.user }}
+                                            </strong>
+
+                                            {% if comment.reply_to %}
+                                                <i class="far fa-arrow-alt-circle-right"
+                                                   style="color: cornflowerblue;"
+                                                ></i>
+                                                <strong style="color: pink">
+                                                    <span style="color: black"
+                                                          class="arrow-outer">  @</span> {{ comment.reply_to }}
+                                                </strong>
+                                            {% endif %}
+
+                                        </p>
+                                        <div>{{ comment.body|safe }}</div>
+
+                                        <div>
+                        <span style="color: gray">
+                        {{ comment.created|date:"Y-m-d H:i:s" }}
+                        </span>
+
+
+
+                                            {% if user.is_authenticated %}
+                                                <button type="button"
+                                                        class="btn btn-light btn-sm text-muted"
+                                                        onclick="load_modal({{ story.id }}, {{ comment.id }})">Reply
+                                                </button>
+                                            {% else %}
+                                                <a class="btn btn-light btn-sm text-muted"
+                                                   href="{% url 'Users:login' %}">
+                                                    Reply
+                                                </a>
+                                            {% endif %}
+                                        </div>
+
+
+                                        <div class="modal fade"
+                                             id="comment_{{ comment.id }}"
+                                             tabindex="-1"
+                                             role="dialog"
+                                             aria-labelledby="CommentModalCenter"
+                                             aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                                <div class="modal-content" style="height: 480px">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Replying
+                                                            to {{ comment.user }}：</h5>
+                                                    </div>
+                                                    <div class="modal-body" id="modal_body_{{ comment.id }}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% if not comment.is_leaf_node %}
+                                            <div class="children">
+                                                {{ children }}
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endwith %}
+                            {% endrecursetree %}
+                        </div>
+
+
+                        <script>
+
+                            function load_modal(story_id, comment_id) {
+                                let modal_body = '#modal_body_' + comment_id;
+                                let modal_id = '#comment_' + comment_id;
+
+
+                                if ($(modal_body).children().length === 0) {
+                                    let content = '<iframe src="/comment/post_comment/' + story_id + '/' + comment_id + '" frameborder="0" style="width: 100%; height: 100%;"></iframe>';
+                                    $(modal_body).append(content);
+                                }
+                                ;
+                                $(modal_id).modal('show');
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+
+            <!--The introduction and meeting notice are displayed on the right-->
+            <div class="column right">
+                <div class="intro">
+                    <h2>Researcher Introduction</h2>
+                    <p3>{{ author_intro }}
+                    </p3>
+                </div>
+                <div class="intro">
+                    <h2>Field Background</h2>
+                    <p4>{{ background }}
+                    </p4>
+                </div>
+
+                <hr/>
+                <div>
+                    {% if current_intervew == None %}
+                        <div style="text-align: center;">
+                            <h4>No interview Currently :)</h4>
+                            <h7>{{ data_and_time }}</h7>
+                        </div>
+                        <hr/>
+                        <div class="jumbotron">
+                            <div class="d-flex justify-content-center">
+                                <a href="{% url 'interview:new_interview' story.id %}">
+                                    <button type="button" class="btn btn-dark">Welcome to make interview appointment
+                                        with
+                                        Researcher.
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div style="text-align: center;">
+                            <h3>Current interview:</h3>
+                            <h7>{{ data_and_time }}</h7>
+                        </div>
+                        <li>
+                            <div class="jumbotron">
+                                <div style="text-align: center;">
+                                    <h4><i><b>{{ current_intervew.interview_name }}</b></i></h4>
+                                    Related to Research Story:<h6>"{{ current_intervew.related_story_name }}"</h6> Post
+                                    by XXXX.
+                                    <h4>Start Time: {{ current_intervew.start_time }}</h4>
+                                    <h4>End Time: {{ current_intervew.end_time }}</h4>
+                                    <h6>Organizer: {{ current_intervew.organizer }}</h6>
+                                </div>
+                                <div style="text-align: center;">
+                                    <a href="{{ current_intervew.interview_link }}">
+                                        <button type="button" class="btn btn-dark">Link to Join:
+                                            <b>{{ current_intervew.interview_name }}</b>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p1>Research Stories!</p1>
+    </div>
+
+{% endblock content %}
+

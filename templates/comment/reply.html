@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="{% static 'bootstrap-4.6.0-dist/css/bootstrap.min.css' %}">
+</head>
+
+<body>
+<form action="." method="POST" id="reply_form">
+    {% csrf_token %}
+    <textarea input type="text" class="form-control" id="test" name="body" rows="3"></textarea>
+
+</form>
+
+<button onclick="confirm_submit({{ story_id }}, {{ parent_comment_id }})" class="btn btn-primary">Post</button>
+
+<script src="{% static 'jquery/jquery-3.3.1.js' %}"></script>
+<script src="{% static 'popper/popper-1.14.4.js' %}"></script>
+<script src="{% static 'bootstrap-4.6.0-dist/css/bootstrap.min.css' %}"></script>
+
+
+<script src="{% static 'csrf.js' %}"></script>
+
+<script>
+
+
+    function confirm_submit(story_id, comment_id) {
+
+        $.ajax({
+            url: '/comment/post_comment/' + story_id + '/' + comment_id,
+            type: 'POST',
+            data: {
+                body: $('#test').val()
+            },
+
+
+            success: function (e) {
+                if (e === '200 OK') {
+                    parent.location.reload();
+                }
+            }
+        })
+    }
+</script>
+
+</body>
+</html>

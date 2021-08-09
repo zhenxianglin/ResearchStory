@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <link rel="stylesheet" href="/static/bootstrap-4.6.0-dist/css/timepicker.css"/>
+    <script src="/static/bootstrap-4.6.0-dist/js/timepicker.js"></script>
+
+
+{% endblock header %}
+{% block content %}
+    <style type="text/css">
+        div.content {
+            margin: 0 auto;
+            padding-top: 10px;
+            padding-bottom: 20px;
+            padding-left: 15px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+
+    </style>
+    <div class="content">
+        <div style="text-align: center;">
+            <h2>Add a new meeting: </h2>
+            <h7>{{ date_and_time }}</h7>
+        </div>
+        <hr/>
+        <div style="text-align: center;">
+            <form action="{% url "meeting:new_meeting" %}" method="post">
+                {% csrf_token %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="row form-group">
+                                <div class="p" style="width:150px;height:40px;float:left;">Meeting name:</div>
+                                <input type="text" class="form-control" style="width:340px;height:30px;float:right;"
+                                       name="meeting_name" placeholder="" required>
+                            </div>
+                            <div class="row form-group">
+                                <div class="p" style="width:150px;height:40px;float:left;">Meeting link:</div>
+                                <input type="text" class="form-control" style="width:340px;height:30px;float:right;"
+                                       name="meeting_link" placeholder="http://" required>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="p" style="width:150px;height:40px;float:left;">Start at:</div>
+                                <input class="form-control" name="start_time"
+                                       style="width:310px;height:30px;float:right;" value="12:00:00">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                     class="bi bi-calendar-date" viewBox="0 0 16 16">
+                                    <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                                </svg>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="p" style="width:150px;height:40px;float:left;">End at:</div>
+                                <input class="form-control" name="end_time" style="width:310px;height:30px;float:right;"
+                                       value="12:00:00">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
+                                     class="bi bi-calendar-date" viewBox="0 0 16 16">
+                                    <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z"/>
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+                                </svg>
+                            </div>
+                            <div class="form-inline row" style="margin-left: 20px">
+
+                                {{ form.monday }}
+                                <label class="btn" for="btn-check-1">Monday</label>
+                                {{ form.tuesday }}
+                                <label class="btn" for="btn-check-2">Tuesday</label>
+                                {{ form.wednesday }}
+                                <label class="btn " for="btn-check-3">Wednesday</label>
+                                {{ form.thursday }}
+                                <label class="btn" for="btn-check-4">Thursday</label>
+                            </div>
+                            <div class="form-inline row" style="margin-left: 20px">
+                                {{ form.friday }}
+                                <label class="btn" for="btn-check-5">Friday</label>
+                                {{ form.saturday }}
+                                <label class="btn" for="btn-check-6">Saturday</label>
+                                {{ form.sunday }}
+                                <label class="btn" for="btn-check-7">Sunday</label>
+                            </div>
+                            <div class="row"></div>
+
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="img-rounded">
+                                <img src="/static/image/meeting2.jpg" class="img-rounded " alt="interview image"
+                                     style="width: 480px;height: 350px">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <button name="submit" class="btn btn-primary">Add meeting</button>
+
+
+            </form>
+
+
+        </div>
+    </div>
+
+
+{% endblock content %}
+{% block js %}
+    <script>
+        $('input').timePicker();
+    </script>
+{% endblock %}
+
