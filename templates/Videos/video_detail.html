@@ -58,12 +58,11 @@
 
                 <div class="row">
                     <div class="col-lg-2 img">
-                        <img src="{{ video.uploader.profile.avatar.url }} " style="width: 60px; height:55x;"
-                             class="round_icon">
+                        <img src="{{ video.uploader.profile.avatar.url }} " style="width: 60px; height:55px;" class="round_icon">
                     </div>
                     <div class="col-lg-10 text-left">
                         <p>Uploader: {{ video.uploader }}</p>
-                        <p>Published on {{ video.uploader }} </p>
+                        <p>Published on {{ video.created_time|date:"Y-m-d H:i:s" }} </p>
                         <p>Research Area: {{ video.classification }}</p>
                         <p>{{ video.desc }}</p>
                     </div>
