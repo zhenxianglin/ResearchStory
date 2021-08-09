@@ -3,6 +3,7 @@
         <div class="ui circular labels">
             {% if page_obj.has_previous %}
                 <a class="ui circular label" href="?page=
+
                         {{ page_obj.previous_page_number }}{% if c %}&c={{ c }}{% endif %}{% if q %}&q={{ q }}{% endif %}">&lt;</a>
             {% endif %}
             {% for i in page_list %}

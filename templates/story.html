@@ -52,7 +52,7 @@
         }
 
         div.pic {
-            background-color: #FFD700;
+            background-color: #909090;
             height: 200px;
             width: 240px;
             float: left;
@@ -228,8 +228,7 @@
 
     </style>
 
-
-
+    <!--Category buttons and sort buttons at the top-->
     <div class="top">
         <div class="top_item">
             <a href="{% url 'Story:storyList' %}" id="a1">
@@ -286,18 +285,20 @@
         </div>
     </div>
 
+<!--Input field, search button-->
 <div class="search_b">
     <div class="search">
         <input type="text" placeholder="Find stories..." name="keyword" id="input1" value="" oninput="change()"/>
         <a id="search"><button class="button_s">Search</button></a>
 
-        <a href="{% url 'Story:advancedSearch'%}">
+        <a href="{% url 'Story:advancedSearch'%}">  <!--Click this button to go to the advanced search page-->
             <button class="button_as" id="a_search">Advanced Search</button>
         </a>
     </div>
 </div>
-
+<!--...-->
     <script>
+                //Get the information in the URL
                 function getQueryString(name) {
                     var query = window.location.href;
                     query = query.replace(/_/g,"/")
@@ -306,10 +307,13 @@
                         var pair = vars[i].split("=");
                         if(pair.length > 1 && pair[0] == name){return pair[1];}
                     }
-                    return(false);
+                    if(name == 'category') {
+                        return('ALL');
+                    }
+                    return false;
                 }
 
-
+                //Set the color of these buttons
                 document.getElementById("1").style.background = "#ff8800";
                 document.getElementById("2").style.background = "#909090";
                 document.getElementById("3").style.background = "#909090";
@@ -321,6 +325,7 @@
                 document.getElementById("sb1").style.background = "#008CBA";
                 document.getElementById("sb2").style.background = "#909090";
 
+                //Determine whether the current search results use advanced search and change buttons' color
                 var a = getQueryString("advancedSearch");
                 if (a == 'T') {
                     document.getElementById("1").style.background = "#909090";
@@ -328,13 +333,11 @@
                     document.getElementById("a_search").style.background = "#4CAF50";
                 }
 
+                //If there are no category and title values in the URL, it need to be processed
                 var c = getQueryString("category");
                 var title = '';
                 if(getQueryString("title")){
                     title = getQueryString("title");
-                }
-                else{
-                    title = '_all';
                 }
                 if(title == ''){
                     title = '_all';
@@ -345,9 +348,9 @@
                 }
                 document.getElementById("input1").value = t;
 
+                //Gets the value of the current category and the value of 'sort by' and changes the color of buttons
                 var d = getQueryString("by");
                 var sort_by = 'time';
-
                 if(d == 'time') {
                     document.getElementById("sb1").style.background = "#008CBA";
                 }
@@ -356,8 +359,6 @@
                     document.getElementById("sb2").style.background = "#008CBA";
                     sort_by = 'hot'
                 }
-
-
                 if(c == 'ComputerScience') {
                     document.getElementById("2").style.background = "#ff8800";
                     document.getElementById("1").style.background = "#909090";
@@ -387,21 +388,22 @@
                     document.getElementById("1").style.background = "#909090";
                 }
 
-
+                //Set the href of each button, using the storyFind method in views.py, which requires passing three variables
+                //These are categories, sorting methods, and heading keywords.
+                //After setting the href, you can click these buttons to search for the story that meets the requirements
                 document.getElementById("a1").href = "category=".concat("ALL" ,"_sort_by=", sort_by ,"_title=", title);
                 document.getElementById("a2").href = "category=".concat("ComputerScience" ,"_sort_by=", sort_by ,"_title=", title);
                 document.getElementById("a3").href = "category=".concat("Science" ,"_sort_by=", sort_by ,"_title=", title);
                 document.getElementById("a4").href = "category=".concat("Engineering" ,"_sort_by=", sort_by ,"_title=", title);
-
                 document.getElementById("a5").href = "category=".concat("Law" ,"_sort_by=", sort_by ,"_title=", title);
                 document.getElementById("a6").href = "category=".concat("Medicine" ,"_sort_by=", sort_by ,"_title=", title);
                 document.getElementById("a7").href = "category=".concat("Business" ,"_sort_by=", sort_by ,"_title=", title);
                 document.getElementById("a8").href = "category=".concat("Art" ,"_sort_by=", sort_by ,"_title=", title);
-
                 document.getElementById("latest_stories").href = "category=".concat(c ,"_sort_by=", "time" ,"_title=", title);
                 document.getElementById("most_viewed").href = "category=".concat(c ,"_sort_by=", "hot" ,"_title=", title);
                 document.getElementById("search").href = "category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
 
+                //When the content of the search bar changes, the href values of buttons need to be updated because the keywords have changed.
                 function change() {
                     title = document.getElementById("input1").value;
                     if(title == ''){
@@ -412,12 +414,10 @@
                     document.getElementById("a2").href = "category=".concat("ComputerScience" ,"_sort_by=", sort_by ,"_title=", title);
                     document.getElementById("a3").href = "category=".concat("Science" ,"_sort_by=", sort_by ,"_title=", title);
                     document.getElementById("a4").href = "category=".concat("Engineering" ,"_sort_by=", sort_by ,"_title=", title);
-
                     document.getElementById("a5").href = "category=".concat("Law" ,"_sort_by=", sort_by ,"_title=", title);
                     document.getElementById("a6").href = "category=".concat("Medicine" ,"_sort_by=", sort_by ,"_title=", title);
                     document.getElementById("a7").href = "category=".concat("Business" ,"_sort_by=", sort_by ,"_title=", title);
                     document.getElementById("a8").href = "category=".concat("Art" ,"_sort_by=", sort_by ,"_title=", title);
-
                     document.getElementById("latest_stories").href = "category=".concat(c ,"_sort_by=", "time" ,"_title=", title);
                     document.getElementById("most_viewed").href = "category=".concat(c ,"_sort_by=", "hot" ,"_title=", title);
                     document.getElementById("search").href = "category=".concat(c ,"_sort_by=", sort_by ,"_title=", title);
@@ -425,6 +425,7 @@
 
         </script>
 
+<!--Displays information about the stories found-->
     <div class="content">
         <div class="row">
             {% for st in story %}

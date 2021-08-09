@@ -15,7 +15,7 @@ class Forum(models.Model):
     title = models.CharField(verbose_name="title", max_length=200, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_time = models.DateTimeField(verbose_name='created_time', auto_now=True)
-    text = RichTextField()
+    text = models.TextField()
     views=models.PositiveIntegerField(verbose_name='views', default=0, auto_created=True)
 
     def viewed(self):
