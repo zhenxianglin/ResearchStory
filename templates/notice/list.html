@@ -1,10 +1,8 @@
-templates/notice/list.html
-
 {% extends "base.html" %}
 {% load static %}
 
 {% block title %}
-    Message Notification
+
 {% endblock title %}
 
 {% block content %}
@@ -12,7 +10,6 @@ templates/notice/list.html
         <div class="row mt-4 ml-4">
             <a href="{% url "notice:update" %}" class="btn btn-warning" role="button">Clear all notifications</a>
         </div>
-        <!-- 未读通知列表 -->
         <div class="row mt-2 ml-4">
             <ul class="list-group">
                 {% for notice in notices %}
@@ -32,7 +29,6 @@ templates/notice/list.html
             </ul>
         </div>
     </div>
-
     <style>
         #notice_link a:link {
             color: black;
