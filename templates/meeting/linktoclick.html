@@ -4,16 +4,13 @@
 {% block header %}
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="/">
-
             <h2>Meeting To Discuss</h2>
         </a>
         <span>
-
             <a href="{% url "meeting:new_meeting" %}"><button type="button" class="btn btn-dark">Add A New
                             Meeting</button></a>
         </span>
     </nav>
-
 {% endblock header %}
 
 
@@ -23,7 +20,6 @@
         <h7>{{ date_and_time }}</h7>
     </div>
     <hr/>
-
     {% for meeting in current_meetings %}
         <hr/>
         <li>
@@ -44,5 +40,12 @@
             </div>
         </li>
     {% endfor %}
+    <hr/>
+    <div class="jumbotron">
+        <div style="text-align: center;">
+            <h6>Only users who have logged in are allowed to create or join discussion meetings. </h6>
+            <a href="{% url "Users:login" %}"><h5>Login</h5></a>
+        </div>
+    </div>
 {% endblock content %}
 
