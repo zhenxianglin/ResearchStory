@@ -1,6 +1,7 @@
 # Group 19: Research Stories
 ## **Introduction**
 Documenting impact of research is needed for various reasons including evaluating research impact, motivating young researchers, and sharing knowledge in general. The goal of this project is to develop an online software service to identify research stories and make them available for general audience on a dedicated video channel.
+Our potential users are those who want to share and fin novel and interesting research papaers, as well as long term impact of research.
 <br></br>
 ## **Catalogue**
 
