@@ -1,4 +1,7 @@
 {% load static %}
+{% load notifications_tags %}
+{% notifications_unread as unread_count %}
+
 <style type="text/css">
     body {
         margin: 0;
@@ -141,6 +144,22 @@
                             </div>
                         </div>
                         {% if user.is_authenticated %}
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {% if unread_count %}
+                                    <svg viewBox="0 0 8 8"
+                                         width="8px"
+                                         height="8px">
+                                        <circle cx="4"
+                                                cy="4"
+                                                r="4"
+                                                fill="#ff6b6b"
+                                        ></circle>
+                                    </svg>
+                                {% endif %}
+                                {#                            {{ user.username }}#}
+                            </a>
+
                             <div class="row" style="margin-left: 15px;margin-right: 15px;margin-top: 10px">
                                 <div class="col-md-4 text-center grid">
                                     <i class="fa fa-user" style="font-size: 25px;line-height: 45px;"></i>
@@ -169,8 +188,20 @@
                                     <i class="fa fa-comments" style="font-size: 25px;line-height: 45px;"></i>
 
                                     <p style="padding: 0px;margin-top: 6px;margin-bottom: 10px;font-size: 12px">
-                                        Message
-
+                                        <a href="{% url "notice:list" %}">Message
+                                            {% if unread_count %}
+                                                <svg viewBox="0 0 8 8"
+                                                     width="8px"
+                                                     height="8px">
+                                                    <circle cx="4"
+                                                            cy="4"
+                                                            r="4"
+                                                            fill="#ff6b6b"
+                                                    ></circle>
+                                                </svg>
+                                                <span class="badge-danger">{{ unread_count }}</span>
+                                            {% endif %}
+                                        </a>
                                     </p>
                                 </div>
                                 <div class="col-md-4 text-center grid">

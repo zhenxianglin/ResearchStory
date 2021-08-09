@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.conf import settings
+import notifications.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -38,6 +39,9 @@ urlpatterns = [
 
     path(r'', include(('Videos.urls', 'Videos'), namespace='Videos')),
 
+    path('inbox/notifications/', include(notifications.urls, namespace='notifications')),
+    # notice
+    path('notice/', include('notice.urls', namespace='notice')),
 
 ]
 
