@@ -25,7 +25,6 @@ class CommentNoticeListView(LoginRequiredMixin, ListView):
 
 class CommentNoticeUpdateView(View):
     """更新通知状态"""
-
     # 处理 get 请求
     def get(self, request):
         # 获取未读消息

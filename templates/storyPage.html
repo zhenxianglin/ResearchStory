@@ -343,9 +343,6 @@
                         <span style="color: gray">
                         {{ comment.created|date:"Y-m-d H:i:s" }}
                         </span>
-
-
-
                                             {% if user.is_authenticated %}
                                                 <button type="button"
                                                         class="btn btn-light btn-sm text-muted"
@@ -433,21 +430,23 @@
                 <hr/>
                 <div>
                     {% if current_intervew == None %}
-                        <div style="text-align: center;">
-                            <h4>No interview Currently :)</h4>
-                            <h7>{{ data_and_time }}</h7>
-                        </div>
-                        <hr/>
-                        <div class="jumbotron">
-                            <div class="d-flex justify-content-center">
-                                <a href="{% url 'interview:new_interview' story.id %}">
-                                    <button type="button" class="btn btn-dark">Welcome to make interview appointment
-                                        with
-                                        Researcher.
-                                    </button>
-                                </a>
+                        {% if USER.usertype == 'R' %}
+                            <div style="text-align: center;">
+                                <h4>No interview Currently :)</h4>
+                                <h7>{{ data_and_time }}</h7>
                             </div>
-                        </div>
+                            <hr/>
+                            <div class="jumbotron">
+                                <div class="d-flex justify-content-center">
+                                    <a href="{% url 'interview:new_interview' story.id %}">
+                                        <button type="button" class="btn btn-dark">Welcome to make interview appointment
+                                            with
+                                            Researcher.
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endif %}
                     {% else %}
                         <div style="text-align: center;">
                             <h3>Current interview:</h3>

@@ -27,34 +27,39 @@
                 <h2>Meeting To Discuss</h2>
             </a>
             <span>
+                     {% if user.is_authenticated %}
+                         {% if USER.usertype == 'R' %}
 
-            <a href="{% url "meeting:new_meeting" %}"><button type="button" class="btn btn-dark">Add A New
+                             <a href="{% url "meeting:new_meeting" %}"><button type="button" class="btn btn-dark">Add A New
                             Meeting</button></a>
+                         {% endif %}
+                     {% endif %}
         </span>
         </nav>
 
-
         <div style="text-align: center;">
-            <h2>No Meetings Today :)</h2>
+            <h2>No Meetings Currently :)</h2>
             <h7>{{ date_and_time }}</h7>
         </div>
         <hr/>
-
-
-        <div class="d-flex justify-content-center">
-            <a href="{% url "meeting:new_meeting" %}">
-                <button type="button" class="btn btn-dark">Welcome to create a meeting for online discussion.</button>
-            </a>
-        </div>
+        {% if user.is_authenticated %}
+            {% if USER.usertype == 'R' %}
+                <div class="d-flex justify-content-center">
+                    <a href="{% url "meeting:new_meeting" %}">
+                        <button type="button" class="btn btn-dark">Welcome to create a meeting for online discussion.
+                        </button>
+                    </a>
+                </div>
+            {% endif %}
+        {% endif %}
         <hr/>
         <br>
-     <div class="jumbotron">
-             <div style="text-align: center;">
-                 <h6>Only users who have logged in are allowed to create or join discussion meetings. </h6>
-                 <a href="{% url "Users:login" %}"><h5>Login</h5></a>
-             </div>
-
-         </div>
+        <div class="jumbotron">
+            <div style="text-align: center;">
+                <h6>Only users who have logged in are allowed can join discussion meetings. </h6>
+                <a href="{% url "Users:login" %}"><h5>Login</h5></a>
+            </div>
+        </div>
 
 
     </div>

@@ -6,44 +6,49 @@
         <a class="navbar-brand" href="/">
             <h2>Meeting To Discuss</h2>
         </a>
-        <span>
-            <a href="{% url "meeting:new_meeting" %}"><button type="button" class="btn btn-dark">Add A New
-                            Meeting</button></a>
+        {% if user.is_authenticated %}
+            {% if USER.usertype == 'R' %}
+                <span>
+                    <a href="{% url "meeting:new_meeting" %}"><button type="button" class="btn btn-dark">Add A New Meeting</button></a>
         </span>
+            {% endif %}
+        {% endif %}
     </nav>
 {% endblock header %}
 
 
 {% block content %}
-    <div style="text-align: center;">
-        <h2>Current Meetings:</h2>
-        <h7>{{ date_and_time }}</h7>
-    </div>
-    <hr/>
-    {% for meeting in current_meetings %}
+    {% if user.is_authenticated %}
+        <div style="text-align: center;">
+            <h2>Current Meetings:</h2>
+            <h7>{{ date_and_time }}</h7>
+        </div>
         <hr/>
-        <li>
-            <div class="jumbotron">
-                <div style="text-align: center;">
-                    <h2><i><b>{{ meeting.meeting_name }}</b></i></h2>
-                    <h3>Start Time: {{ meeting.start_time }}</h3>
-                    <h3>End Time: {{ meeting.end_time }}</h3>
-                    <h6>Organizer: {{ meeting.user }}</h6>
+        {% for meeting in current_meetings %}
+            <hr/>
+            <li>
+                <div class="jumbotron">
+                    <div style="text-align: center;">
+                        <h2><i><b>{{ meeting.meeting_name }}</b></i></h2>
+                        <h3>Start Time: {{ meeting.start_time }}</h3>
+                        <h3>End Time: {{ meeting.end_time }}</h3>
+                        <h6>Organizer: {{ meeting.user }}</h6>
+                    </div>
+                    <div style="text-align: center;">
+                        <a href="{{ meeting.meeting_link }}">
+                            <button type="button" class="btn btn-dark">Link to Join:
+                                <b>{{ meeting.meeting_name }}</b>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-                <div style="text-align: center;">
-                    <a href="{{ meeting.meeting_link }}">
-                        <button type="button" class="btn btn-dark">Link to Join:
-                            <b>{{ meeting.meeting_name }}</b>
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </li>
-    {% endfor %}
+            </li>
+        {% endfor %}
+    {% endif %}
     <hr/>
     <div class="jumbotron">
         <div style="text-align: center;">
-            <h6>Only users who have logged in are allowed to create or join discussion meetings. </h6>
+            <h6>Only users who have logged in are allowed can join discussion meetings. </h6>
             <a href="{% url "Users:login" %}"><h5>Login</h5></a>
         </div>
     </div>
