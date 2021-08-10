@@ -407,7 +407,9 @@
                             {#    next_url = next_url.charAt(next_url.length - 1) == '/' ? next_url.slice(0, -1) : next_url;#}
                             {#    // 刷新并定位到锚点#}
                             {#    window.location.replace(next_url + "#comment_elem_" + new_comment_id);#}
-                            {#};#}
+                            {
+                                #};
+                            #}
 
                         </script>
                     </div>
@@ -430,23 +432,24 @@
                 <hr/>
                 <div>
                     {% if current_intervew == None %}
-                        {% if USER.usertype == 'R' %}
-                            <div style="text-align: center;">
-                                <h4>No interview Currently :)</h4>
-                                <h7>{{ data_and_time }}</h7>
-                            </div>
-                            <hr/>
-                            <div class="jumbotron">
-                                <div class="d-flex justify-content-center">
-                                    <a href="{% url 'interview:new_interview' story.id %}">
-                                        <button type="button" class="btn btn-dark">Welcome to make interview appointment
-                                            with
-                                            Researcher.
+
+                        <div style="text-align: center;">
+                            <h4>No interview Currently :)</h4>
+                            <h7>{{ data_and_time }}</h7>
+                        </div>
+                        <hr/>
+                        <div class="jumbotron">
+                            <div class="d-flex justify-content-center">
+                                <a href="{% url 'interview:new_interview' story.id %}">
+                                    {% if USER.usertype == 'R' %}
+                                        <button type="button" class="btn btn-dark">Welcome to make interview appointment.
+
                                         </button>
-                                    </a>
-                                </div>
+                                    {% endif %}
+                                </a>
                             </div>
-                        {% endif %}
+                        </div>
+
                     {% else %}
                         <div style="text-align: center;">
                             <h3>Current interview:</h3>
