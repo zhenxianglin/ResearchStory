@@ -30,7 +30,6 @@ def post_comment(request, story_id, parent_comment_id=None):
                 new_comment.parent_id = parent_comment.get_root().id
                 new_comment.reply_to = parent_comment.user
                 new_comment.save()
-
                 if not parent_comment.user.is_superuser:
                     notify.send(
                         request.user,
@@ -51,12 +50,11 @@ def post_comment(request, story_id, parent_comment_id=None):
                     action_object=new_comment,
                 )
             # 锚点定位，
-            redirect_url = story.get_absolute_url()+'#comment_elem_'+str(new_comment.id)
-            return redirect(redirect_url)
-            # return redirect(story)
+            # redirect_url = story.get_absolute_url()+'#comment_elem_'+str(new_comment.id)
+            # return redirect(redirect_url)
+            return redirect(story)
         else:
             return render(request, 'Fail/comments_fail.html')
-
             # return HttpResponse('There is something wrong with this form. Please fill it out again. ')
     # GET request
     else:
